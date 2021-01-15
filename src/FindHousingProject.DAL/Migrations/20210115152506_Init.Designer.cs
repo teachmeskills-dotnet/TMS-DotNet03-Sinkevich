@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FindHousingProject.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210114204203_FindHousing")]
-    partial class FindHousing
+    [Migration("20210115152506_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
