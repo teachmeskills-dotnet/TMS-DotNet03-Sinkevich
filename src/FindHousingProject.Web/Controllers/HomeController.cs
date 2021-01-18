@@ -24,7 +24,7 @@ namespace FindHousingProject.Web.Controllers
 
             return View(_vm);
         }
-
+       // [Authorized]
         public IActionResult Another()
         {
             return View(_vm);

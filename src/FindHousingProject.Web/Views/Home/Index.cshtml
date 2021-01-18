@@ -1,3 +1,17 @@
 ﻿@model SimpleViewModel
-
 <h1>HOME PAGE @Model.Value</h1>
+<!--<a href="account/register">click</a>-->
+<a href="account/register">click</a>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>Welcome!</h1>
+}
+else
+{
+    <div class="enter">
+        <a class="signin" asp-controller="Account" asp-action="SignIn">SignIn</a>
+        <a class="signup" asp-controller="Account" asp-action="SignUp">SignUp</a>
+    </div>
+}
