@@ -3,16 +3,11 @@
 <!--<a href="account/register">click</a>-->
 <a href="account/register">click</a>
 <a asp-controller="Account" asp-action="Register">reg</a>
-
-
-@if (User.Identity.IsAuthenticated)
-{
-    <h1>Welcome!</h1>
+@{
+    ViewData["Title"] = "Home Page";
 }
-else
-{
-    <div class="enter">
-        <a class="signin" asp-controller="Account" asp-action="SignIn">SignIn</a>
-        <a class="signup" asp-controller="Account" asp-action="SignUp">SignUp</a>
-    </div>
-}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
