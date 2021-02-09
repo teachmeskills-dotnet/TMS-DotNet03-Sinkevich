@@ -1,0 +1,22 @@
+﻿@using FindHousingProject.Common.Resources
+@model FindHousingProject.Web.ViewModels.SignInViewModel
+
+<form method="post" asp-controller="Account" asp-action="SignIn" asp-route-return-url="@Model.ReturnUrl" class="template-form">
+    <div asp-validation-summary="All"></div>
+    <div class="upper-container"></div>
+    <div>
+        <label asp-for="Email" class="template-label"></label><br />
+        <input asp-for="Email" placeholder="Enter email" autocomplete="off" class="template-input">
+    </div>
+    <div>
+        <label asp-for="Password" class="template-label"></label><br />
+        <input asp-for="Password" placeholder="Password" autocomplete="off" class="template-input">
+    </div>
+    <div>
+        <label asp-for="RememberMe" class="template-label"></label><br />
+        <input asp-for="RememberMe" />
+    </div>
+    <div>
+        <input type="submit" value="Вход" class="template-button">
+    </div>
+</form>

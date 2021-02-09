@@ -1,0 +1,42 @@
+﻿@using FindHousingProject.Common.Resources
+@model FindHousingProject.Web.ViewModels.SettingsViewModel
+
+<form method="post" asp-action="Settings" asp-controller="Account" enctype="multipart/form-data" class="template-form">
+    <div asp-validation-summary="All"></div>
+    <div class="upper-container"></div>
+    <div>
+        <label asp-for="FullName" class="template-label"></label>
+        <input asp-for="FullName" autocomplete="off" class="template-input">
+    </div>
+    <div>
+        <label asp-for="IsOwner" class="template-label"></label>
+        <input asp-for="IsOwner">
+    </div>
+
+    <div class="avatar">
+        @if (Model.Avatar != null)
+        {
+            <img id="output" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))">
+        }
+        else
+        {
+            <img id="output" src="~/images/default_avatar.jpg">
+        }
+    </div>
+
+    <div>
+        <label asp-for="NewAvatar" class="template-button"></label>
+        <input asp-for="NewAvatar" accept="image/*" hidden>
+    </div>
+
+    <input type="hidden" value="@Model.Id" name="Id">
+    <input type="hidden" value="@Model.Email" name="Email">
+
+    <div>
+        <input type="submit" value="Сохранить" class="template-button">
+    </div>
+</form>
+
+@section js {
+    <script src="~/js/app.js" asp-append-version="true"></script>
+}

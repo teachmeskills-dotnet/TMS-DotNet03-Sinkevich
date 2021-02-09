@@ -17,7 +17,7 @@ namespace FindHousingProject.DAL.Configurations
             builder.ToTable(TableConstants.UserTable)
                 .HasKey(o => o.Id);
             builder.Property(t => t.FullName)
-                .IsRequired()
+                //.IsRequired()
                 .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
 
            // builder.Property(p => p.Email)
@@ -30,15 +30,15 @@ namespace FindHousingProject.DAL.Configurations
               //  .IsRequired();
 
             builder.Property(p => p.BirthDate)
-                .IsRequired()
+               // .IsRequired()
                 .HasColumnType(ConfigurationConstants.DateFormat);
 
             builder.Property(t => t.Documents)
-                .IsRequired()
+                .IsRequired().HasDefaultValue<string>("паспорт")
                 .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
 
             builder.Property(t => t.Gender)
-                .IsRequired()
+               // .IsRequired()
                 .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
 
         }

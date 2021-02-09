@@ -1,4 +1,8 @@
+using FindHousingProject.BLL.Interfaces;
+using FindHousingProject.BLL.Managers;
+using FindHousingProject.BLL.Repositories;
 using FindHousingProject.DAL;
+using FindHousingProject.DAL.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -25,12 +29,18 @@ namespace FindHousingProject.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IRepository<User>, Repository<User>>();
+            services.AddScoped<IUserManager, UsManager>();
+
+            
+
+
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>() //services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>() //services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();
         }
 

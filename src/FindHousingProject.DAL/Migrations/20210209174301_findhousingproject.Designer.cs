@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FindHousingProject.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210204202535_addEntities")]
-    partial class addEntities
+    [Migration("20210209174301_findhousingproject")]
+    partial class findhousingproject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -168,11 +168,12 @@ namespace FindHousingProject.DAL.Migrations
 
                     b.Property<string>("Documents")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(255)")
+                        .HasDefaultValue("паспорт");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -180,12 +181,10 @@ namespace FindHousingProject.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -207,7 +206,6 @@ namespace FindHousingProject.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")

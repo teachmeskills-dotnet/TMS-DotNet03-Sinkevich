@@ -14,10 +14,12 @@ namespace FindHousingProject.DAL.Entities
         /// User Id.
         /// </summary>
        //  public int Id { get; set; }
+
         /// <summary>
         /// User full name.
         /// </summary>
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
+
         /// <summary>
         /// User mail.
         /// </summary>
@@ -28,19 +30,21 @@ namespace FindHousingProject.DAL.Entities
         /// </summary>
         public byte[] Avatar { get; set; }
 
-
         /// <summary>
         /// User telefon.
         /// </summary>
         //public ulong PhoneNumber { get; set; }
+
         /// <summary>
         /// User date of Birth.
         /// </summary>
         public DateTime BirthDate { get; set; }
+
         /// <summary>
         /// User identity document.
         /// </summary>
         public string Documents{ get; set; }
+
         /// <summary>
         /// User gender
         /// </summary>
@@ -50,7 +54,6 @@ namespace FindHousingProject.DAL.Entities
         ///
         /// </summary>
         public ICollection<Reservation> Reservations { get; set; }
-
 
         /// <summary>
         ///

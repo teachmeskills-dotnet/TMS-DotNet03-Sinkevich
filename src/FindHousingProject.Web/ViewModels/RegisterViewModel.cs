@@ -19,6 +19,12 @@ namespace FindHousingProject.Web.ViewModels
         public string Email { get; set; }
 
         /// <summary>
+        /// Is vendor.
+        /// </summary>
+        [Display(Name = "Owner")]
+        public bool IsOwner { get; set; }
+
+        /// <summary>
         /// Password.
         /// </summary>
         [Required]
