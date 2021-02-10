@@ -52,5 +52,12 @@ namespace FindHousingProject.BLL.Interfaces
         /// <param name="userBLL">Profile data transfer object.</param>
         /// <param name="email">User identifier.</param>
         Task UpdateProfileAsync(UserBLL userBLL, string email);
+
+        /// <summary>
+        /// Get profile by user identifier.
+        /// </summary>
+        /// <param name="email">User identifier.</param>
+        /// <returns>Profile data transfer object.</returns>
+        Task<UserBLL> GetProfileAsync(string email);
     }
 }

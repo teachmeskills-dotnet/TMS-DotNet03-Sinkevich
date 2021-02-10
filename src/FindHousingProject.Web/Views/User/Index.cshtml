@@ -1,0 +1,27 @@
+﻿@using FindHousingProject.Common.Resources
+@model FindHousingProject.Web.ViewModels.UserViewModel
+
+@{ ViewData["Title"] = string.Format(PageResource.Register, Model.Email); }
+
+<div class="profile">
+    <div class="avatar">
+        @if (Model.Avatar != null)
+        {
+            <img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))">
+            <h1>Ура зашла1!</h1>
+        }
+        else
+        {
+            <img src="~/images/default_avatar.jpg">
+            <h1>Ура зашла2!</h1>
+        }
+    </div>
+    <div class="info">
+
+        <p class="name">@Model.Email</p>
+        <p class="username">@('@')@Model.FullName</p>
+        <h1>Ура зашла3!</h1>
+
+    </div>
+</div>
+<div class="break-line"></div>

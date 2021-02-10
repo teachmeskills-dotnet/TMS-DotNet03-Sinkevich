@@ -1,14 +1,13 @@
 ﻿using FindHousingProject.BLL.Interfaces;
 using FindHousingProject.BLL.Models;
 using FindHousingProject.Common.Constants;
+using FindHousingProject.Common.Resources;
 using FindHousingProject.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using FindHousingProject.Common.Resources;
 
 namespace FindHousingProject.BLL.Managers
 {
@@ -140,6 +139,25 @@ namespace FindHousingProject.BLL.Managers
 
             await _repositoryUser.CreateAsync(profile);
             await _repositoryUser.SaveChangesAsync();
+        }
+
+        public async Task<UserBLL> GetProfileAsync(string email)
+        {
+            var profile = await _repositoryUser.GetEntityAsync(profile => profile.Email == email);
+            if (profile is null)
+            {
+                throw new KeyNotFoundException(ErrorResource.ProfileNotFound);
+            }
+
+            var userBll = new UserBLL
+            {
+                Id = profile.Id,
+                Email = profile.Email,
+                FullName = profile.FullName,
+               // IsOwner = profile.IsOwner,
+                Avatar = profile.Avatar
+            };
+            return userBll;
         }
     }
 }

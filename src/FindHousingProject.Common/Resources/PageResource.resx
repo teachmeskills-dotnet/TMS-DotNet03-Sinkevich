@@ -117,13 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HousingNotFound" xml:space="preserve">
-    <value>Housing is not found.</value>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
   </data>
-  <data name="ProfileNotFound" xml:space="preserve">
-    <value>Profile not found.</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit </value>
   </data>
-  <data name="UserNotFound" xml:space="preserve">
-    <value>User is not found.</value>
+  <data name="Register" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign In</value>
   </data>
 </root>
