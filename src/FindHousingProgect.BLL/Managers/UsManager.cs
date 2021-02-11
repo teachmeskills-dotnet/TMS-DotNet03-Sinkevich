@@ -46,7 +46,7 @@ namespace FindHousingProject.BLL.Managers
                 {
                     await _userManager.AddToRoleAsync(userEmail, RolesConstants.OwnerRole);
                 }
-                await CreateAsync(new UserBLL
+                await CreateAsync(new UserDto
                 {
                     IsOwner = isOwner,
                     Email = userEmail.Email
@@ -86,36 +86,36 @@ namespace FindHousingProject.BLL.Managers
             _repositoryUser.Delete(profile);
             await _repositoryUser.SaveChangesAsync();
         }
-        public async Task UpdateProfileAsync(UserBLL userBLL, string email)
+        public async Task UpdateProfileAsync(UserDto userDto, string email)
         {
-            userBLL = userBLL ?? throw new ArgumentNullException(nameof(userBLL));
+            userDto = userDto ?? throw new ArgumentNullException(nameof(userDto));
 
-            var userDAL = await _repositoryUser.GetEntityAsync(profile => profile.Email == userBLL.Email);
+            var userDAL = await _repositoryUser.GetEntityAsync(profile => profile.Email == userDto.Email);
 
             if (userDAL is null)
             {
                 throw new KeyNotFoundException(ErrorResource.UserNotFound);
             }
 
-            static bool ValidateToUpdate(User userDAL, UserBLL userBLL)
+            static bool ValidateToUpdate(User userDAL, UserDto userDto)
             {
                 bool updated = false;
 
-                if (userDAL.FullName != userBLL.FullName)
+                if (userDAL.FullName != userDto.FullName)
                 {
-                    userDAL.FullName = userBLL.FullName;
+                    userDAL.FullName = userDto.FullName;
                     updated = true;
                 }
 
-                if (userDAL.Avatar != userBLL.Avatar && userBLL.Avatar != null)
+                if (userDAL.Avatar != userDto.Avatar && userDto.Avatar != null)
                 {
-                    userDAL.Avatar = userBLL.Avatar;
+                    userDAL.Avatar = userDto.Avatar;
                     updated = true;
                 }
                 return updated;
             }
 
-            var result = ValidateToUpdate(userDAL, userBLL);
+            var result = ValidateToUpdate(userDAL, userDto);
             if (result)
             {
                 await _repositoryUser.SaveChangesAsync();
@@ -126,22 +126,22 @@ namespace FindHousingProject.BLL.Managers
                 await SwitchProfileStatusAsync(email);
             }*/
         }
-        public async Task CreateAsync(UserBLL userBLL)
+        public async Task CreateAsync(UserDto userDto)
         {
-            userBLL = userBLL ?? throw new ArgumentNullException(nameof(userBLL));
+            userDto = userDto ?? throw new ArgumentNullException(nameof(userDto));
 
             var profile = new User
             {
-                Id = userBLL.Id,
+                Id = userDto.Id,
                // IsOwner = userBLL.IsOwner,
-                Email = userBLL.Email
+                Email = userDto.Email
             };
 
             await _repositoryUser.CreateAsync(profile);
             await _repositoryUser.SaveChangesAsync();
         }
 
-        public async Task<UserBLL> GetProfileAsync(string email)
+        public async Task<UserDto> GetProfileAsync(string email)
         {
             var profile = await _repositoryUser.GetEntityAsync(profile => profile.Email == email);
             if (profile is null)
@@ -149,7 +149,7 @@ namespace FindHousingProject.BLL.Managers
                 throw new KeyNotFoundException(ErrorResource.ProfileNotFound);
             }
 
-            var userBll = new UserBLL
+            var userDto = new UserDto
             {
                 Id = profile.Id,
                 Email = profile.Email,
@@ -157,7 +157,7 @@ namespace FindHousingProject.BLL.Managers
                // IsOwner = profile.IsOwner,
                 Avatar = profile.Avatar
             };
-            return userBll;
+            return userDto;
         }
     }
 }

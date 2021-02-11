@@ -1,10 +1,13 @@
 ﻿@using FindHousingProject.Common.Resources
 @model FindHousingProject.Web.ViewModels.SignInViewModel
 
+    <h2>Sign In</h2>
+
 <form method="post" asp-controller="Account" asp-action="SignIn" asp-route-return-url="@Model.ReturnUrl" class="template-form">
     <div asp-validation-summary="All"></div>
     <div class="upper-container"></div>
     <div>
+        <h1>Проверка</h1>
         <label asp-for="Email" class="template-label"></label><br />
         <input asp-for="Email" placeholder="Enter email" autocomplete="off" class="template-input">
     </div>

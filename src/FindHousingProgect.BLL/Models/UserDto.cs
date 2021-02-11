@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FindHousingProject.BLL.Models
 {
-    public class UserBLL
+    public class UserDto
     {
         /// <summary>
         /// Identifier.
