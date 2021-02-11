@@ -12,14 +12,18 @@
         }
         else
         {
-            <img src="~/images/default_avatar.jpg">
+            <img src="https://secure.gravatar.com/avatar/?s=64&d=https%3A%2F%2Fvidnova.dental%2Fwp-content%2Fthemes%2Fvidnova%2Fpublic%2Fimages%2Fdefault_avatar.jpg&r=g">
             <h1>Ура зашла2!</h1>
         }
+        <form method="get" asp-controller="Account" asp-action="Settings">
+            <button type="submit" class="template-button">Settings</button>
+        </form>
+        
     </div>
     <div class="info">
 
         <p class="name">@Model.Email</p>
-        <p class="username">@('@')@Model.FullName</p>
+        <p class="username">@('@')@Model.Email</p>
         <h1>Ура зашла3!</h1>
 
     </div>

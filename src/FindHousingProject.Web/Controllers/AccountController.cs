@@ -39,7 +39,7 @@ namespace FindHousingProject.Web.Controllers
                 {
                     // установка куки
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Profile");
+                    return RedirectToAction("Index", "User");
 
                     //return RedirectToAction("Index", "Home");
                 }
@@ -77,7 +77,7 @@ namespace FindHousingProject.Web.Controllers
                     {
                         return Redirect(model.ReturnUrl);
                     }
-                    return RedirectToAction("Index", "Profile");
+                    return RedirectToAction("Index", "User");
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid email and(or) password.");
@@ -116,6 +116,11 @@ namespace FindHousingProject.Web.Controllers
                 }
             }
             return View(model);
+        }
+        public async Task<IActionResult> Settings()
+        {
+            var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
+            return View(new SettingsViewModel());
         }
     }
 }

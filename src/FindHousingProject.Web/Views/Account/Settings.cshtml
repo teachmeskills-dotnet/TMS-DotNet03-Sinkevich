@@ -1,5 +1,6 @@
 ﻿@using FindHousingProject.Common.Resources
 @model FindHousingProject.Web.ViewModels.SettingsViewModel
+@{ ViewData["Title"] = string.Format(PageResource.StringFormat, PageResource.SiteName, PageResource.Settings); }
 
 <form method="post" asp-action="Settings" asp-controller="Account" enctype="multipart/form-data" class="template-form">
     <div asp-validation-summary="All"></div>
@@ -37,6 +38,6 @@
     </div>
 </form>
 
-@section js {
+@section Scripts {
     <script src="~/js/app.js" asp-append-version="true"></script>
 }

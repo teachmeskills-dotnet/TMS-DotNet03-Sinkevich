@@ -28,5 +28,6 @@ namespace FindHousingProject.DAL
 
             base.OnModelCreating(builder);
         }
+
     }
 }

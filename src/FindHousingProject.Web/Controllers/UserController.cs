@@ -18,7 +18,7 @@ namespace FindHousingProject.Web.Controllers
             _iuserManager = iuserManager;
         }
 
-        [Route("profile/{emailName?}")]
+        [Route("user/{emailName?}")]
         [HttpGet]
         public async Task<IActionResult> Index(string email)
         {
@@ -35,6 +35,10 @@ namespace FindHousingProject.Web.Controllers
             };
 
             return View(userViewModel);
+        }
+        public async Task<IActionResult> Profile()
+        {
+            return RedirectToAction("Index", "User");
         }
     }
 }

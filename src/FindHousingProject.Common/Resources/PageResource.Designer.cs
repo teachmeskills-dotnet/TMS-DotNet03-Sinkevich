@@ -88,11 +88,38 @@ namespace FindHousingProject.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sign In.
         /// </summary>
         public static string SignIn {
             get {
                 return ResourceManager.GetString("SignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find Housing.
+        /// </summary>
+        public static string SiteName {
+            get {
+                return ResourceManager.GetString("SiteName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} - {1}.
+        /// </summary>
+        public static string StringFormat {
+            get {
+                return ResourceManager.GetString("StringFormat", resourceCulture);
             }
         }
     }

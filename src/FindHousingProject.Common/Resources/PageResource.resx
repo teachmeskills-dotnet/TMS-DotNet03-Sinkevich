@@ -126,7 +126,16 @@
   <data name="Register" xml:space="preserve">
     <value>Sign Up</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="SignIn" xml:space="preserve">
     <value>Sign In</value>
+  </data>
+  <data name="SiteName" xml:space="preserve">
+    <value>Find Housing</value>
+  </data>
+  <data name="StringFormat" xml:space="preserve">
+    <value>{0} - {1}</value>
   </data>
 </root>
