@@ -1,4 +1,5 @@
 ﻿using FindHousingProject.BLL.Interfaces;
+using FindHousingProject.Common.Constants;
 using FindHousingProject.DAL.Entities;
 using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
@@ -120,7 +121,13 @@ namespace FindHousingProject.Web.Controllers
         public async Task<IActionResult> Settings()
         {
             var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
-            return View(new SettingsViewModel());
+            var model = new SettingsViewModel
+            {
+                Roles = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
+                    Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} },
+            };
+            //return View(new SettingsViewModel());
+            return View(model);
         }
     }
 }

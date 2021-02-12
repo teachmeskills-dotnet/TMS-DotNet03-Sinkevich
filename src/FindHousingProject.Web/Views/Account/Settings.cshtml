@@ -13,6 +13,10 @@
         <label asp-for="IsOwner" class="template-label"></label>
         <input asp-for="IsOwner">
     </div>
+    <div>
+        <select asp-for="Role" asp-items="Model.Roles"></select>
+    </div>
+
 
     <div class="avatar">
         @if (Model.Avatar != null)

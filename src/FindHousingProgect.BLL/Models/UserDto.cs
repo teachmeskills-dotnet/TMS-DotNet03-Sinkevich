@@ -15,7 +15,10 @@ namespace FindHousingProject.BLL.Models
         /// Full Name.
         /// </summary>
         public string FullName { get; set; }
-
+        /// <summary>
+        /// Role .
+        /// </summary>
+        public string Role { get; set; }
         /// <summary>
         /// Email.
         /// </summary>

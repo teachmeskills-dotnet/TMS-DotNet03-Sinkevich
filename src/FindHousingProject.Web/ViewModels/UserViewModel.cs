@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 
 namespace FindHousingProject.Web.ViewModels
@@ -12,6 +13,14 @@ namespace FindHousingProject.Web.ViewModels
         /// Identifier.
         /// </summary>
         public string Id { get; set; }
+
+        /// <summary>
+        /// Is owner.
+        /// </summary>
+        public string Role { get; set; }
+
+        public List<SelectListItem> Roles { get; set; }
+       
 
         /// <summary>
         /// Is owner.

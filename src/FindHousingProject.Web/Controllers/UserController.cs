@@ -1,4 +1,5 @@
 ﻿using FindHousingProject.BLL.Interfaces;
+using FindHousingProject.Common.Constants;
 using FindHousingProject.DAL.Entities;
 using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -31,14 +32,18 @@ namespace FindHousingProject.Web.Controllers
                 Email = profile.Email,
                 FullName= profile.FullName,
                 Avatar = profile.Avatar,
+                Role = profile.Role,
+                Roles=new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
+                    Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} },
                 IsOwner = profile.IsOwner
             };
 
             return View(userViewModel);
         }
-        public async Task<IActionResult> Profile()
-        {
-            return RedirectToAction("Index", "User");
-        }
+
+        /* public async Task<IActionResult> Profile()
+         {
+             return RedirectToAction("Index", "User");
+         }*/
     }
 }

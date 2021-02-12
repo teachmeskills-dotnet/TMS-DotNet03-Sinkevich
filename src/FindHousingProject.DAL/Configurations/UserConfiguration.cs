@@ -20,8 +20,11 @@ namespace FindHousingProject.DAL.Configurations
                 //.IsRequired()
                 .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
 
-           // builder.Property(p => p.Email)
-                //.IsRequired();
+            builder.Property(t => t.Role)
+                .IsRequired()
+                .HasMaxLength(ConfigurationConstants.ShortLenghtForStringField);
+            // builder.Property(p => p.Email)
+            //.IsRequired();
 
             builder.Property(p => p.Avatar)
                 .HasColumnType(ConfigurationConstants.AvatarFormat);

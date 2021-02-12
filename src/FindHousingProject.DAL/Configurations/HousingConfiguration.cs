@@ -42,7 +42,7 @@ namespace FindHousingProject.DAL.Configurations
             builder.Property(t => t.BookedTo)
                 .HasColumnType(ConfigurationConstants.DateFormat);
 
-            builder.Property(t => t.Discription)
+            builder.Property(t => t.Description)
                 .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
 
             builder.Property(t => t.Address)

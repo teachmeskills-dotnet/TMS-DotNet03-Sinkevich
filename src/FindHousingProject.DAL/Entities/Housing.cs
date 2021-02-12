@@ -59,7 +59,7 @@ namespace FindHousingProject.DAL.Entities
         /// <summary>
         /// Discription about housing.
         /// </summary>
-        public string Discription { get; set; }
+        public string Description { get; set; }
         /// <summary>
         /// Housing address.
         /// </summary>
