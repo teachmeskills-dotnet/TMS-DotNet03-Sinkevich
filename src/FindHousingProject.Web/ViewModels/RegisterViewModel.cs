@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FindHousingProject.Common.Constants;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,12 +19,6 @@ namespace FindHousingProject.Web.ViewModels
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
-        /// <summary>
-        /// Is vendor.
-        /// </summary>
-        [Display(Name = "Owner")]
-        public bool IsOwner { get; set; }
 
         /// <summary>
         /// Password.

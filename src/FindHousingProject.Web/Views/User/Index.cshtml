@@ -7,6 +7,13 @@
     <div class="info">
         <p class="name"><a>Id: </a>@Model.Id</p>
         <p class="username">@(' ')@Model.Email</p>
+        <div>
+            <b><label asp-for="FullName" class="template-label"></label></b>
+            <a class="username">@(' ')@Model.PrettyFullName</a>
+        </div>
+        <div>
+            <a class="username">@(' ')@Model.Role</a>
+        </div>
     </div>
     <div class="avatar">
         @if (Model.Avatar != null)

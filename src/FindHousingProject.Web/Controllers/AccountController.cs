@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FindHousingProject.Web.Controllers
@@ -35,7 +34,7 @@ namespace FindHousingProject.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email};//User user = new User { Email = model.Email, UserName = model.Email, Year = model.Year };
+                User user = new User { Email = model.Email, UserName = model.Email, Role=RolesConstants.GuestRole};//User user = new User { Email = model.Email, UserName = model.Email, Year = model.Year };
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -81,6 +80,7 @@ namespace FindHousingProject.Web.Controllers
                         return Redirect(model.ReturnUrl);
                     }
                     return RedirectToAction("Index", "User");
+                    
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid email and(or) password.");
@@ -130,9 +130,9 @@ namespace FindHousingProject.Web.Controllers
                 Email = user.Email,
                 FullName = user.FullName,
                 Role = user.Role,
-                Roles = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
+                /*Roles = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
                     Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} },
-            };
+            */};
             return View(model);
         }
         [HttpPost]
@@ -160,10 +160,11 @@ namespace FindHousingProject.Web.Controllers
                 }
 
                 await _iuserManager.UpdateProfileAsync(userDto);
+                return RedirectToAction("Index", "User");
 
-                return RedirectToAction("Settings", "Account");
+               // return RedirectToAction("Settings", "Account");
             }
-            settingsViewModel.Avatar = (await _iuserManager.GetAsync(userId)).Avatar;
+            //settingsViewModel.Avatar = (await _iuserManager.GetAsync(userId)).Avatar;
 
             return View(settingsViewModel);
         }
