@@ -1,4 +1,5 @@
 ﻿using FindHousingProject.BLL.Interfaces;
+using FindHousingProject.BLL.Models;
 using FindHousingProject.Common.Constants;
 using FindHousingProject.DAL.Entities;
 using FindHousingProject.Web.ViewModels;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -118,16 +120,54 @@ namespace FindHousingProject.Web.Controllers
             }
             return View(model);
         }
+        [HttpGet]
         public async Task<IActionResult> Settings()
         {
-            var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
+            var user = await _iuserManager.GetAsync(User.Identity.Name);
+            //var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
             var model = new SettingsViewModel
             {
+                Id=user.Id,
+                Email = user.Email,
+                FullName = user.FullName,
+                Role = user.Role,
                 Roles = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
                     Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} },
             };
             //return View(new SettingsViewModel());
             return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Settings(SettingsViewModel settingsViewModel)
+        {
+            var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
+            if (ModelState.IsValid)
+            {
+                var userDto = new UserDto()
+                {
+                    Id = settingsViewModel.Id,
+                    FullName = settingsViewModel.FullName,
+                    Role= settingsViewModel.Role,
+                   Email= settingsViewModel.Email
+                };
+
+                if (settingsViewModel.NewAvatar != null)
+                {
+                    byte[] imageData = null;
+                    using (var binaryReader = new BinaryReader(settingsViewModel.NewAvatar.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)settingsViewModel.NewAvatar.Length);
+                    }
+                    userDto.Avatar = imageData;
+                }
+
+                await _iuserManager.UpdateProfileAsync(userDto);
+
+                return RedirectToAction("Settings", "Account");
+            }
+            settingsViewModel.Avatar = (await _iuserManager.GetAsync(userId)).Avatar;
+
+            return View(settingsViewModel);
         }
     }
 }

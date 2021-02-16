@@ -22,7 +22,7 @@ namespace FindHousingProject.Web
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
         public IConfiguration Configuration { get; }
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -32,9 +32,6 @@ namespace FindHousingProject.Web
             services.AddScoped<IRepository<User>, Repository<User>>();
             services.AddScoped<IUserManager, UsManager>();
 
-            
-
-
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationContext>(options =>
@@ -43,7 +40,6 @@ namespace FindHousingProject.Web
             services.AddIdentity<User, IdentityRole>() //services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -75,12 +71,28 @@ namespace FindHousingProject.Web
                      await context.Response.WriteAsync("Hello World!");
                  });
              });*/
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+        private static void CreateRoles(IServiceProvider serviceProvider)
+        {
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            Task<IdentityResult> roleResult;
+
+            Task<bool> hasVendorRole = roleManager.RoleExistsAsync("Owner");
+            hasVendorRole.Wait();
+
+            if (!hasVendorRole.Result)
+            {
+                roleResult = roleManager.CreateAsync(new IdentityRole("Owner"));
+                roleResult.Wait();
+            }
         }
     }
 }

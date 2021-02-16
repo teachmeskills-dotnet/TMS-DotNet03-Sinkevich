@@ -10,8 +10,21 @@
         <input asp-for="FullName" autocomplete="off" class="template-input">
     </div>
     <div>
+        <input type="hidden" asp-for="Email" autocomplete="off" class="template-input">
+    </div>
+    <div>
         <label asp-for="IsOwner" class="template-label"></label>
         <input asp-for="IsOwner">
+
+        @if  (true)
+        {
+            <label asp-for="IsOwner" class="template-label"></label>
+            <input asp-for="IsOwner">
+        }
+        else
+        {
+        }
+
     </div>
     <div>
         <select asp-for="Role" asp-items="Model.Roles"></select>
@@ -38,7 +51,7 @@
     <input type="hidden" value="@Model.Email" name="Email">
 
     <div>
-        <input type="submit" value="Сохранить" class="template-button">
+        <input type="submit" value="Save" class="template-button">
     </div>
 </form>
 

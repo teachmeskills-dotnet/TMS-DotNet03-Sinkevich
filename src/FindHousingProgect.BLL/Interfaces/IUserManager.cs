@@ -36,8 +36,8 @@ namespace FindHousingProject.BLL.Interfaces
         /// <summary>
         /// Create profile.
         /// </summary>
-        /// <param name="userBLL">Profile data transfer object.</param>
-        Task CreateAsync(UserDto userBLL);
+        /// <param name="userDto">Profile data transfer object.</param>
+        Task CreateAsync(UserDto userDto);
 
         /// <summary>
         /// Delete profile by identifier.
@@ -49,15 +49,15 @@ namespace FindHousingProject.BLL.Interfaces
         /// <summary>
         /// Update profile by identifier.
         /// </summary>
-        /// <param name="userBLL">Profile data transfer object.</param>
+        /// <param name="userDto">Profile data transfer object.</param>
         /// <param name="email">User identifier.</param>
-        Task UpdateProfileAsync(UserDto userBLL, string email);
+        Task UpdateProfileAsync(UserDto userDto);
 
         /// <summary>
         /// Get profile by user identifier.
         /// </summary>
         /// <param name="email">User identifier.</param>
         /// <returns>Profile data transfer object.</returns>
-        Task<UserDto> GetProfileAsync(string email);
+        Task<UserDto> GetAsync(string email);
     }
 }

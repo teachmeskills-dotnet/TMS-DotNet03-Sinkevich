@@ -24,7 +24,7 @@ namespace FindHousingProject.Web.Controllers
         public async Task<IActionResult> Index(string email)
         {
             email = email ?? User.Identity.Name;
-            var profile = await _iuserManager.GetProfileAsync(email);
+            var profile = await _iuserManager.GetAsync(email);
 
             var userViewModel = new UserViewModel()
             {
