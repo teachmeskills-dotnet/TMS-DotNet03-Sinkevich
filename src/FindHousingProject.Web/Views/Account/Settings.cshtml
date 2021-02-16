@@ -13,20 +13,6 @@
         <input type="hidden" asp-for="Email" autocomplete="off" class="template-input">
     </div>
     <div>
-        <label asp-for="IsOwner" class="template-label"></label>
-        <input asp-for="IsOwner">
-
-        @if  (true)
-        {
-            <label asp-for="IsOwner" class="template-label"></label>
-            <input asp-for="IsOwner">
-        }
-        else
-        {
-        }
-
-    </div>
-    <div>
         <select asp-for="Role" asp-items="Model.Roles"></select>
     </div>
 
@@ -54,7 +40,11 @@
         <input type="submit" value="Save" class="template-button">
     </div>
 </form>
-
+<div>
+    <form method="get" asp-controller="Account" asp-action="ChangePassword">
+        <button type="submit" class="template-button">Change Password</button>
+    </form>
+</div>
 @section Scripts {
     <script src="~/js/app.js" asp-append-version="true"></script>
 }

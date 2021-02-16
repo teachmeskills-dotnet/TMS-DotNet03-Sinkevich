@@ -16,18 +16,12 @@ namespace FindHousingProject.BLL.Managers
     public class UsManager: IUserManager
     {
         private readonly UserManager<User> _userManager;
-      //  private readonly IUserManager _iuserManager;
         private readonly IRepository<User> _repositoryUser;
-       /* public UserManager( UserManager<User> userManager, IUserManager iuserManager)
-        {
-            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-           // _iuserManager = iuserManager ?? throw new ArgumentNullException(nameof(iuserManager));
-        }*/
+
        public UsManager(UserManager<User> userManager, IRepository<User> repositoryUser)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _repositoryUser = repositoryUser ?? throw new ArgumentNullException(nameof(repositoryUser));
-           // _iuserManager = iuserManager ?? throw new ArgumentNullException(nameof(iuserManager));
         }
         public async Task<(IdentityResult, User)> SignUpAsync(
                     string email,
@@ -138,7 +132,6 @@ namespace FindHousingProject.BLL.Managers
             var profile = new User
             {
                 Id = userDto.Id,
-               // IsOwner = userBLL.IsOwner,
                 Email = userDto.Email
             };
 
@@ -160,7 +153,6 @@ namespace FindHousingProject.BLL.Managers
                 Email = profile.Email,
                 FullName = profile.FullName,
                 Role = profile.Role,
-               // IsOwner = profile.IsOwner,
                 Avatar = profile.Avatar
             };
             return userDto;

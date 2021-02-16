@@ -79,7 +79,7 @@ namespace FindHousingProject.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-        private static void CreateRoles(IServiceProvider serviceProvider)
+       /* private static void CreateRoles(IServiceProvider serviceProvider)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -93,6 +93,6 @@ namespace FindHousingProject.Web
                 roleResult = roleManager.CreateAsync(new IdentityRole("Owner"));
                 roleResult.Wait();
             }
-        }
+        }*/
     }
 }

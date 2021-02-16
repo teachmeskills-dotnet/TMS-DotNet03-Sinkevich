@@ -28,7 +28,7 @@ namespace FindHousingProject.Web.ViewModels
         /// New password confirm.
         /// </summary>
         [Required]
-        [Compare("Password", ErrorMessage = "Passwords don't match")]
+        [Compare("NewPassword", ErrorMessage = "Passwords don't match")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         public string NewPasswordConfirm { get; set; }

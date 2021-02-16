@@ -40,10 +40,5 @@ namespace FindHousingProject.Web.Controllers
 
             return View(userViewModel);
         }
-
-        /* public async Task<IActionResult> Profile()
-         {
-             return RedirectToAction("Index", "User");
-         }*/
     }
 }

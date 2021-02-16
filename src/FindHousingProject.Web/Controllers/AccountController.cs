@@ -124,7 +124,6 @@ namespace FindHousingProject.Web.Controllers
         public async Task<IActionResult> Settings()
         {
             var user = await _iuserManager.GetAsync(User.Identity.Name);
-            //var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
             var model = new SettingsViewModel
             {
                 Id=user.Id,
@@ -134,7 +133,6 @@ namespace FindHousingProject.Web.Controllers
                 Roles = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
                     Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} },
             };
-            //return View(new SettingsViewModel());
             return View(model);
         }
         [HttpPost]
