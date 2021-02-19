@@ -110,6 +110,7 @@ namespace FindHousingProject.BLL.Managers
             userDAL.Avatar = userDto.Avatar;
             userDAL.FullName = userDto.FullName;
             userDAL.Role = userDto.Role;
+            userDAL.Avatar = userDto.Avatar;    
             _repositoryUser.Update(userDAL);
             await _repositoryUser.SaveChangesAsync();
 

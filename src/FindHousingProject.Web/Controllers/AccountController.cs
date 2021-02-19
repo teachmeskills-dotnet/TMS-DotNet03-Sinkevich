@@ -80,7 +80,6 @@ namespace FindHousingProject.Web.Controllers
                         return Redirect(model.ReturnUrl);
                     }
                     return RedirectToAction("Index", "User");
-                    
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid email and(or) password.");
@@ -130,6 +129,7 @@ namespace FindHousingProject.Web.Controllers
                 Email = user.Email,
                 FullName = user.FullName,
                 Role = user.Role,
+                Avatar = user.Avatar
                 /*Roles = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
                     Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} },
             */};
@@ -145,6 +145,7 @@ namespace FindHousingProject.Web.Controllers
                 {
                     Id = settingsViewModel.Id,
                     FullName = settingsViewModel.FullName,
+                    Avatar=settingsViewModel.Avatar,
                     Role= settingsViewModel.Role,
                    Email= settingsViewModel.Email
                 };

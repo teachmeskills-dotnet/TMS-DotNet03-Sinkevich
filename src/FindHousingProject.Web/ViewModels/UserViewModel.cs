@@ -1,4 +1,5 @@
 ﻿using FindHousingProject.Common.Constants;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,6 @@ namespace FindHousingProject.Web.ViewModels
         /// <summary>
         /// Avatar.
         /// </summary>
-        public byte[] Avatar { get; set; }
+        public byte [] Avatar { get; set; }
     }
 }

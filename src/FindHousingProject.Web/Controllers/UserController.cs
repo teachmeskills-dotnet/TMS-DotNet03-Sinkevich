@@ -3,7 +3,9 @@ using FindHousingProject.Common.Constants;
 using FindHousingProject.DAL.Entities;
 using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +27,6 @@ namespace FindHousingProject.Web.Controllers
         {
             email = email ?? User.Identity.Name;
             var profile = await _iuserManager.GetAsync(email);
-
             var userViewModel = new UserViewModel()
             {
                 Id = profile.Id,
@@ -33,8 +34,6 @@ namespace FindHousingProject.Web.Controllers
                 FullName= profile.FullName,
                 Avatar = profile.Avatar,
                 Role = profile.Role,
-                /*Roles=new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
-                    Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} },*/
                 IsOwner = profile.IsOwner
             };
 
