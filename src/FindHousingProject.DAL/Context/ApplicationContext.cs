@@ -10,6 +10,8 @@ namespace FindHousingProject.DAL
 {
     public class ApplicationContext : IdentityDbContext<User>//IdentityDbContext
     {
+        public DbSet<Housing> Housing { get; set; }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
@@ -28,6 +30,7 @@ namespace FindHousingProject.DAL
 
             base.OnModelCreating(builder);
         }
+
 
     }
 }

@@ -36,6 +36,7 @@ namespace FindHousingProject.BLL.Interfaces
         /// <param name="predicate">LINQ predicate.</param>
         /// <returns>T entity.</returns>
         Task<T> GetEntityAsync(Expression<Func<T, bool>> predicate);
+        Task<List<T>> GetListAsync(Expression<Func<T, bool>> predicate);
 
         /// <summary>
         /// Get entity async by predicate (without tracking).

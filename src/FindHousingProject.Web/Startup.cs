@@ -29,9 +29,12 @@ namespace FindHousingProject.Web
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            // Managers
+            // Repositories
             services.AddScoped<IRepository<User>, Repository<User>>();
+            services.AddScoped<IRepository<Housing>, Repository<Housing>>();
+            // Managers
             services.AddScoped<IUserManager, UsManager>();
+            services.AddScoped<IHousingManager, HousingManager>();
             // Microsoft services
             services.AddControllersWithViews();
             // Database context

@@ -35,6 +35,10 @@ namespace FindHousingProject.BLL.Repositories
         {
             return _dbSet.AsNoTracking();
         }
+        public async Task<List<T>> GetListAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.Where(predicate).ToListAsync();
+        }
 
         public async Task<T> GetEntityAsync(Expression<Func<T, bool>> predicate)
         {
