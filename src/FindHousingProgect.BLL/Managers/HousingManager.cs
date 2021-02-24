@@ -14,12 +14,14 @@ namespace FindHousingProject.BLL.Managers
     {
         private readonly IRepository<Housing> _repositoryHousing;
         private readonly IUserManager _userManager;
-        public HousingManager(IRepository<Housing> repositoryHousing, IUserManager userManager)
+        private readonly IRepository<User> _repositoryUser;
+        public HousingManager(IRepository<Housing> repositoryHousing, IUserManager userManager, IRepository<User> repositoryUser)
         {
             _repositoryHousing = repositoryHousing ?? throw new ArgumentNullException(nameof(repositoryHousing));
-            _userManager = userManager ?? throw new ArgumentNullException(nameof(repositoryHousing));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _repositoryUser = repositoryUser ?? throw new ArgumentNullException(nameof(repositoryUser));
         }
-        public async Task CreateAsync(Housing housingDto)
+        public async Task CreateAsync(HousingDto housingDto)
         {
             housingDto = housingDto ?? throw new ArgumentNullException(nameof(housingDto));
 
@@ -39,6 +41,7 @@ namespace FindHousingProject.BLL.Managers
                // State = orderDto.VendorId is null ? StateType.AwaitingVendor : StateType.AwaitingConfirm
             };
             await _repositoryHousing.CreateAsync(housing);
+           // await _repositoryUser.GetEntityAsync();
             await _repositoryHousing.SaveChangesAsync();
         }
        public async Task<IEnumerable<Housing>> GetCurrentHousingsAsync(string email)

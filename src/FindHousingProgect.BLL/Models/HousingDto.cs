@@ -31,7 +31,7 @@ namespace FindHousingProject.BLL.Models
         /// <summary>
         /// User which booking housing
         /// </summary>
-        public UserDto User { get; set; }
+        public User User { get; set; }
 
         /// <summary>
         ///
@@ -61,7 +61,7 @@ namespace FindHousingProject.BLL.Models
         /// <summary>
         /// Discription about housing.
         /// </summary>
-        public string Discription { get; set; }
+        public string Description { get; set; }
         /// <summary>
         /// Housing address.
         /// </summary>

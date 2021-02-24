@@ -138,7 +138,7 @@ namespace FindHousingProject.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Settings(SettingsViewModel settingsViewModel)
         {
-            var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
+           // var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
             if (ModelState.IsValid)
             {
                 var userDto = new UserDto()

@@ -1,4 +1,4 @@
-﻿@model FindHousingProject.DAL.Entities.Housing
+﻿@model FindHousingProject.Web.ViewModels.CreateHousingViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,10 +10,37 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form method="post" asp-action="Create" asp-controller="Housing" enctype="multipart/form-data" class="template-form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group"></div>
-            <div class="form-group"></div>
+            <div>
+                <label asp-for="Name" class="template-label"></label>
+                <input asp-for="Name" autocomplete="off" class="template-input">
+            </div>
+            <div>
+                <label asp-for="PricePerDay" class="template-label"></label>
+                <input asp-for="PricePerDay" autocomplete="off" class="template-input">
+            </div>
+            <div>
+                <label asp-for="Description" class="template-label"></label>
+                <input asp-for="Description" autocomplete="off" class="template-input">
+            </div>
+            <div>
+                <label asp-for="Address" class="template-label"></label>
+                <input asp-for="Address" autocomplete="off" class="template-input">
+            </div>
+            <div>
+                <p>
+                    <label>Photo</label>
+                    <!-- if (Model.Scenery != null)
+                    {
+                    <img style='max-width:50px;' src="data:image/jpeg;base64,(Convert.ToBase64String(Model.Scenery))">
+                    }
+                    else
+                    {
+                    <img src="https://suvenirus.org/wp-content/uploads/admin/OR-31.jpg">
+                    }-->
+                </p>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -26,5 +53,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/app.js" asp-append-version="true"></script>
 }

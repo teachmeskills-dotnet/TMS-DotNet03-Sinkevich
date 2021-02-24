@@ -6,9 +6,7 @@ namespace FindHousingProject.Web.ViewModels
     public class CreateHousingViewModel
     {
         public string  Name { get; set; }
-        public string  Id { get; set; }
-        public Country Place { get; set; } //https://www.jqueryscript.net/form/country-picker-flags.html
-        public User User { get; set; }
+        //public Country Place { get; set; } //https://www.jqueryscript.net/form/country-picker-flags.html
         public DateTime BookedFrom { get; set; }
         public DateTime BookedTo { get; set; }
         public decimal PricePerDay { get; set; }

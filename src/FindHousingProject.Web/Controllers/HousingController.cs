@@ -28,63 +28,42 @@ namespace FindHousingProject.Web.Controllers
         // GET: Housing
         public async Task<IActionResult> Index()
         {
-            return View(await _ihousingManager.GetCurrentHousingsAsync(User.Identity.Name));
-            //return View(await _context.Joke.ToListAsync());
+            if (User.Identity.Name == null)
+            {
+                return RedirectToAction(  "SignIn", "Account");
+            }
+            else
+            {
+                return View(await _ihousingManager.GetCurrentHousingsAsync(User.Identity.Name));
+            }
         }
+        [HttpGet]
         [Authorize]
-        // GET: Jokes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Jokes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /* [Authorize]
-         [HttpPost]
-         [ValidateAntiForgeryToken]
-          public async Task<IActionResult> Create([Bind("Id,JokeQuestion,JokeAnswer")] Joke joke)
-          {
-              if (ModelState.IsValid)
-              {
-                   _context.Add(joke);
-                   await _context.SaveChangesAsync();
-                   return RedirectToAction(nameof(Index));
-               }
-               return View(joke);
-     }*/
-
-        [HttpGet]
-        [Authorize(Roles = RolesConstants.OwnerRole)]
-        public IActionResult CreateHousing(string housingId)
-        {
-            var сreateHousingViewModel = new CreateHousingViewModel()
-            {
-                Id = housingId
-            };
-            return View(сreateHousingViewModel);
-        }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = RolesConstants.OwnerRole)]
-        public async Task<IActionResult> CreateHousing(CreateHousingViewModel сreateHousingViewModel)
+        public async Task<IActionResult> Create(CreateHousingViewModel сreateHousingViewModel)
         {
             if (ModelState.IsValid)
             {
+                // var user = await _usManager.GetAsync(User.Identity.Name);
                 var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
-                var housingDto = new Housing()
+                var housingDto = new HousingDto()
                 {
+                    UserId= userId,
                     Name = сreateHousingViewModel.Name,
-                    Id= сreateHousingViewModel.Id,
-                    Address = сreateHousingViewModel.Address
+                    PricePerDay = сreateHousingViewModel.PricePerDay,
+                    Description = сreateHousingViewModel.Description,
+                    Address = сreateHousingViewModel.Address,
+                    Scenery = сreateHousingViewModel.Scenery
                 };
                 await _ihousingManager.CreateAsync(housingDto);
-                return RedirectToAction("Housing", "Create");
+                return RedirectToAction( "Index", "Housing");
             }
             return View(сreateHousingViewModel);
         }
-
     }
 }
