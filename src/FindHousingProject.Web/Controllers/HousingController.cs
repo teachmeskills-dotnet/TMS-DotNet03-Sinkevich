@@ -12,6 +12,7 @@ using FindHousingProject.BLL.Managers;
 using FindHousingProject.Web.ViewModels;
 using FindHousingProject.Common.Constants;
 using FindHousingProject.BLL.Interfaces;
+using System.IO;
 
 namespace FindHousingProject.Web.Controllers
 {
@@ -60,6 +61,15 @@ namespace FindHousingProject.Web.Controllers
                     Address = сreateHousingViewModel.Address,
                     Scenery = сreateHousingViewModel.Scenery
                 };
+                if (сreateHousingViewModel.NewScenery != null)
+                {
+                    byte[] imageData = null;
+                    using (var binaryReader = new BinaryReader(сreateHousingViewModel.NewScenery.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)сreateHousingViewModel.NewScenery.Length);
+                    }
+                    housingDto.Scenery= imageData;
+                }
                 await _ihousingManager.CreateAsync(housingDto);
                 return RedirectToAction( "Index", "Housing");
             }

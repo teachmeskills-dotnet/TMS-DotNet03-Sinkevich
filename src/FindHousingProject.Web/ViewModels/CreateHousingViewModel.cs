@@ -1,5 +1,7 @@
 ﻿using FindHousingProject.DAL.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace FindHousingProject.Web.ViewModels
 {
@@ -14,8 +16,13 @@ namespace FindHousingProject.Web.ViewModels
         /// Scenery.
         /// </summary>
         public byte[] Scenery { get; set; }
+        /// <summary>
+        /// New scenery.
+        /// </summary>
+        [Display(Name = "Change scenery")]
+        public IFormFile NewScenery { get; set; }
+        //public List<SelectListItem> Roles { get; set; }
         public string Description { get; set; }
-
         public string Address { get; set; }
     }
 }
