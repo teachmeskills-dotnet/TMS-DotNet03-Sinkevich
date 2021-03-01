@@ -26,7 +26,7 @@
             </div>
             <div>
                 <label>Scenery</label>
-                @if (Model.Scenery != null)
+                @if (Model?.Scenery != null)
                 {
                     <img style='max-width:70px;max-height:70px' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Scenery))">
                 }

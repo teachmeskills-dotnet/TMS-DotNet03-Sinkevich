@@ -75,5 +75,63 @@ namespace FindHousingProject.Web.Controllers
             }
             return View(сreateHousingViewModel);
         }
+        public async Task<IActionResult> Delete(string housingId)
+        {
+            var housing = await _ihousingManager.GetHousingAsync(housingId);
+
+            var housingEditViewModel = new CreateHousingViewModel()
+            {
+                Id = housing.Id,
+                Description = housing.Description,
+                PricePerDay = housing.PricePerDay,
+                Name = housing.Name
+            };
+            return View(housingEditViewModel);
+        }
+        // [Authorize(Roles = RolesConstants.OwnerRole)]
+        [HttpPost,  ActionName("Delete") ]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteHousing(string housingId)
+        {
+            var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
+
+            await _ihousingManager.DeleteAsync(housingId, userId);
+
+            return RedirectToAction("Index", "Housing");
+        }
+
+        public async Task<IActionResult> Edit(string housingId)
+        {
+            var housing = await _ihousingManager.GetHousingAsync(housingId);
+
+            var housingEditViewModel = new CreateHousingViewModel()
+            {
+                Id = housing.Id,
+                Description = housing.Description,
+                PricePerDay = housing.PricePerDay,
+                Name = housing.Name
+            };
+            return View(housingEditViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditHousing(CreateHousingViewModel createHousingViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
+                var housingDto = new HousingDto()
+                {
+                    Id = createHousingViewModel.Id,
+                    Description = createHousingViewModel.Description,
+                    PricePerDay =createHousingViewModel.PricePerDay,
+                    Name=createHousingViewModel.Name
+                };
+                await _ihousingManager.UpdateHousingAsync(housingDto, userId);
+                return RedirectToAction("Outgoing", "Orders");
+            }
+            return View(createHousingViewModel);
+        }
     }
 }
