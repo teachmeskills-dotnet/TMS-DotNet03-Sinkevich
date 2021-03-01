@@ -145,5 +145,38 @@ namespace FindHousingProject.Web.Controllers
             }
             return View(createHousingViewModel);
         }
+        public async Task<IActionResult> Details(string housingId)
+        {
+            var housing = await _ihousingManager.GetHousingAsync(housingId);
+            var housingDetailsViewModel = new CreateHousingViewModel()
+            {
+                Name = housing.Name,
+                Address = housing.Address,
+                PricePerDay = housing.PricePerDay,
+                Description = housing.Description,
+                Scenery = housing.Scenery
+            };
+
+            return View(housingDetailsViewModel);
+        }
+        [HttpPost, ActionName("Details")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DetailsHousing(CreateHousingViewModel createHousingViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
+                var housingDto = new HousingDto()
+                {
+                    Id = createHousingViewModel.Id,
+                    Description = createHousingViewModel.Description,
+                    PricePerDay = createHousingViewModel.PricePerDay,
+                    Address = createHousingViewModel.Address,
+                    Name = createHousingViewModel.Name,
+                };
+                return RedirectToAction("Index", "Housing");
+            }
+            return View(createHousingViewModel);
+        }
     }
 }

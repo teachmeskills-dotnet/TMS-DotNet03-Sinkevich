@@ -48,8 +48,7 @@
                 <td>
                     <!-- <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |-->
                     @Html.ActionLink("Edit", "Edit", new { housingId = item.Id })|
-
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    @Html.ActionLink("Details", "Details", new { housingId = item.Id })|
                     @Html.ActionLink("Delete", "Delete", new { housingId = item.Id })
                 </td>
             </tr>
