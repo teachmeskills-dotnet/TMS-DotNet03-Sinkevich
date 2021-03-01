@@ -109,12 +109,14 @@ namespace FindHousingProject.Web.Controllers
                 Id = housing.Id,
                 Description = housing.Description,
                 PricePerDay = housing.PricePerDay,
-                Name = housing.Name
+                Name = housing.Name,
+                Address=housing.Address,
+                Scenery=housing.Scenery
             };
             return View(housingEditViewModel);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditHousing(CreateHousingViewModel createHousingViewModel)
         {
@@ -126,10 +128,20 @@ namespace FindHousingProject.Web.Controllers
                     Id = createHousingViewModel.Id,
                     Description = createHousingViewModel.Description,
                     PricePerDay =createHousingViewModel.PricePerDay,
-                    Name=createHousingViewModel.Name
+                    Address=createHousingViewModel.Address,
+                    Name=createHousingViewModel.Name,
                 };
+                if (createHousingViewModel.NewScenery != null)
+                {
+                    byte[] imageData = null;
+                    using (var binaryReader = new BinaryReader(createHousingViewModel.NewScenery.OpenReadStream()))
+                    {
+                        imageData = binaryReader.ReadBytes((int)createHousingViewModel.NewScenery.Length);
+                    }
+                    housingDto.Scenery = imageData;
+                }
                 await _ihousingManager.UpdateHousingAsync(housingDto, userId);
-                return RedirectToAction("Outgoing", "Orders");
+                return RedirectToAction("Index", "Housing");
             }
             return View(createHousingViewModel);
         }

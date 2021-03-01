@@ -1,21 +1,41 @@
-﻿@model FindHousingProject.BLL.Models.HousingDto
-
-@{
-    ViewData["Title"] = "Edit";
-}
+﻿@model FindHousingProject.Web.ViewModels.CreateHousingViewModel
 
 <h1>Edit</h1>
 
-<h4>Joke</h4>
+<h4>Housing</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form method="post" asp-action="Edit" asp-controller="Housing" enctype="multipart/form-data" class="template-form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
+            <div>
+                <label asp-for="Name" class="template-label"></label>
+                <input asp-for="Name" autocomplete="off" class="template-input">
             </div>
-            <div class="form-group">
+            <div>
+                <label asp-for="PricePerDay" class="template-label"></label>
+                <input asp-for="PricePerDay" autocomplete="off" class="template-input">
+            </div>
+            <div>
+                <label asp-for="Description" class="template-label"></label>
+                <input asp-for="Description" autocomplete="off" class="template-input">
+            </div>
+            <div>
+                <label asp-for="Address" class="template-label"></label>
+                <input asp-for="Address" autocomplete="off" class="template-input">
+            </div>
+            <div>
+                <label>Scenery</label>
+                @if (Model?.Scenery != null)
+                {
+                    <img style='max-width:70px;max-height:70px' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Scenery))">
+                }
+                else
+                {
+                    <img style='max-width:70px;max-height:70px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png">
+                }
+                <input name="NewScenery" type="file" class="form-control" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

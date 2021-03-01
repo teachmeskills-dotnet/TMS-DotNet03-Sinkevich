@@ -78,6 +78,7 @@ namespace FindHousingProject.BLL.Managers
                 Address = housing.Address,
                 Name = housing.Name,
                 Description = housing.Description,
+                Scenery=housing.Scenery,
                 PricePerDay = housing.PricePerDay
             };
             return housingsDto;
@@ -104,7 +105,16 @@ namespace FindHousingProject.BLL.Managers
                     housing.Name = housingDto.Name;
                     updated = true;
                 }
-
+                if (housing.Address != housingDto.Address)
+                {
+                    housing.Address = housingDto.Address;
+                    updated = true;
+                }
+                if (housing.Scenery != housingDto.Scenery)
+                {
+                    housing.Scenery = housingDto.Scenery;
+                    updated = true;
+                }
                 if (housing.Description != housingDto.Description)
                 {
                     housing.Description = housingDto.Description;
