@@ -13,5 +13,13 @@ namespace FindHousingProject.BLL.Interfaces
         Task DeleteAsync(string id, string userId);
         Task<HousingDto> GetHousingAsync(string id);
         Task UpdateHousingAsync(HousingDto housingDto, string userId);
+        IEnumerable<Housing> GetAllHousings();
+        /// <summary>
+        /// Get housing by name.
+        /// </summary>
+        /// <param name="userInput">User input.</param>
+        /// <returns>Collection of housing data transfer objects.</returns>
+        Task<IEnumerable<Housing>> GetUserInputAsync(string userInput);
+
     }
 }

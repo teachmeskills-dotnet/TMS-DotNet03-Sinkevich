@@ -1,13 +1,12 @@
 ﻿using FindHousingProject.BLL.Interfaces;
-using FindHousingProject.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
-using System.Linq;
 using FindHousingProject.BLL.Models;
 using FindHousingProject.Common.Resources;
+using FindHousingProject.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FindHousingProject.BLL.Managers
 {
@@ -50,6 +49,10 @@ namespace FindHousingProject.BLL.Managers
             var userId = await _userManager.GetUserIdByEmailAsync(email);
             return await _repositoryHousing.GetListAsync(x=>x.UserId==userId);
        }
+        public IEnumerable<Housing> GetAllHousings()
+        {
+            return  _repositoryHousing.GetAll();
+        }
         public async Task DeleteAsync(string id, string userId)
         {
             var housing = await _repositoryHousing.GetEntityAsync(housing=>housing.Id==id && housing.UserId==userId);
@@ -135,6 +138,32 @@ namespace FindHousingProject.BLL.Managers
             {
                 await _repositoryHousing.SaveChangesAsync();
             }
+        }
+ 
+        public async Task<IEnumerable<Housing>> GetUserInputAsync(string userInput)
+        {
+            var housingDtos = new List<Housing>();
+
+            var housings = await _repositoryHousing
+                .GetAll()
+                .AsNoTracking()
+                .Where(housing => housing.Name.Contains(userInput)).ToListAsync();
+
+            if (housings.Any())
+            {
+                foreach (var housing in housings)
+                {
+                    housingDtos.Add(new Housing
+                    {
+                        Name = housing.Name,
+                        Address = housing.Address,
+                        PricePerDay = housing.PricePerDay,
+                        Scenery = housing.Scenery
+                    });
+                }
+            }
+            return housingDtos;
+
         }
     }
 }

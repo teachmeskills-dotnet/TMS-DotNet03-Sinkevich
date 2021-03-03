@@ -178,5 +178,14 @@ namespace FindHousingProject.Web.Controllers
             }
             return View(createHousingViewModel);
         }
+        public IActionResult ShowSearchFrom()
+        {
+            return View(_ihousingManager.GetAllHousings());
+        }
+        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        {
+            return View("ShowSearchFrom", await _ihousingManager.GetUserInputAsync(SearchPhrase));
+        }
+
     }
 }
