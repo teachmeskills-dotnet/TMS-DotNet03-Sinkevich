@@ -186,6 +186,5 @@ namespace FindHousingProject.Web.Controllers
         {
             return View("ShowSearchFrom", await _ihousingManager.GetUserInputAsync(SearchPhrase));
         }
-
     }
 }
