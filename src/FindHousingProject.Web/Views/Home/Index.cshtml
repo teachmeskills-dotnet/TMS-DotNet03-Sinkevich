@@ -44,11 +44,60 @@
     </script>
 </head>
 <body>
-    <label for="from">From</label>
-    <input type="text" id="from" name="from">
-    <label for="to">to</label>
-    <input type="text" id="to" name="to">
+    <div class="search-box">
+        <div class="search-box-title">Book unique homes</div>
+        <form class="search-form">
+            <label class="search-box-label" for="search-bar">WHERE</label>
+            <div class="search-box-input">
+                <input id="search-bar-splash" class="box-input pac-target-input" type="text" placeholder="Anywhere" value="" autocomplete="off">
+            </div>
+            <div>
+                <div class="search-box-dates">
+                    <label class="search-box-label" for="search-bar">DATES</label>
+                    <div class="DateRangePicker DateRangePicker_1">
+                        <div>
+                            <div class="DateRangePickerInput DateRangePickerInput_1 DateRangePickerInput__withBorder DateRangePickerInput__withBorder_2">
+                                <div class="DateInput DateInput_1">
+                                    <input class="DateInput_input DateInput_input_1" aria-label="Check in" type="text" id="from" name="from" placeholder="Check in" autocomplete="off" aria-describedby="DateInput__screen-reader-message-check_in" value="">
+                                </div>
+                                <div class="DateRangePickerInput_arrow DateRangePickerInput_arrow_1" aria-hidden="true" role="presentation">
+                                    <svg class="DateRangePickerInput_arrow_svg DateRangePickerInput_arrow_svg_1" focusable="false" viewBox="0 0 1000 1000">
+                                        <path d="M694.4 242.4l249.1 249.1c11 11 11 21 0 32L694.4 772.7c-5 5-10 7-16 7s-11-2-16-7c-11-11-11-21 0-32l210.1-210.1H67.1c-13 0-23-10-23-23s10-23 23-23h805.4L662.4 274.5c-21-21.1 11-53.1 32-32.1z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="DateInput DateInput_1">
+                                    <input class="DateInput_input DateInput_input_1" aria-label="Check out" type="text" id="to" name="to" placeholder="Check out" autocomplete="off" aria-describedby="DateInput__screen-reader-message-check_out" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label class="search-box-label">
+                    GUESTS<select class="listing-show-guest-dropdwn">
+                        <option value="1" default="">1 guest</option>
+                        <option value="2">2 guests</option>
+                        <option value="3">3 guests</option>
+                        <option value="4">4 guests</option>
+                        <option value="5">5 guests</option>
+                        <option value="6">6 guests</option>
+                        <option value="7">7 guests</option>
+                        <option value="8">8 guests</option>
+                        <option value="9">9 guests</option>
+                        <option value="10">10 guests</option>
+                    </select>
+                </label>
+            </div>
+            <div>
+                <button class="search-box-submit">Search</button>
+            </div>
+        </form>
+    </div>
 </body>
+
+
 
 @section Scripts {
     <script src="~/js/app.js" asp-append-version="true"></script>

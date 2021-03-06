@@ -9,6 +9,7 @@ namespace FindHousingProject.Web.ViewModels
     {
         public string Id { get; set; }
         public string  Name { get; set; }
+        public Place Place { get; set; }
         //public Country Place { get; set; } //https://www.jqueryscript.net/form/country-picker-flags.html
         public DateTime BookedFrom { get; set; }
         public DateTime BookedTo { get; set; }

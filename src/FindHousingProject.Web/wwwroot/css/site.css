@@ -71,6 +71,67 @@ body {
 }
 
 
+
+.search-box {
+    background: #ffffff;
+    border-radius: 4px;
+    padding: 32px;
+    width: 441px;
+    box-shadow: 0 16px 40px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-left: 14vw;
+    margin-bottom: 26vh;
+}
+.search-box-title
+{
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: normal;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+    color: #484848;
+    padding-top: 6px;
+    padding-bottom: 22px;
+    font-weight: bold;
+}
+.search-box-label {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    color: #484848;
+    font-weight: 800;
+    display: block;
+}
+.search-box-input {
+    width: 100%;
+    height: 48px;
+    display: table;
+    background-color: #ffffff;
+    border: 1px solid #EBEBEB;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+.box-input {
+    padding: 17px;
+    box-sizing: border-box;
+    border-radius: 2px;
+    display: inline;
+    height: 48px;
+    width: 100%;
+}
+.search-box-dates {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.search-box-label {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    color: #484848;
+    font-weight: 800;
+    display: block;
+}
 .DateRangePicker {
     margin-top: 6px;
     width: 100%;
@@ -78,4 +139,81 @@ body {
 .DateRangePicker {
     position: relative;
     display: inline-block;
+}
+.DateRangePickerInput {
+    width: 100%;
+}
+.DateRangePickerInput__withBorder {
+    border-radius: 2px;
+    border: 1px solid #dbdbdb;
+}
+.DateRangePickerInput {
+    background-color: #fff;
+    display: inline-block;
+}
+.DateInput {
+    width: 45%;
+}
+.DateInput {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    position: relative;
+    display: inline-block;
+    width: 130px;
+    vertical-align: middle;
+}
+.DateInput_input {
+    font-weight: 200;
+    font-size: 19px;
+    line-height: 24px;
+    color: #484848;
+    background-color: #fff;
+    width: 100%;
+    padding: 11px 11px 9px;
+    border: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 2px solid transparent;
+    border-left: 0;
+    border-radius: 0;
+}
+.DateInput_screenReaderMessage {
+    border: 0;
+    clip: rect(0,0,0,0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.DateRangePickerInput_arrow {
+    display: inline-block;
+    vertical-align: middle;
+    color: #484848;
+}
+.DateRangePickerInput_arrow_svg {
+    vertical-align: middle;
+    fill: #484848;
+    height: 24px;
+    width: 24px;
+}
+.search-box-label {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    color: #484848;
+    font-weight: 800;
+    display: block;
+}
+.listing-show-guest-dropdwn {
+    width: 100%;
+    height: 45px;
+    padding: 8px;
+    border: 1px solid #dbdbdb;
+    background: #ffffff;
+    font-size: 17px;
+    color: #484848;
+    line-height: 24px;
 }

@@ -78,6 +78,7 @@ namespace FindHousingProject.BLL.Managers
             {
                 Id = housing.Id,
                 UserId = housing.UserId,
+                Place = housing.Place,
                 Address = housing.Address,
                 Name = housing.Name,
                 Description = housing.Description,
@@ -106,6 +107,11 @@ namespace FindHousingProject.BLL.Managers
                 if (housing.Name != housingDto.Name)
                 {
                     housing.Name = housingDto.Name;
+                    updated = true;
+                }
+                if (housing.Place != housingDto.Place)
+                {
+                    housing.Place = housingDto.Place;
                     updated = true;
                 }
                 if (housing.Address != housingDto.Address)
@@ -157,6 +163,7 @@ namespace FindHousingProject.BLL.Managers
                     {
                         Name = housing.Name,
                         Address = housing.Address,
+                        Place = housing.Place,
                         PricePerDay = housing.PricePerDay,
                         Scenery = housing.Scenery
                     });

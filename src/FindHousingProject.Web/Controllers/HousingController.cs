@@ -56,6 +56,7 @@ namespace FindHousingProject.Web.Controllers
                 {
                     UserId= userId,
                     Name = сreateHousingViewModel.Name,
+                    Place = сreateHousingViewModel.Place,
                     PricePerDay = сreateHousingViewModel.PricePerDay,
                     Description = сreateHousingViewModel.Description,
                     Address = сreateHousingViewModel.Address,
@@ -82,6 +83,7 @@ namespace FindHousingProject.Web.Controllers
             var housingEditViewModel = new CreateHousingViewModel()
             {
                 Id = housing.Id,
+                Place=housing.Place,
                 Description = housing.Description,
                 PricePerDay = housing.PricePerDay,
                 Name = housing.Name
@@ -107,6 +109,7 @@ namespace FindHousingProject.Web.Controllers
             var housingEditViewModel = new CreateHousingViewModel()
             {
                 Id = housing.Id,
+                Place = housing.Place,
                 Description = housing.Description,
                 PricePerDay = housing.PricePerDay,
                 Name = housing.Name,
@@ -126,6 +129,7 @@ namespace FindHousingProject.Web.Controllers
                 var housingDto = new HousingDto()
                 {
                     Id = createHousingViewModel.Id,
+                    Place = createHousingViewModel.Place,
                     Description = createHousingViewModel.Description,
                     PricePerDay =createHousingViewModel.PricePerDay,
                     Address=createHousingViewModel.Address,
@@ -151,6 +155,7 @@ namespace FindHousingProject.Web.Controllers
             var housingDetailsViewModel = new CreateHousingViewModel()
             {
                 Name = housing.Name,
+                Place = housing.Place,
                 Address = housing.Address,
                 PricePerDay = housing.PricePerDay,
                 Description = housing.Description,
@@ -169,6 +174,7 @@ namespace FindHousingProject.Web.Controllers
                 var housingDto = new HousingDto()
                 {
                     Id = createHousingViewModel.Id,
+                    Place = createHousingViewModel.Place,
                     Description = createHousingViewModel.Description,
                     PricePerDay = createHousingViewModel.PricePerDay,
                     Address = createHousingViewModel.Address,
