@@ -115,61 +115,67 @@ namespace FindHousingProject.BLL.Managers
                 throw new KeyNotFoundException(ErrorResource.HousingNotFound);
             }
 
-            static bool ValidateToUpdate(Housing housing, HousingDto housingDto)
-            {
-                bool updated = false;
-
-                if (housing.Name != housingDto.Name)
-                {
-                    housing.Name = housingDto.Name;
-                    updated = true;
-                }
-               if (housing.Place.Name != housingDto.Place.Name)
-                {
-                    housing.Place.Name = housingDto.Place.Name;
-                    updated = true;
-                }
-                if (housing.Address != housingDto.Address)
-                {
-                    housing.Address = housingDto.Address;
-                    updated = true;
-                }
-                if (housing.Scenery != housingDto.Scenery)
-                {
-                    housing.Scenery = housingDto.Scenery;
-                    updated = true;
-                }
-                if (housing.Description != housingDto.Description)
-                {
-                    housing.Description = housingDto.Description;
-                    updated = true;
-                }
-
-                if (housing.PricePerDay != housingDto.PricePerDay)
-                {
-                    housing.PricePerDay = housingDto.PricePerDay;
-                    updated = true;
-                }
-
-                return updated;
-            }
 
             var result = ValidateToUpdate(housing, housingDto);
             if (result)
             {
+                _repositoryPlace.Update(housing.Place);
+                _repositoryHousing.Update(housing);
                 await _repositoryHousing.SaveChangesAsync();
             }
         }
-        public async Task<IEnumerable<Housing>> GetUserInputAsync(string userInput)
+        static bool ValidateToUpdate(Housing housing, HousingDto housingDto)
+        {
+            bool updated = false;
+
+            if (housing.Name != housingDto.Name)
+            {
+                housing.Name = housingDto.Name;
+                updated = true;
+            }
+            if (housing.Place.Name != housingDto.Place.Name)
+            {
+                housing.Place.Name = housingDto.Place.Name;
+                updated = true;
+            }
+            if (housing.Address != housingDto.Address)
+            {
+                housing.Address = housingDto.Address;
+                updated = true;
+            }
+            if (housing.Scenery != housingDto.Scenery)
+            {
+                housing.Scenery = housingDto.Scenery;
+                updated = true;
+            }
+            if (housing.Description != housingDto.Description)
+            {
+                housing.Description = housingDto.Description;
+                updated = true;
+            }
+
+            if (housing.PricePerDay != housingDto.PricePerDay)
+            {
+                housing.PricePerDay = housingDto.PricePerDay;
+                updated = true;
+            }
+
+            return updated;
+        }
+        public async Task<IEnumerable<Housing>> SearchHousingAsync(string userInput, DateTime? checkIn = null, DateTime? checkOut = null)
         {
             var housingDtos = new List<Housing>();
 
             var housings = await _repositoryHousing
-                .GetAll().Include(x=>x.Place)
+                .GetAll().Include(x=>x.Place).Include(x=>x.Reservations)
                 .AsNoTracking().ToListAsync();
             if (!string.IsNullOrWhiteSpace(userInput))
             {
                 housings = housings.Where(x => x.Name.Contains(userInput, StringComparison.OrdinalIgnoreCase) ||(x.Place!=null && x.Place.Name.Contains(userInput, StringComparison.OrdinalIgnoreCase))).ToList();
+            }
+            if (checkIn!=null && checkOut!=null)
+            {
+                housings = housings.Where(x=> !x.Reservations.Any(r=>r.CheckIn >= checkIn.Value && r.CheckOut<= checkOut.Value)).ToList();
             }
             if (housings.Any())
             {

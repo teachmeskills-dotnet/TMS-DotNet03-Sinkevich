@@ -1,5 +1,6 @@
 ﻿using FindHousingProject.BLL.Models;
 using FindHousingProject.DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,7 +20,6 @@ namespace FindHousingProject.BLL.Interfaces
         /// </summary>
         /// <param name="userInput">User input.</param>
         /// <returns>Collection of housing data transfer objects.</returns>
-        Task<IEnumerable<Housing>> GetUserInputAsync(string userInput);
-
+        Task<IEnumerable<Housing>> SearchHousingAsync(string userInput, DateTime? checkIn=null, DateTime? checkOut=null);
     }
 }

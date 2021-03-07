@@ -208,9 +208,9 @@ namespace FindHousingProject.Web.Controllers
         {
             return View(_ihousingManager.GetAllHousings());
         }
-        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        public async Task<IActionResult> ShowSearchResults(String SearchPhrase, DateTime? from= null, DateTime? to = null)
         {
-            return View("ShowSearchFrom", await _ihousingManager.GetUserInputAsync(SearchPhrase));
+            return View("ShowSearchFrom", await _ihousingManager.SearchHousingAsync(SearchPhrase,from, to));
         }
     }
 }
