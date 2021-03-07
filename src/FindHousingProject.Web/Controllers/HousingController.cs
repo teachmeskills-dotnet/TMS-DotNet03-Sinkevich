@@ -52,11 +52,16 @@ namespace FindHousingProject.Web.Controllers
             {
                 // var user = await _usManager.GetAsync(User.Identity.Name);
                 var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
+                var placeDto = new Place()
+                {
+                    Name = сreateHousingViewModel.Place,
+
+                };
                 var housingDto = new HousingDto()
                 {
                     UserId= userId,
                     Name = сreateHousingViewModel.Name,
-                    Place = сreateHousingViewModel.Place,
+                    Place = placeDto,
                     PricePerDay = сreateHousingViewModel.PricePerDay,
                     Description = сreateHousingViewModel.Description,
                     Address = сreateHousingViewModel.Address,
@@ -83,7 +88,7 @@ namespace FindHousingProject.Web.Controllers
             var housingEditViewModel = new CreateHousingViewModel()
             {
                 Id = housing.Id,
-                Place=housing.Place,
+                Place=housing.Place?.Name,
                 Description = housing.Description,
                 PricePerDay = housing.PricePerDay,
                 Name = housing.Name
@@ -109,7 +114,7 @@ namespace FindHousingProject.Web.Controllers
             var housingEditViewModel = new CreateHousingViewModel()
             {
                 Id = housing.Id,
-                Place = housing.Place,
+                Place = housing.Place?.Name,
                 Description = housing.Description,
                 PricePerDay = housing.PricePerDay,
                 Name = housing.Name,
@@ -126,10 +131,15 @@ namespace FindHousingProject.Web.Controllers
             if (ModelState.IsValid)
             {
                 var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
+                var placeDto = new Place()
+                {
+                    Name = createHousingViewModel.Place,
+
+                };
                 var housingDto = new HousingDto()
                 {
                     Id = createHousingViewModel.Id,
-                    Place = createHousingViewModel.Place,
+                    Place = placeDto,
                     Description = createHousingViewModel.Description,
                     PricePerDay =createHousingViewModel.PricePerDay,
                     Address=createHousingViewModel.Address,
@@ -152,10 +162,14 @@ namespace FindHousingProject.Web.Controllers
         public async Task<IActionResult> Details(string housingId)
         {
             var housing = await _ihousingManager.GetHousingAsync(housingId);
+            var user = await _usManager.GetAsync(User.Identity.Name);
+
+
             var housingDetailsViewModel = new CreateHousingViewModel()
             {
+                User= user,
                 Name = housing.Name,
-                Place = housing.Place,
+                Place = housing.Place?.Name,
                 Address = housing.Address,
                 PricePerDay = housing.PricePerDay,
                 Description = housing.Description,
@@ -168,13 +182,19 @@ namespace FindHousingProject.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DetailsHousing(CreateHousingViewModel createHousingViewModel)
         {
+            var placeDto = new Place()
+            {
+                Name = createHousingViewModel.Place,
+            };
+
             if (ModelState.IsValid)
             {
                 var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
+
                 var housingDto = new HousingDto()
                 {
                     Id = createHousingViewModel.Id,
-                    Place = createHousingViewModel.Place,
+                    Place = placeDto,
                     Description = createHousingViewModel.Description,
                     PricePerDay = createHousingViewModel.PricePerDay,
                     Address = createHousingViewModel.Address,

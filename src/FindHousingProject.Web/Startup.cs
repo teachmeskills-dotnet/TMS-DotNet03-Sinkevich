@@ -32,6 +32,7 @@ namespace FindHousingProject.Web
             // Repositories
             services.AddScoped<IRepository<User>, Repository<User>>();
             services.AddScoped<IRepository<Housing>, Repository<Housing>>();
+            services.AddScoped<IRepository<Place>, Repository<Place>>();
             // Managers
             services.AddScoped<IUserManager, UsManager>();
             services.AddScoped<IHousingManager, HousingManager>();

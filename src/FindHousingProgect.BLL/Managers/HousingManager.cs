@@ -15,19 +15,25 @@ namespace FindHousingProject.BLL.Managers
         private readonly IRepository<Housing> _repositoryHousing;
         private readonly IUserManager _userManager;
         private readonly IRepository<User> _repositoryUser;
-        public HousingManager(IRepository<Housing> repositoryHousing, IUserManager userManager, IRepository<User> repositoryUser)
+        private readonly IRepository<Place> _repositoryPlace;
+        public HousingManager(IRepository<Housing> repositoryHousing, IUserManager userManager, IRepository<User> repositoryUser, IRepository<Place> repositoryPlace)
         {
             _repositoryHousing = repositoryHousing ?? throw new ArgumentNullException(nameof(repositoryHousing));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _repositoryUser = repositoryUser ?? throw new ArgumentNullException(nameof(repositoryUser));
+            _repositoryPlace = repositoryPlace ?? throw new ArgumentNullException(nameof(repositoryPlace));
         }
         public async Task CreateAsync(HousingDto housingDto)
         {
             housingDto = housingDto ?? throw new ArgumentNullException(nameof(housingDto));
+            housingDto.Place.Type = "Housing type";
+
+            await _repositoryPlace.CreateAsync(housingDto.Place);
+           // await _repositoryHousing.SaveChangesAsync();
 
             var housing = new Housing
             {
-                Id = housingDto.Id,
+              //  Id = housingDto.Id,
                 Place = housingDto.Place,
                 Name = housingDto.Name,
                 UserId = housingDto.UserId,
@@ -55,7 +61,7 @@ namespace FindHousingProject.BLL.Managers
         }
         public async Task DeleteAsync(string id, string userId)
         {
-            var housing = await _repositoryHousing.GetEntityAsync(housing=>housing.Id==id && housing.UserId==userId);
+             var housing = await _repositoryHousing.GetEntityAsync(housing=>housing.Id==id && housing.UserId==userId);
 
             if (housing is null)
             {
@@ -67,7 +73,10 @@ namespace FindHousingProject.BLL.Managers
         }
         public async Task<HousingDto> GetHousingAsync(string id)
         {
-            var housing = await _repositoryHousing.GetEntityAsync(order => order.Id == id);
+            //var housing = await _repositoryHousing.GetEntityAsync(order => order.Id == id);
+            var housing = await _repositoryHousing
+            .GetAll().Include(x => x.Place).FirstOrDefaultAsync(order => order.Id == id);
+
             if (housing is null)
             {
                 throw new KeyNotFoundException(ErrorResource.HousingNotFound);
@@ -79,6 +88,7 @@ namespace FindHousingProject.BLL.Managers
                 Id = housing.Id,
                 UserId = housing.UserId,
                 Place = housing.Place,
+                PlaceId = housing.PlaceId,
                 Address = housing.Address,
                 Name = housing.Name,
                 Description = housing.Description,
@@ -91,9 +101,14 @@ namespace FindHousingProject.BLL.Managers
         {
             housingDto = housingDto ?? throw new ArgumentNullException(nameof(housingDto));
 
-            var housing = await _repositoryHousing.GetEntityAsync(housings => housings.Id == housingDto.Id
-                && housings.UserId == userId
-               );
+            var housing = await _repositoryHousing
+            .GetAll().Include(x => x.Place).FirstOrDefaultAsync(housings => housings.Id == housingDto.Id
+               && housings.UserId == userId
+             );
+
+            // var housing = await _repositoryHousing.GetEntityAsync(housings => housings.Id == housingDto.Id
+            //   && housings.UserId == userId
+            // );
 
             if (housing is null)
             {
@@ -109,9 +124,9 @@ namespace FindHousingProject.BLL.Managers
                     housing.Name = housingDto.Name;
                     updated = true;
                 }
-                if (housing.Place != housingDto.Place)
+               if (housing.Place.Name != housingDto.Place.Name)
                 {
-                    housing.Place = housingDto.Place;
+                    housing.Place.Name = housingDto.Place.Name;
                     updated = true;
                 }
                 if (housing.Address != housingDto.Address)
@@ -145,22 +160,24 @@ namespace FindHousingProject.BLL.Managers
                 await _repositoryHousing.SaveChangesAsync();
             }
         }
- 
         public async Task<IEnumerable<Housing>> GetUserInputAsync(string userInput)
         {
             var housingDtos = new List<Housing>();
 
             var housings = await _repositoryHousing
-                .GetAll()
-                .AsNoTracking()
-                .Where(housing => housing.Name.Contains(userInput)).ToListAsync();
-
+                .GetAll().Include(x=>x.Place)
+                .AsNoTracking().ToListAsync();
+            if (!string.IsNullOrWhiteSpace(userInput))
+            {
+                housings = housings.Where(x => x.Name.Contains(userInput, StringComparison.OrdinalIgnoreCase) ||(x.Place!=null && x.Place.Name.Contains(userInput, StringComparison.OrdinalIgnoreCase))).ToList();
+            }
             if (housings.Any())
             {
                 foreach (var housing in housings)
                 {
                     housingDtos.Add(new Housing
                     {
+                        Id=housing.Id,
                         Name = housing.Name,
                         Address = housing.Address,
                         Place = housing.Place,
@@ -170,7 +187,6 @@ namespace FindHousingProject.BLL.Managers
                 }
             }
             return housingDtos;
-
         }
     }
 }

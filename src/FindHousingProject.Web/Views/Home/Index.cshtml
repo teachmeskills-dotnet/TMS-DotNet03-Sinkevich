@@ -5,51 +5,19 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jQuery UI Datepicker - Select a Date Range</title>
+    <title>Home</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            var dateFormat = "mm/dd/yy",
-                from = $("#from")
-                    .datepicker({
-                        defaultDate: "+1w",
-                        changeMonth: true,
-                        numberOfMonths: 3
-                    })
-                    .on("change", function () {
-                        to.datepicker("option", "minDate", getDate(this));
-                    }),
-                to = $("#to").datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    numberOfMonths: 3
-                })
-                    .on("change", function () {
-                        from.datepicker("option", "maxDate", getDate(this));
-                    });
-
-            function getDate(element) {
-                var date;
-                try {
-                    date = $.datepicker.parseDate(dateFormat, element.value);
-                } catch (error) {
-                    date = null;
-                }
-                return date;
-            }
-        });
-    </script>
 </head>
 <body>
     <div class="search-box">
         <div class="search-box-title">Book unique homes</div>
-        <form class="search-form">
+        <form class="search-form" asp-controller="Housing" asp-action="ShowSearchResults">
             <label class="search-box-label" for="search-bar">WHERE</label>
             <div class="search-box-input">
-                <input id="search-bar-splash" class="box-input pac-target-input" type="text" placeholder="Anywhere" value="" autocomplete="off">
+                <input id="search-bar-splash" name="SearchPhrase" class="box-input pac-target-input" type="text" placeholder="Anywhere" value="" autocomplete="off">
             </div>
             <div>
                 <div class="search-box-dates">
@@ -99,8 +67,9 @@
 
 
 
+
 @section Scripts {
-    <script src="~/js/app.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 }

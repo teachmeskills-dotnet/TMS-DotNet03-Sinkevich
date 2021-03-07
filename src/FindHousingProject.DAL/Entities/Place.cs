@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace FindHousingProject.DAL.Entities
@@ -12,6 +13,7 @@ namespace FindHousingProject.DAL.Entities
         /// <summary>
         /// Place Id.
         /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         /// <summary>
         /// User Country Id.

@@ -21,8 +21,4 @@
     <ProjectReference Include="..\FindHousingProject.Common\FindHousingProject.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Reservation\" />
-  </ItemGroup>
-
 </Project>

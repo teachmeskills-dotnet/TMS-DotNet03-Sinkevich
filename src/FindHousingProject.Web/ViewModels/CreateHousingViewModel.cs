@@ -1,4 +1,5 @@
-﻿using FindHousingProject.DAL.Entities;
+﻿using FindHousingProject.BLL.Models;
+using FindHousingProject.DAL.Entities;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ namespace FindHousingProject.Web.ViewModels
     {
         public string Id { get; set; }
         public string  Name { get; set; }
-        public Place Place { get; set; }
+        public string Place { get; set; }
         //public Country Place { get; set; } //https://www.jqueryscript.net/form/country-picker-flags.html
         public DateTime BookedFrom { get; set; }
         public DateTime BookedTo { get; set; }
@@ -26,5 +27,6 @@ namespace FindHousingProject.Web.ViewModels
         //public List<SelectListItem> Roles { get; set; }
         public string Description { get; set; }
         public string Address { get; set; }
+        public UserDto User { get; set; }
     }
 }
