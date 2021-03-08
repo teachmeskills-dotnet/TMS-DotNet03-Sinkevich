@@ -37,16 +37,13 @@
                     @if (item.Scenery != null)
                     {
                         <img style='max-width:70px;max-height:70px' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Scenery))">
-                        <div>Не равно null</div>
                     }
                     else
                     {
                         <img style='max-width:70px;max-height:70px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png">
-                        <div>Равно null</div>
                     }
                 </td>
                 <td>
-                    <!-- <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |-->
                     @Html.ActionLink("Edit", "Edit", new { housingId = item.Id })|
                     @Html.ActionLink("Details", "Details", new { housingId = item.Id })|
                     @Html.ActionLink("Delete", "Delete", new { housingId = item.Id })

@@ -32,30 +32,28 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @if (item.Scenery != null)
-                {
-                    <img style='max-width:70px;max-height:70px' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Scenery))">
-                }
-                else
-                {
-                    <img style='max-width:70px;max-height:70px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png">
-                }
-               <br /> @Html.ActionLink("Details", "Details", new { housingId = item.Id })
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @if (item.Scenery != null)
+                    {
+                        <img style='max-width:70px;max-height:70px' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Scenery))">
+                    }
+                    else
+                    {
+                        <img style='max-width:70px;max-height:70px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png">
+                    }
+                    <br /> @Html.ActionLink("Details", "Details", new { housingId = item.Id })
+                </td>
+            </tr>
         }
     </tbody>
 </table>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-

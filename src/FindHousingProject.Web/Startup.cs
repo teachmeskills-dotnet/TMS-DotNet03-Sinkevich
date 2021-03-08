@@ -82,7 +82,7 @@ namespace FindHousingProject.Web
                      await context.Response.WriteAsync("Hello World!");
                  });
              });*/
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

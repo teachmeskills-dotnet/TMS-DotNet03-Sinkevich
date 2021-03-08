@@ -31,11 +31,19 @@ namespace FindHousingProject.Web.Controllers
         {
             if (User.Identity.Name == null)
             {
-                return RedirectToAction(  "SignIn", "Account");
+                return RedirectToAction("SignIn", "Account");
             }
             else
             {
-                return View(await _ihousingManager.GetCurrentHousingsAsync(User.Identity.Name));
+                var user = await _usManager.GetAsync(User.Identity.Name);
+                if(user?.Role != RolesConstants.OwnerRole)
+                {
+                    return RedirectToAction("Another", "Home");
+                }
+                else
+                {
+                    return View(await _ihousingManager.GetCurrentHousingsAsync(User.Identity.Name));
+                }
             }
         }
         [HttpGet]
@@ -144,6 +152,7 @@ namespace FindHousingProject.Web.Controllers
                     PricePerDay =createHousingViewModel.PricePerDay,
                     Address=createHousingViewModel.Address,
                     Name=createHousingViewModel.Name,
+                    Scenery=createHousingViewModel.Scenery
                 };
                 if (createHousingViewModel.NewScenery != null)
                 {
@@ -161,22 +170,28 @@ namespace FindHousingProject.Web.Controllers
         }
         public async Task<IActionResult> Details(string housingId)
         {
-            var housing = await _ihousingManager.GetHousingAsync(housingId);
-            var user = await _usManager.GetAsync(User.Identity.Name);
-
-
-            var housingDetailsViewModel = new CreateHousingViewModel()
+            if (User.Identity.Name == null)
             {
-                User= user,
-                Name = housing.Name,
-                Place = housing.Place?.Name,
-                Address = housing.Address,
-                PricePerDay = housing.PricePerDay,
-                Description = housing.Description,
-                Scenery = housing.Scenery
-            };
+                return RedirectToAction("SignIn", "Account");
+            }
+            else
+            {
+                var housing = await _ihousingManager.GetHousingAsync(housingId);
+                var user = await _usManager.GetAsync(User.Identity.Name);
 
-            return View(housingDetailsViewModel);
+                var housingDetailsViewModel = new CreateHousingViewModel()
+                {
+                    User = user,
+                    Name = housing.Name,
+                    Place = housing.Place?.Name,
+                    Address = housing.Address,
+                    PricePerDay = housing.PricePerDay,
+                    Description = housing.Description,
+                    Scenery = housing.Scenery
+                };
+
+                return View(housingDetailsViewModel);
+            }
         }
         [HttpPost, ActionName("Details")]
         [ValidateAntiForgeryToken]

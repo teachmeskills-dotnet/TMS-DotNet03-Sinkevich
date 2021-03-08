@@ -25,7 +25,7 @@
             }
             else
             {
-                <img src="https://secure.gravatar.com/avatar/?s=64&d=https%3A%2F%2Fvidnova.dental%2Fwp-content%2Fthemes%2Fvidnova%2Fpublic%2Fimages%2Fdefault_avatar.jpg&r=g">
+                <img style='max-width:160px;' src="https://politsib.ru/source/images/avatar.png">
             }
             <input name="NewAvatar" type="file" class="form-control" />
         </p>
@@ -34,11 +34,11 @@
         <input type="submit" value="Save" class="template-button">
     </div>
 </form>
-    <div>
-        <form method="get" asp-controller="Account" asp-action="ChangePassword">
-            <button type="submit" class="template-button">Change Password</button>
-        </form>
-    </div>
-    @section Scripts {
-        <script src="~/js/app.js" asp-append-version="true"></script>
-    }
+<div>
+    <form method="get" asp-controller="Account" asp-action="ChangePassword">
+        <button type="submit" class="template-button">Change Password</button>
+    </form>
+</div>
+@section Scripts {
+    <script src="~/js/app.js" asp-append-version="true"></script>
+}

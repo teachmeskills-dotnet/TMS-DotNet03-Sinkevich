@@ -64,7 +64,7 @@
                     }
                     else
                     {
-                        <img src="https://secure.gravatar.com/avatar/?s=64&d=https%3A%2F%2Fvidnova.dental%2Fwp-content%2Fthemes%2Fvidnova%2Fpublic%2Fimages%2Fdefault_avatar.jpg&r=g">
+                        <img style='max-width:160px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png">
                     }
                 </div>
             </div>
@@ -73,7 +73,7 @@
         {
             <div class="search-boxDetails">
                 <div class="search-box-title">@Html.DisplayFor(model => model.PricePerDay)</div>
-                <form class="search-form">
+                <form class="search-form" asp-controller="Reservation" asp-action="Reservation">
                     <div>
                         <div class="search-box-dates">
                             <label class="search-box-label" for="search-bar">DATES</label>

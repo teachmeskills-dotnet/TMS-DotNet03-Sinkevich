@@ -15,14 +15,14 @@
             <a class="username">@(' ')@Model.Role</a>
         </div>
     </div>
-     <div class="avatar">
+    <div class="avatar">
         @if (Model.Avatar != null)
         {
             <img style='max-width:160px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))">
         }
         else
         {
-            <img src="https://secure.gravatar.com/avatar/?s=64&d=https%3A%2F%2Fvidnova.dental%2Fwp-content%2Fthemes%2Fvidnova%2Fpublic%2Fimages%2Fdefault_avatar.jpg&r=g">
+            <img style='max-width:160px;' src="https://politsib.ru/source/images/avatar.png">
         }
         <form method="get" asp-controller="Account" asp-action="Settings">
             <button type="submit" class="template-button">Settings</button>

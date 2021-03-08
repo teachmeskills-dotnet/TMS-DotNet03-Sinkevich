@@ -17,7 +17,7 @@ namespace FindHousingProject.Web.Controllers
         private readonly UserManager<User> _userManager;//private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;//private readonly SignInManager<User> _signInManager;
         private readonly IUserManager _iuserManager;
-        public AccountController(IUserManager iuserManager,UserManager<User> userManager, SignInManager<User> signInManager)//public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(IUserManager iuserManager, UserManager<User> userManager, SignInManager<User> signInManager)//public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -34,7 +34,7 @@ namespace FindHousingProject.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email, Role=RolesConstants.GuestRole};//User user = new User { Email = model.Email, UserName = model.Email, Year = model.Year };
+                User user = new User { Email = model.Email, UserName = model.Email, Role = RolesConstants.GuestRole };//User user = new User { Email = model.Email, UserName = model.Email, Year = model.Year };
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -125,29 +125,30 @@ namespace FindHousingProject.Web.Controllers
             var user = await _iuserManager.GetAsync(User.Identity.Name);
             var model = new SettingsViewModel
             {
-                Id=user.Id,
+                Id = user.Id,
                 Email = user.Email,
                 FullName = user.FullName,
                 Role = user.Role,
                 Avatar = user.Avatar
                 /*Roles = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
                     Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} },
-            */};
+            */
+            };
             return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> Settings(SettingsViewModel settingsViewModel)
         {
-           // var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
+            // var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
             if (ModelState.IsValid)
             {
                 var userDto = new UserDto()
                 {
                     Id = settingsViewModel.Id,
                     FullName = settingsViewModel.FullName,
-                    Avatar=settingsViewModel.Avatar,
-                    Role= settingsViewModel.Role,
-                   Email= settingsViewModel.Email
+                    Avatar = settingsViewModel.Avatar,
+                    Role = settingsViewModel.Role,
+                    Email = settingsViewModel.Email
                 };
 
                 if (settingsViewModel.NewAvatar != null)
@@ -163,7 +164,7 @@ namespace FindHousingProject.Web.Controllers
                 await _iuserManager.UpdateProfileAsync(userDto);
                 return RedirectToAction("Index", "User");
 
-               // return RedirectToAction("Settings", "Account");
+                // return RedirectToAction("Settings", "Account");
             }
             //settingsViewModel.Avatar = (await _iuserManager.GetAsync(userId)).Avatar;
 
