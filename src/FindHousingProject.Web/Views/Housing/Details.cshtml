@@ -1,4 +1,4 @@
-﻿@model FindHousingProject.Web.ViewModels.CreateHousingViewModel
+﻿@model FindHousingProject.Web.ViewModels.HousingViewModel
 @using FindHousingProject.Common.Constants
 
 @{
@@ -74,6 +74,8 @@
             <div class="search-boxDetails">
                 <div class="search-box-title">@Html.DisplayFor(model => model.PricePerDay)</div>
                 <form class="search-form" asp-controller="Reservation" asp-action="Reservation">
+                    <input type="hidden" asp-for="Id" name="Id" />
+                    <input type="hidden" asp-for="PricePerDay" name="PricePerDay" />
                     <div>
                         <div class="search-box-dates">
                             <label class="search-box-label" for="search-bar">DATES</label>
@@ -81,7 +83,7 @@
                                 <div>
                                     <div class="DateRangePickerInput DateRangePickerInput_1 DateRangePickerInput__withBorder DateRangePickerInput__withBorder_2">
                                         <div class="DateInput DateInput_1">
-                                            <input class="DateInput_input DateInput_input_1" aria-label="Check in" type="text" id="from" name="from" placeholder="Check in" autocomplete="off" aria-describedby="DateInput__screen-reader-message-check_in" value="">
+                                            <input class="DateInput_input DateInput_input_1" aria-label="Check in" type="text" id="from" name="CheckIn" placeholder="Check in" autocomplete="off" aria-describedby="DateInput__screen-reader-message-check_in" value="">
                                         </div>
                                         <div class="DateRangePickerInput_arrow DateRangePickerInput_arrow_1" aria-hidden="true" role="presentation">
                                             <svg class="DateRangePickerInput_arrow_svg DateRangePickerInput_arrow_svg_1" focusable="false" viewBox="0 0 1000 1000">
@@ -90,7 +92,7 @@
                                             </svg>
                                         </div>
                                         <div class="DateInput DateInput_1">
-                                            <input class="DateInput_input DateInput_input_1" aria-label="Check out" type="text" id="to" name="to" placeholder="Check out" autocomplete="off" aria-describedby="DateInput__screen-reader-message-check_out" value="">
+                                            <input class="DateInput_input DateInput_input_1" aria-label="Check out" type="text" id="to" name="CheckOut" placeholder="Check out" autocomplete="off" aria-describedby="DateInput__screen-reader-message-check_out" value="">
                                         </div>
                                     </div>
                                 </div>

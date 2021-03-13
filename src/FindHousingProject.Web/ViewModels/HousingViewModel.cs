@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FindHousingProject.Web.ViewModels
 {
-    public class CreateHousingViewModel
+    public class HousingViewModel
     {
         public string Id { get; set; }
         public string  Name { get; set; }

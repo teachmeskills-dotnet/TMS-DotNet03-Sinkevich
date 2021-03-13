@@ -18,7 +18,7 @@
 
     <div class="avatar">
         <p>
-            <label>Avatar</label>
+
             @if (Model.Avatar != null)
             {
                 <img style='max-width:160px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))">
@@ -27,7 +27,7 @@
             {
                 <img style='max-width:160px;' src="https://politsib.ru/source/images/avatar.png">
             }
-            <input name="NewAvatar" type="file" class="form-control" />
+            <input name="NewAvatar" type="file" class="template-button" />
         </p>
     </div>
     <div>

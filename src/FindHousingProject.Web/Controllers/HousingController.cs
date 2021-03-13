@@ -54,7 +54,7 @@ namespace FindHousingProject.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateHousingViewModel сreateHousingViewModel)
+        public async Task<IActionResult> Create(HousingViewModel housingViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -62,38 +62,38 @@ namespace FindHousingProject.Web.Controllers
                 var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
                 var placeDto = new Place()
                 {
-                    Name = сreateHousingViewModel.Place,
+                    Name = housingViewModel.Place,
 
                 };
                 var housingDto = new HousingDto()
                 {
                     UserId= userId,
-                    Name = сreateHousingViewModel.Name,
+                    Name = housingViewModel.Name,
                     Place = placeDto,
-                    PricePerDay = сreateHousingViewModel.PricePerDay,
-                    Description = сreateHousingViewModel.Description,
-                    Address = сreateHousingViewModel.Address,
-                    Scenery = сreateHousingViewModel.Scenery
+                    PricePerDay = housingViewModel.PricePerDay,
+                    Description = housingViewModel.Description,
+                    Address = housingViewModel.Address,
+                    Scenery = housingViewModel.Scenery
                 };
-                if (сreateHousingViewModel.NewScenery != null)
+                if (housingViewModel.NewScenery != null)
                 {
                     byte[] imageData = null;
-                    using (var binaryReader = new BinaryReader(сreateHousingViewModel.NewScenery.OpenReadStream()))
+                    using (var binaryReader = new BinaryReader(housingViewModel.NewScenery.OpenReadStream()))
                     {
-                        imageData = binaryReader.ReadBytes((int)сreateHousingViewModel.NewScenery.Length);
+                        imageData = binaryReader.ReadBytes((int)housingViewModel.NewScenery.Length);
                     }
                     housingDto.Scenery= imageData;
                 }
                 await _ihousingManager.CreateAsync(housingDto);
                 return RedirectToAction( "Index", "Housing");
             }
-            return View(сreateHousingViewModel);
+            return View(housingViewModel);
         }
         public async Task<IActionResult> Delete(string housingId)
         {
             var housing = await _ihousingManager.GetHousingAsync(housingId);
 
-            var housingEditViewModel = new CreateHousingViewModel()
+            var housingEditViewModel = new HousingViewModel()
             {
                 Id = housing.Id,
                 Place=housing.Place?.Name,
@@ -119,7 +119,7 @@ namespace FindHousingProject.Web.Controllers
         {
             var housing = await _ihousingManager.GetHousingAsync(housingId);
 
-            var housingEditViewModel = new CreateHousingViewModel()
+            var housingEditViewModel = new HousingViewModel()
             {
                 Id = housing.Id,
                 Place = housing.Place?.Name,
@@ -134,39 +134,39 @@ namespace FindHousingProject.Web.Controllers
 
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditHousing(CreateHousingViewModel createHousingViewModel)
+        public async Task<IActionResult> EditHousing(HousingViewModel housingViewModel)
         {
             if (ModelState.IsValid)
             {
                 var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
                 var placeDto = new Place()
                 {
-                    Name = createHousingViewModel.Place,
+                    Name = housingViewModel.Place,
 
                 };
                 var housingDto = new HousingDto()
                 {
-                    Id = createHousingViewModel.Id,
+                    Id = housingViewModel.Id,
                     Place = placeDto,
-                    Description = createHousingViewModel.Description,
-                    PricePerDay =createHousingViewModel.PricePerDay,
-                    Address=createHousingViewModel.Address,
-                    Name=createHousingViewModel.Name,
-                    Scenery=createHousingViewModel.Scenery
+                    Description = housingViewModel.Description,
+                    PricePerDay =housingViewModel.PricePerDay,
+                    Address=housingViewModel.Address,
+                    Name=housingViewModel.Name,
+                    Scenery=housingViewModel.Scenery
                 };
-                if (createHousingViewModel.NewScenery != null)
+                if (housingViewModel.NewScenery != null)
                 {
                     byte[] imageData = null;
-                    using (var binaryReader = new BinaryReader(createHousingViewModel.NewScenery.OpenReadStream()))
+                    using (var binaryReader = new BinaryReader(housingViewModel.NewScenery.OpenReadStream()))
                     {
-                        imageData = binaryReader.ReadBytes((int)createHousingViewModel.NewScenery.Length);
+                        imageData = binaryReader.ReadBytes((int)housingViewModel.NewScenery.Length);
                     }
                     housingDto.Scenery = imageData;
                 }
                 await _ihousingManager.UpdateHousingAsync(housingDto, userId);
                 return RedirectToAction("Index", "Housing");
             }
-            return View(createHousingViewModel);
+            return View(housingViewModel);
         }
         public async Task<IActionResult> Details(string housingId)
         {
@@ -179,8 +179,9 @@ namespace FindHousingProject.Web.Controllers
                 var housing = await _ihousingManager.GetHousingAsync(housingId);
                 var user = await _usManager.GetAsync(User.Identity.Name);
 
-                var housingDetailsViewModel = new CreateHousingViewModel()
+                var housingDetailsViewModel = new HousingViewModel()
                 {
+                    Id = housing.Id,
                     User = user,
                     Name = housing.Name,
                     Place = housing.Place?.Name,
@@ -195,11 +196,11 @@ namespace FindHousingProject.Web.Controllers
         }
         [HttpPost, ActionName("Details")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DetailsHousing(CreateHousingViewModel createHousingViewModel)
+        public async Task<IActionResult> DetailsHousing(HousingViewModel housingViewModel)
         {
             var placeDto = new Place()
             {
-                Name = createHousingViewModel.Place,
+                Name = housingViewModel.Place,
             };
 
             if (ModelState.IsValid)
@@ -208,16 +209,16 @@ namespace FindHousingProject.Web.Controllers
 
                 var housingDto = new HousingDto()
                 {
-                    Id = createHousingViewModel.Id,
+                    Id = housingViewModel.Id,
                     Place = placeDto,
-                    Description = createHousingViewModel.Description,
-                    PricePerDay = createHousingViewModel.PricePerDay,
-                    Address = createHousingViewModel.Address,
-                    Name = createHousingViewModel.Name,
+                    Description = housingViewModel.Description,
+                    PricePerDay = housingViewModel.PricePerDay,
+                    Address = housingViewModel.Address,
+                    Name = housingViewModel.Name,
                 };
                 return RedirectToAction("Index", "Housing");
             }
-            return View(createHousingViewModel);
+            return View(housingViewModel);
         }
         public IActionResult ShowSearchFrom()
         {

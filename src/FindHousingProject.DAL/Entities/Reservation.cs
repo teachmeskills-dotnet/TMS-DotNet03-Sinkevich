@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FindHousingProject.DAL.Entities
 {
@@ -12,6 +13,7 @@ namespace FindHousingProject.DAL.Entities
         /// <summary>
         /// Reservation Id.
         /// </summary>
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
         /// <summary>
         /// Housing Id.
