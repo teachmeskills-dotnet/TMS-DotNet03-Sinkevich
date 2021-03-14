@@ -12,6 +12,7 @@ namespace FindHousingProject.Web.ViewModels
         public string Id { get; set; }
         public string Name { get; set; }
         public string Place { get; set; }
+        public string Housing { get; set; }
         public string HousingId { get; set; }
         public DateTime CheckIn{ get; set; }
         public DateTime CheckOut { get; set; }

@@ -1,7 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,17 +56,14 @@
                         <option value="10">10 guests</option>
                     </select>
                 </label>
-            </div>
-            <div>
-                <button class="search-box-submit">Search</button>
+                <br />
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
 </body>
-
-
-
-
 @section Scripts {
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

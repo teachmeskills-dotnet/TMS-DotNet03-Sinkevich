@@ -27,9 +27,9 @@ namespace FindHousingProject.BLL.Managers
             _repositoryPlace = repositoryPlace ?? throw new ArgumentNullException(nameof(repositoryPlace));
             _repositoryReservation = repositoryReservation ?? throw new ArgumentNullException(nameof(repositoryReservation));
         }
-        public IEnumerable<Reservation> GetAllReservation()
+        public IEnumerable<Reservation> GetAllUserReservations(String userId)
         {
-            return _repositoryReservation.GetAll();
+            return _repositoryReservation.GetAll().Where(x => x.UserId == userId).Include(x => x.Housing);
         }
         public async Task<String> ReservationAsync(String housingId, String userId, decimal amount, DateTime checkIn, DateTime checkOut)
         {
@@ -42,7 +42,7 @@ namespace FindHousingProject.BLL.Managers
             var reservstionPeriod = Period.Create(checkIn, checkOut);
             var reservations = await _repositoryReservation
                 .GetAll().AsNoTracking().ToListAsync();
-            reservations = reservations.Where(x => Period.Create(x.CheckIn, x.CheckOut).IsIntersect(reservstionPeriod)).ToList();
+            reservations = reservations.Where(x => Period.Create(x.CheckIn, x.CheckOut).IsIntersectOrInclude(reservstionPeriod)).ToList();
 
             if(reservations.Any())
             {

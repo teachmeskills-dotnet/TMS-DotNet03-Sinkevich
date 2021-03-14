@@ -13,10 +13,12 @@ namespace FindHousingProject.DAL.Entities
         /// Country Id.
         /// </summary>
         public string Id { get; set; }
+
         /// <summary>
         /// Country name.
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// List of places
         /// </summary>

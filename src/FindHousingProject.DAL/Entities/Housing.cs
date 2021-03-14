@@ -15,14 +15,17 @@ namespace FindHousingProject.DAL.Entities
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         /// <summary>
         /// Place Id.
         /// </summary>
         public string PlaceId { get; set; }
+
         /// <summary>
         /// Place where you stay.
         /// </summary>
         public Place Place { get; set; }
+
         /// <summary>
         /// User Id.
         /// </summary>
@@ -42,30 +45,37 @@ namespace FindHousingProject.DAL.Entities
         /// Housing name.
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// Cost per day.
         /// </summary>
         public decimal PricePerDay { get; set; }
+
         /// <summary>
         /// Number of all seats.
         /// </summary>
         public int NumberOfSeats { get; set; }
+
         /// <summary>
         /// Unfree days for booking.
         /// </summary>
         public DateTime? BookedFrom { get; set; }
+
         /// <summary>
         /// Free days for booking.
         /// </summary>
         public DateTime? BookedTo { get; set; }
+
         /// <summary>
         /// Discription about housing.
         /// </summary>
         public string Description { get; set; }
+
         /// <summary>
         /// Housing address.
         /// </summary>
         public string Address { get; set; }
+
         /// <summary>
         /// .
         /// </summary>

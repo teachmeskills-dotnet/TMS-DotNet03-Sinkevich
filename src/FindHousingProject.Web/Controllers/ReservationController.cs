@@ -1,11 +1,9 @@
 ﻿using FindHousingProject.BLL.Interfaces;
 using FindHousingProject.BLL.Models;
-using FindHousingProject.DAL.Entities;
+using FindHousingProject.Common.Resources;
 using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using FindHousingProject.Common.Constants;
 using System.Threading.Tasks;
 
 namespace FindHousingProject.Web.Controllers
@@ -22,19 +20,22 @@ namespace FindHousingProject.Web.Controllers
             _userManager = userManager;
             _reservationManager = reservationManager;
         }
+
         [HttpGet]
-        public IActionResult Reservation()
+        public async Task<IActionResult> Reservation()
         {
-            return View();
+            var userId = await _userManager.GetUserIdByEmailAsync(User.Identity.Name);
+            return View(_reservationManager.GetAllUserReservations(userId));
         }
+
         [HttpPost, ActionName("Reservation")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reservation(ReservationsViewModel reservationsViewModel)
         {
+            var housing = await _housingManager.GetHousingAsync(reservationsViewModel.Id);
             if (ModelState.IsValid)
             {
                 var userId = await _userManager.GetUserIdByEmailAsync(User.Identity.Name);
-                var housing = await _housingManager.GetHousingAsync(reservationsViewModel.Id);
                 var reservationDto = new ReservationDto()
                 {
                     CheckIn = reservationsViewModel.CheckIn,
@@ -42,10 +43,17 @@ namespace FindHousingProject.Web.Controllers
                 };
                 var days = (reservationDto.CheckOut - reservationDto.CheckIn).Days;
                 var totalAmount = days * housing.PricePerDay;
-                await _reservationManager.ReservationAsync(housing.Id, userId, totalAmount, reservationDto.CheckIn, reservationDto.CheckOut);
-                return RedirectToAction("Reservation", "Reservation");
+                var status = await _reservationManager.ReservationAsync(housing.Id, userId, totalAmount, reservationDto.CheckIn, reservationDto.CheckOut);
+                switch (status)
+                {
+                    case StatusConstants.Booked:
+                        return RedirectToAction("Reservation");
+                    default:
+                        return RedirectToAction("Details", "Housing", new { housingId = housing.Id, message = ErrorResource.DataNotBooked });
+                        // break;
+                }
             }
-            return View(reservationsViewModel);
+            return RedirectToAction("Details", "Housing", new { housingId = housing.Id, message = ErrorResource.EnterData/*message = "Exception happened"*/ });
         }
         //String housingId, String userId, decimal amount, DateTime checkIn, DateTime checkOut
     }

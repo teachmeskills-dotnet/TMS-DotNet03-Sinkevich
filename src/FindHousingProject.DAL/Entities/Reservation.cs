@@ -15,6 +15,7 @@ namespace FindHousingProject.DAL.Entities
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         /// <summary>
         /// Housing Id.
         /// </summary>
@@ -24,7 +25,6 @@ namespace FindHousingProject.DAL.Entities
         /// 
         /// </summary>
         public Housing Housing { get; set; }
-
 
         /// <summary>
         /// User Id.
@@ -36,20 +36,24 @@ namespace FindHousingProject.DAL.Entities
         /// </summary>
         public User User { get; set; }
 
-
         /// <summary>
         /// Arrival Date.
         /// </summary>
         public DateTime CheckIn { get; set; }
+
         /// <summary>
         /// Date of departure.
         /// </summary>
         public DateTime CheckOut { get; set; }
+
         /// <summary>
         /// Cost all days.
         /// </summary>
         public decimal Amount { get; set; }
 
+        /// <summary>
+        /// .
+        /// </summary>
         public byte State { get; set; }
     }
 }

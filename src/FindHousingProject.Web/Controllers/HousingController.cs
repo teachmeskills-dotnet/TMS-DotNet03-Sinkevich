@@ -26,6 +26,7 @@ namespace FindHousingProject.Web.Controllers
             _ihousingManager = housingManager;
             _usManager = usManager;
         }
+
         // GET: Housing
         public async Task<IActionResult> Index()
         {
@@ -46,6 +47,7 @@ namespace FindHousingProject.Web.Controllers
                 }
             }
         }
+
         [HttpGet]
         [Authorize]
         public IActionResult Create()
@@ -89,6 +91,7 @@ namespace FindHousingProject.Web.Controllers
             }
             return View(housingViewModel);
         }
+
         public async Task<IActionResult> Delete(string housingId)
         {
             var housing = await _ihousingManager.GetHousingAsync(housingId);
@@ -103,6 +106,7 @@ namespace FindHousingProject.Web.Controllers
             };
             return View(housingEditViewModel);
         }
+
         // [Authorize(Roles = RolesConstants.OwnerRole)]
         [HttpPost,  ActionName("Delete") ]
         [ValidateAntiForgeryToken]
@@ -168,7 +172,8 @@ namespace FindHousingProject.Web.Controllers
             }
             return View(housingViewModel);
         }
-        public async Task<IActionResult> Details(string housingId)
+
+        public async Task<IActionResult> Details(string housingId, string message = null)
         {
             if (User.Identity.Name == null)
             {
@@ -178,6 +183,11 @@ namespace FindHousingProject.Web.Controllers
             {
                 var housing = await _ihousingManager.GetHousingAsync(housingId);
                 var user = await _usManager.GetAsync(User.Identity.Name);
+
+                if(message != null)
+                {
+                    ModelState.AddModelError("Error", message);
+                }
 
                 var housingDetailsViewModel = new HousingViewModel()
                 {
@@ -194,6 +204,7 @@ namespace FindHousingProject.Web.Controllers
                 return View(housingDetailsViewModel);
             }
         }
+
         [HttpPost, ActionName("Details")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DetailsHousing(HousingViewModel housingViewModel)
@@ -220,10 +231,12 @@ namespace FindHousingProject.Web.Controllers
             }
             return View(housingViewModel);
         }
+
         public IActionResult ShowSearchFrom()
         {
             return View(_ihousingManager.GetAllHousings());
         }
+
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase, DateTime? from= null, DateTime? to = null)
         {
             return View("ShowSearchFrom", await _ihousingManager.SearchHousingAsync(SearchPhrase,from, to));

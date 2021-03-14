@@ -1,5 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,100;1,300;1,400;1,700;1,900&display=swap');
 
 a.navbar-brand {
   white-space: normal;
@@ -72,9 +71,97 @@ body {
 
 
 
-.search-box {
+
+
+
+
+body { /* + */
+    height: 100%;
+    background-image: url("https://cdn.pixabay.com/photo/2015/01/28/23/35/hills-615429_960_720.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.box { /* + */
+    overflow: hidden;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    border: 2px solid #000;
+    width: 50%;
+    padding: 80px 0;
+    cursor: move;
+    box-sizing: border-box;
+}
+
+    .box:before { /* + */
+        content: "";
+        background-image: url("https://cdn.pixabay.com/photo/2015/01/28/23/35/hills-615429_960_720.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        position: absolute;
+        width: 110%;
+        height: 110%;
+        top: -5%;
+        left: -5%;
+        z-index: 1;
+        -webkit-filter: blur(10px);
+        filter: blur(10px);
+    }
+
+h1 { /* + */
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #000;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+}
+.table { /* + */
     background: #ffffff;
     border-radius: 4px;
+    box-shadow: 0 0 20px #1b6ec2;
+    padding: 10px;
+}
+.body-housing { /* + */
+    height: 100%;
+    background-image: url("https://img-fotki.yandex.ru/get/6208/139602611.d/0_743c8_8ff4fe80_orig.jp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #14763a;
+}
+
+.field { /* + */
+    clear: both;
+    text-align: right;
+    line-height: 25px;
+}
+
+label { /* + */
+    float: left;
+    padding-right: 10px;
+}
+
+.main { /* + */
+    float: left
+}
+.inp { /* + */
+    display: flex;
+}
+
+
+
+
+
+
+
+.search-box {
+    background: #ffffff;
+    border-radius: 6px;
     padding: 32px;
     width: 441px;
     box-shadow: 0 16px 40px;

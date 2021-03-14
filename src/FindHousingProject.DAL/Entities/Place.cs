@@ -15,26 +15,32 @@ namespace FindHousingProject.DAL.Entities
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Id { get; set; }
+
         /// <summary>
         /// User Country Id.
         /// </summary>
         public string CountryId { get; set; }
+
         /// <summary>
         /// User Country.
         /// </summary>
         public Country Country { get; set; }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public  ICollection<Housing> Housings { get; set; }
+
         /// <summary>
         /// Type of housing (hotel, house, apartment, hostel, etc.).
         /// </summary>
         public string Type { get; set; }
+
         /// <summary>
         /// Type name.
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// Location information.
         /// </summary>

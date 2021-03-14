@@ -61,6 +61,24 @@ namespace FindHousingProject.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date is booked. Choose another date..
+        /// </summary>
+        public static string DataNotBooked {
+            get {
+                return ResourceManager.GetString("DataNotBooked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select your booking dates!.
+        /// </summary>
+        public static string EnterData {
+            get {
+                return ResourceManager.GetString("EnterData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Housing is not found..
         /// </summary>
         public static string HousingNotFound {
@@ -70,7 +88,7 @@ namespace FindHousingProject.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Profile not found..
+        ///   Looks up a localized string similar to Profile is not found..
         /// </summary>
         public static string ProfileNotFound {
             get {

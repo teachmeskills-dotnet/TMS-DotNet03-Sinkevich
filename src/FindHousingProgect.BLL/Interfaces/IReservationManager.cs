@@ -9,7 +9,7 @@ namespace FindHousingProject.BLL.Interfaces
 {
     public interface IReservationManager
     {
-        IEnumerable<Reservation> GetAllReservation();
+        IEnumerable<Reservation> GetAllUserReservations(String userId);
         Task<String> ReservationAsync(String housingId, String userId, decimal amount, DateTime checkIn, DateTime checkOut);
     }
 }
