@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<FindHousingProject.DAL.Entities.Reservation>
+@using FindHousingProject.Common.Resources
 
 @{
     ViewData["Title"] = "Reservation";
 }
 
-<h1>Your reservations:</h1>
+<h1 style="color:blue">Your reservations:</h1>
 <table class="table">
     <thead>
         <tr>
@@ -28,23 +29,24 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Housing.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CheckIn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CheckOut)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Housing.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckIn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CheckOut)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State)
+                    &#9989;
+                </td>
+            </tr>
         }
 
     </tbody>

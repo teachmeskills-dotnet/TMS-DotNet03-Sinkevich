@@ -1,25 +1,15 @@
 ﻿@using FindHousingProject.Common.Resources
 @model FindHousingProject.Web.ViewModels.SignInViewModel
-
-<h2>Sign In</h2>
-
-<form method="post" asp-controller="Account" asp-action="SignIn" asp-route-return-url="@Model.ReturnUrl" class="template-form">
+<form method="post" asp-controller="Account" asp-action="SignIn" asp-route-return-url="@Model.ReturnUrl" class="transparent">
     <div asp-validation-summary="All"></div>
-    <div class="upper-container"></div>
-    <div>
-        <h1>Проверка</h1>
-        <label asp-for="Email" class="template-label"></label><br />
-        <input asp-for="Email" placeholder="Enter email" class="template-input">
-    </div>
-    <div>
-        <label asp-for="Password" class="template-label"></label><br />
-        <input asp-for="Password" placeholder="Password" class="template-input">
-    </div>
-    <div>
-        <label asp-for="RememberMe" class="template-label"></label><br />
-        <input asp-for="RememberMe" />
-    </div>
-    <div>
-        <input type="submit" value="Sign In" class="template-button">
+    <div class="form-inner">
+        <h1>Sign In</h1>
+        <label for="username" asp-for="Email" ></label><br />
+        <input type="text" id="username" asp-for="Email" placeholder="Enter email" >
+        <label for="password" asp-for="Password"> </label><br />
+        <input id="password" type="password" asp-for="Password" placeholder="Password" >
+        <input type="checkbox" id="custom-checkbox" asp-for="RememberMe" />
+        <label for="custom-checkbox" asp-for="RememberMe" ></label><br />
+        <input type="submit" value="Sign In" >
     </div>
 </form>

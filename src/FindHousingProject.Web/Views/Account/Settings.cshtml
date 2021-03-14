@@ -2,23 +2,16 @@
 @model FindHousingProject.Web.ViewModels.SettingsViewModel
 @{ ViewData["Title"] = string.Format(PageResource.StringFormat, PageResource.SiteName, PageResource.Settings); }
 
-<form method="post" asp-action="Settings" asp-controller="Account" enctype="multipart/form-data" class="template-form">
-    <div asp-validation-summary="All"></div>
-    <div class="upper-container"></div>
-    <div>
-        <label asp-for="FullName" class="template-label"></label>
-        <input asp-for="FullName" autocomplete="off" class="template-input">
-    </div>
-    <div>
-        <input type="hidden" asp-for="Email" autocomplete="off" class="template-input">
-    </div>
-    <div>
-        <select asp-for="Role" asp-items="Model.Roles"></select>
-    </div>
-
-    <div class="avatar">
+<form method="post" asp-action="Settings" asp-controller="Account" enctype="multipart/form-data" class="transparent" style="color:black; font-size: 14pt;">
+    <div class="form-inner">
+        <div asp-validation-summary="All"></div>
         <p>
+            <input asp-for="FullName" autocomplete="off">
+            <input type="hidden" asp-for="Email" autocomplete="off">
+        </p>
+        <p><select asp-for="Role" asp-items="Model.Roles"></select></p>
 
+        <p>
             @if (Model.Avatar != null)
             {
                 <img style='max-width:160px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))">
@@ -27,18 +20,19 @@
             {
                 <img style='max-width:160px;' src="https://politsib.ru/source/images/avatar.png">
             }
+            <br />
             <input name="NewAvatar" type="file" class="template-button" />
         </p>
+
+        <input type="submit" value="Save">
     </div>
-    <div>
-        <input type="submit" value="Save" class="template-button">
-    </div>
+
 </form>
-<div>
-    <form method="get" asp-controller="Account" asp-action="ChangePassword">
-        <button type="submit" class="template-button">Change Password</button>
-    </form>
-</div>
+
+<form method="get" asp-controller="Account" asp-action="ChangePassword" style="text-align:center">
+    <button type="submit" class="btn btn-primary">Change Password</button>
+</form>
+
 @section Scripts {
     <script src="~/js/app.js" asp-append-version="true"></script>
 }
