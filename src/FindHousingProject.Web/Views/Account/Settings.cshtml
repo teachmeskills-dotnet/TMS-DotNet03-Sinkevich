@@ -2,7 +2,7 @@
 @model FindHousingProject.Web.ViewModels.SettingsViewModel
 @{ ViewData["Title"] = string.Format(PageResource.StringFormat, PageResource.SiteName, PageResource.Settings); }
 
-<form method="post" asp-action="Settings" asp-controller="Account" class="transparent" style="color:black;">
+<form method="post" asp-action="Settings" asp-controller="Account" enctype="multipart/form-data" class="transparent" style="color:black;">
     <div class="form-inner">
         <div class="user">
             <div asp-validation-summary="All"></div>
@@ -13,7 +13,7 @@
             <select asp-for="Role" asp-items="Model.Roles"></select>
             <br />
             <div>
-                @if (Model.Avatar != null)
+                @if (Model?.Avatar != null)
                 {
                     <img style='max-width:160px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))">
                 }
@@ -23,12 +23,13 @@
                 }
                 <input name="NewAvatar" type="file" class="template-button" />
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div style="text-align: center">
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
             </div>
         </div>
     </div>
-
 </form>
 
 <form method="get" asp-controller="Account" asp-action="ChangePassword" style="text-align:center">

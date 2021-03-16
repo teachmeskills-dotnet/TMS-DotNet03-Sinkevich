@@ -137,7 +137,7 @@ namespace FindHousingProject.BLL.Managers
                 housing.Address = housingDto.Address;
                 updated = true;
             }
-            if (housing.Scenery != housingDto.Scenery)
+            if (housing.Scenery != housingDto.Scenery && housing.Scenery!=null)
             {
                 housing.Scenery = housingDto.Scenery;
                 updated = true;

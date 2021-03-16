@@ -161,6 +161,7 @@ namespace FindHousingProject.Web.Controllers
                     }
                     userDto.Avatar = imageData;
                 }
+             
 
                 await _iuserManager.UpdateProfileAsync(userDto);
                 return RedirectToAction("Index", "User");

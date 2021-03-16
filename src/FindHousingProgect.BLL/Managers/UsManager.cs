@@ -94,12 +94,14 @@ namespace FindHousingProject.BLL.Managers
             {
                 throw new KeyNotFoundException(ErrorResource.UserNotFound);
             }
-            userDAL.Avatar = userDto.Avatar;
+            if(userDto.Avatar != null)
+            {
+                userDAL.Avatar = userDto.Avatar;
+            }
             userDAL.FullName = userDto.FullName;
             userDAL.Role = userDto.Role;
             _repositoryUser.Update(userDAL);
             await _repositoryUser.SaveChangesAsync();
-
         }
 
         public async Task CreateAsync(UserDto userDto)

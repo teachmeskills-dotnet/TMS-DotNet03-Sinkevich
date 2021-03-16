@@ -41,37 +41,5 @@ namespace FindHousingProject.Web.Controllers
 
             return View(userViewModel);
         }
-
-        [HttpPost, ActionName("Settings")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SettingsUser(UserViewModel userViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                var userId = await _userManager.GetUserIdByEmailAsync(User.Identity.Name);
-
-                var userDto = new UserDto()
-                {
-                    Id = userViewModel.Id,
-                    Email = userViewModel.Email,
-                    FullName = userViewModel.FullName,
-                    Avatar = userViewModel.Avatar,
-                    Role = userViewModel.Role,
-                    IsOwner = userViewModel.IsOwner
-                };
-                if (userViewModel.NewAvatar != null)
-                {
-                    byte[] imageData = null;
-                    using (var binaryReader = new BinaryReader(userViewModel.NewAvatar.OpenReadStream()))
-                    {
-                        imageData = binaryReader.ReadBytes((int)userViewModel.NewAvatar.Length);
-                    }
-                    userDto.Avatar = imageData;
-                }
-                await _userManager.UpdateProfileAsync(userDto);
-                return RedirectToAction("Index", "User");
-            }
-            return View(userViewModel);
-        }
     }
 }
