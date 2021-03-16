@@ -29,6 +29,7 @@ namespace FindHousingProject.Web.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -55,6 +56,7 @@ namespace FindHousingProject.Web.Controllers
             }
             return View(model);
         }
+
         [HttpGet]
         public IActionResult SignIn(string returnUrl = null)
         {
@@ -100,6 +102,7 @@ namespace FindHousingProject.Web.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
@@ -119,6 +122,7 @@ namespace FindHousingProject.Web.Controllers
             }
             return View(model);
         }
+
         [HttpGet]
         public async Task<IActionResult> Settings()
         {
@@ -130,16 +134,13 @@ namespace FindHousingProject.Web.Controllers
                 FullName = user.FullName,
                 Role = user.Role,
                 Avatar = user.Avatar
-                /*Roles = new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
-                    Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} },
-            */
             };
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> Settings(SettingsViewModel settingsViewModel)
         {
-            // var userId = await _iuserManager.GetUserIdByEmailAsync(User.Identity.Name);
             if (ModelState.IsValid)
             {
                 var userDto = new UserDto()
@@ -163,11 +164,7 @@ namespace FindHousingProject.Web.Controllers
 
                 await _iuserManager.UpdateProfileAsync(userDto);
                 return RedirectToAction("Index", "User");
-
-                // return RedirectToAction("Settings", "Account");
             }
-            //settingsViewModel.Avatar = (await _iuserManager.GetAsync(userId)).Avatar;
-
             return View(settingsViewModel);
         }
     }

@@ -1,11 +1,12 @@
 ﻿@using FindHousingProject.Common.Resources
 @model FindHousingProject.Web.ViewModels.SignInViewModel
+
 <form method="post" asp-controller="Account" asp-action="SignIn" asp-route-return-url="@Model.ReturnUrl" class="transparent">
     <div asp-validation-summary="All"></div>
     <div class="form-inner">
         <h1>Sign In</h1>
         <label for="username" asp-for="Email" ></label><br />
-        <input type="text" id="username" asp-for="Email" placeholder="Enter email" >
+        <input type="text" id="username" asp-for="Email" placeholder="Enter email">
         <label for="password" asp-for="Password"> </label><br />
         <input id="password" type="password" asp-for="Password" placeholder="Password" >
         <input type="checkbox" id="custom-checkbox" asp-for="RememberMe" />

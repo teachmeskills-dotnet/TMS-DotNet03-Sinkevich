@@ -1,20 +1,21 @@
 ﻿@using FindHousingProject.Common.Resources
+@using FindHousingProject.Common.Constants
 @model FindHousingProject.Web.ViewModels.UserViewModel
 
 @{ ViewData["Title"] = string.Format(PageResource.Register, Model.Email); }
 
-<div class="box">
+<div class="transparent" style="color:black;">
     <div class="user">
         <p style="color:white">@(' ')@Model.Email</p>
         <div class="inp">
-            <b><label asp-for="FullName" class="template-label"></label></b>
-            <a class="username">@(' ')@Model.PrettyFullName</a>
+            <b><label asp-for="FullName">FullName</label></b>
+            <a style="color:blue">@(' ')@Model.PrettyFullName</a>
         </div>
         <div class="inp">
-            <b><label asp-for="Role" class="template-label"></label></b>
-            <a class="username">@(' ')@Model.Role</a>
+            <b><label asp-for="Role"></label></b>
+            <a style="color:blue">@(' ')@Model.Role</a>
         </div>
-        <div>
+        <div class="Avatar">
             @if (Model.Avatar != null)
             {
                 <img style='max-width:160px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))">
@@ -22,6 +23,12 @@
             else
             {
                 <img style='max-width:160px;' src="https://politsib.ru/source/images/avatar.png">
+            }
+        </div>
+        <div>
+            @if (Model.Role == RolesConstants.GuestRole)
+            {
+                <a asp-controller="Reservation" asp-action="Reservation">Reservation</a>
             }
         </div>
         <form method="get" asp-controller="Account" asp-action="Settings">

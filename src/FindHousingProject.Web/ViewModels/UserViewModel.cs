@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FindHousingProject.Web.ViewModels
 {
@@ -46,5 +47,8 @@ namespace FindHousingProject.Web.ViewModels
         /// Avatar.
         /// </summary>
         public byte [] Avatar { get; set; }
+
+        [Display(Name = "Change avatar")]
+        public IFormFile NewAvatar { get; set; }
     }
 }

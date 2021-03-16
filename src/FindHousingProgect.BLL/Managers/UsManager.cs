@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 namespace FindHousingProject.BLL.Managers
 {
     ///<inheritdoc cref="IUserManager"/>
-
     public class UsManager: IUserManager
     {
         private readonly UserManager<User> _userManager;
@@ -23,6 +22,7 @@ namespace FindHousingProject.BLL.Managers
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _repositoryUser = repositoryUser ?? throw new ArgumentNullException(nameof(repositoryUser));
         }
+
         public async Task<(IdentityResult, User)> SignUpAsync(
                     string email,
                     string password,
@@ -48,6 +48,7 @@ namespace FindHousingProject.BLL.Managers
             }
             return (result, userEmail);
         }
+
         public async Task<string> GetUserIdByEmailAsync(string email)
         {
             var user = await _userManager.Users.FirstOrDefaultAsync(user => user.UserName == email);
@@ -57,6 +58,7 @@ namespace FindHousingProject.BLL.Managers
             }
             return user.Id;
         }
+
         public async Task<IdentityResult> ChangePasswordAsync(string email, string oldPassword, string newPassword)
         {
             var user = await _userManager.FindByIdAsync(email);
@@ -69,6 +71,7 @@ namespace FindHousingProject.BLL.Managers
             var result = await _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
             return result;
         }
+
         public async Task DeleteAsync(string id, string email)
         {
             var profile = await _repositoryUser.GetEntityAsync(profile => profile.Id== id && profile.Email == email);
@@ -80,23 +83,7 @@ namespace FindHousingProject.BLL.Managers
             _repositoryUser.Delete(profile);
             await _repositoryUser.SaveChangesAsync();
         }
-        /*static bool ValidateToUpdate(User userDAL, UserDto userDto)
-        {
-            bool updated = false;
 
-            if (userDAL.FullName != userDto.FullName)
-            {
-                userDAL.FullName = userDto.FullName;
-                updated = true;
-            }
-
-            if (userDAL.Avatar != userDto.Avatar && userDto.Avatar != null)
-            {
-                userDAL.Avatar = userDto.Avatar;
-                updated = true;
-            }
-            return updated;
-        }*/
         public async Task UpdateProfileAsync(UserDto userDto)
         {
             userDto = userDto ?? throw new ArgumentNullException(nameof(userDto));
@@ -110,22 +97,11 @@ namespace FindHousingProject.BLL.Managers
             userDAL.Avatar = userDto.Avatar;
             userDAL.FullName = userDto.FullName;
             userDAL.Role = userDto.Role;
-            userDAL.Avatar = userDto.Avatar;
             _repositoryUser.Update(userDAL);
             await _repositoryUser.SaveChangesAsync();
 
-            /* var result = ValidateToUpdate(userDAL, userDto);
-             if (result)
-             {
-                 _repositoryUser.Update(userDAL);
-                 await _repositoryUser.SaveChangesAsync();
-             }
-
-             /*if (userDAL.IsOwner != userBLL.IsOwner)
-             {
-                 await SwitchProfileStatusAsync(email);
-             }*/
         }
+
         public async Task CreateAsync(UserDto userDto)
         {
             userDto = userDto ?? throw new ArgumentNullException(nameof(userDto));

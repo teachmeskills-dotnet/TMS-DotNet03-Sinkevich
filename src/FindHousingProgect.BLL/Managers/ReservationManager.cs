@@ -66,27 +66,4 @@ namespace FindHousingProject.BLL.Managers
             return StatusConstants.Booked;
         }
     }
-        /*void NewReservation(DateTime from, DateTime to)
-        {
-            List<DateTime[]> listing = new List<DateTime[]>{};
-
-            DateTime[] newData = new DateTime[] {   DateTime from , new DateTime(to) };
-            bool check = true;
-            foreach (var lst in listing)
-            {
-                if (newData[0] > lst[0] && newData[0] < lst[1] ||
-                    newData[1] > lst[0] && newData[1] < lst[1] ||
-                    newData[0] < lst[0] && newData[1] > lst[1])
-                {
-                    Console.WriteLine("Мест нет. Бронь не возможна.");
-                    check = false;
-                    break;
-                }
-            }
-            if (check)
-            {
-                Console.WriteLine("Есть свободное место. Происходит бронь.");
-                listing.Add(newData);
-            }
-        }*/
 }

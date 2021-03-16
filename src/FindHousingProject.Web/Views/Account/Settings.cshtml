@@ -2,29 +2,31 @@
 @model FindHousingProject.Web.ViewModels.SettingsViewModel
 @{ ViewData["Title"] = string.Format(PageResource.StringFormat, PageResource.SiteName, PageResource.Settings); }
 
-<form method="post" asp-action="Settings" asp-controller="Account" enctype="multipart/form-data" class="transparent" style="color:black; font-size: 14pt;">
+<form method="post" asp-action="Settings" asp-controller="Account" class="transparent" style="color:black;">
     <div class="form-inner">
-        <div asp-validation-summary="All"></div>
-        <p>
-            <input asp-for="FullName" autocomplete="off">
-            <input type="hidden" asp-for="Email" autocomplete="off">
-        </p>
-        <p><select asp-for="Role" asp-items="Model.Roles"></select></p>
-
-        <p>
-            @if (Model.Avatar != null)
-            {
-                <img style='max-width:160px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))">
-            }
-            else
-            {
-                <img style='max-width:160px;' src="https://politsib.ru/source/images/avatar.png">
-            }
+        <div class="user">
+            <div asp-validation-summary="All"></div>
+            <div>
+                <input asp-for="FullName" autocomplete="off">
+                <input type="hidden" asp-for="Email" autocomplete="off">
+            </div>
+            <select asp-for="Role" asp-items="Model.Roles"></select>
             <br />
-            <input name="NewAvatar" type="file" class="template-button" />
-        </p>
-
-        <input type="submit" value="Save">
+            <div>
+                @if (Model.Avatar != null)
+                {
+                    <img style='max-width:160px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))">
+                }
+                else
+                {
+                    <img style='max-width:160px;' src="https://politsib.ru/source/images/avatar.png">
+                }
+                <input name="NewAvatar" type="file" class="template-button" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
     </div>
 
 </form>

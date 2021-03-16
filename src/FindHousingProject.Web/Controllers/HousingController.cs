@@ -60,7 +60,6 @@ namespace FindHousingProject.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // var user = await _usManager.GetAsync(User.Identity.Name);
                 var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
                 var placeDto = new Place()
                 {
@@ -107,7 +106,6 @@ namespace FindHousingProject.Web.Controllers
             return View(housingEditViewModel);
         }
 
-        // [Authorize(Roles = RolesConstants.OwnerRole)]
         [HttpPost,  ActionName("Delete") ]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteHousing(string housingId)

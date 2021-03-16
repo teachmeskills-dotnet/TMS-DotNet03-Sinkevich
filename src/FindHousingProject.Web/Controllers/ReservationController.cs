@@ -55,6 +55,5 @@ namespace FindHousingProject.Web.Controllers
             }
             return RedirectToAction("Details", "Housing", new { housingId = housing.Id, message = ErrorResource.EnterData/*message = "Exception happened"*/ });
         }
-        //String housingId, String userId, decimal amount, DateTime checkIn, DateTime checkOut
     }
 }

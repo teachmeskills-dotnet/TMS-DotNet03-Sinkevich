@@ -26,16 +26,18 @@ namespace FindHousingProject.Web.Controllers
             _logger = logger;
 
         }
+
         public IActionResult Index()
         {
 
             return View(_vm);
         }
-       // [Authorized]
+
         public IActionResult Another()
         {
             return View(_vm);
         }
+
         public IActionResult Privacy()
         {
             return View();

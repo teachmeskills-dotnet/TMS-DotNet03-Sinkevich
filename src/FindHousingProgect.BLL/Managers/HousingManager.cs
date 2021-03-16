@@ -23,17 +23,16 @@ namespace FindHousingProject.BLL.Managers
             _repositoryUser = repositoryUser ?? throw new ArgumentNullException(nameof(repositoryUser));
             _repositoryPlace = repositoryPlace ?? throw new ArgumentNullException(nameof(repositoryPlace));
         }
+
         public async Task CreateAsync(HousingDto housingDto)
         {
             housingDto = housingDto ?? throw new ArgumentNullException(nameof(housingDto));
             housingDto.Place.Type = "Housing type";
 
             await _repositoryPlace.CreateAsync(housingDto.Place);
-           // await _repositoryHousing.SaveChangesAsync();
 
             var housing = new Housing
             {
-              //  Id = housingDto.Id,
                 Place = housingDto.Place,
                 Name = housingDto.Name,
                 UserId = housingDto.UserId,
@@ -44,21 +43,22 @@ namespace FindHousingProject.BLL.Managers
                 Scenery = housingDto.Scenery,
                 Description = housingDto.Description,
                 Address = housingDto.Address
-               // State = orderDto.VendorId is null ? StateType.AwaitingVendor : StateType.AwaitingConfirm
             };
             await _repositoryHousing.CreateAsync(housing);
-           // await _repositoryUser.GetEntityAsync();
             await _repositoryHousing.SaveChangesAsync();
         }
+
        public async Task<IEnumerable<Housing>> GetCurrentHousingsAsync(string email)
        {
             var userId = await _userManager.GetUserIdByEmailAsync(email);
             return await _repositoryHousing.GetListAsync(x=>x.UserId==userId);
        }
+
         public IEnumerable<Housing> GetAllHousings()
         {
             return  _repositoryHousing.GetAll();
         }
+
         public async Task DeleteAsync(string id, string userId)
         {
              var housing = await _repositoryHousing.GetEntityAsync(housing=>housing.Id==id && housing.UserId==userId);
@@ -71,9 +71,9 @@ namespace FindHousingProject.BLL.Managers
             _repositoryHousing.Delete(housing);
             await _repositoryHousing.SaveChangesAsync();
         }
+
         public async Task<HousingDto> GetHousingAsync(string id)
         {
-            //var housing = await _repositoryHousing.GetEntityAsync(order => order.Id == id);
             var housing = await _repositoryHousing
             .GetAll().Include(x => x.Place).FirstOrDefaultAsync(order => order.Id == id);
 
@@ -82,7 +82,6 @@ namespace FindHousingProject.BLL.Managers
                 throw new KeyNotFoundException(ErrorResource.HousingNotFound);
             }
 
-            //HousingDto housingDto = null;
             var housingsDto = new HousingDto
             {
                 Id = housing.Id,
@@ -103,18 +102,12 @@ namespace FindHousingProject.BLL.Managers
 
             var housing = await _repositoryHousing
             .GetAll().Include(x => x.Place).FirstOrDefaultAsync(housings => housings.Id == housingDto.Id
-               && housings.UserId == userId
-             );
-
-            // var housing = await _repositoryHousing.GetEntityAsync(housings => housings.Id == housingDto.Id
-            //   && housings.UserId == userId
-            // );
+               && housings.UserId == userId );
 
             if (housing is null)
             {
                 throw new KeyNotFoundException(ErrorResource.HousingNotFound);
             }
-
 
             var result = ValidateToUpdate(housing, housingDto);
             if (result)
@@ -124,6 +117,7 @@ namespace FindHousingProject.BLL.Managers
                 await _repositoryHousing.SaveChangesAsync();
             }
         }
+
         static bool ValidateToUpdate(Housing housing, HousingDto housingDto)
         {
             bool updated = false;
@@ -162,6 +156,7 @@ namespace FindHousingProject.BLL.Managers
 
             return updated;
         }
+
         public async Task<IEnumerable<Housing>> SearchHousingAsync(string userInput, DateTime? checkIn = null, DateTime? checkOut = null)
         {
             var housingDtos = new List<Housing>();
