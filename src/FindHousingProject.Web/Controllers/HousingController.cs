@@ -71,7 +71,7 @@ namespace FindHousingProject.Web.Controllers
                     UserId= userId,
                     Name = housingViewModel.Name,
                     Place = placeDto,
-                    PricePerDay = housingViewModel.PricePerDay,
+                    PricePerDay = housingViewModel.Price,
                     Description = housingViewModel.Description,
                     Address = housingViewModel.Address,
                     Scenery = housingViewModel.Scenery
@@ -100,7 +100,7 @@ namespace FindHousingProject.Web.Controllers
                 Id = housing.Id,
                 Place=housing.Place?.Name,
                 Description = housing.Description,
-                PricePerDay = housing.PricePerDay,
+                Price = housing.PricePerDay,
                 Name = housing.Name
             };
             return View(housingEditViewModel);
@@ -126,7 +126,7 @@ namespace FindHousingProject.Web.Controllers
                 Id = housing.Id,
                 Place = housing.Place?.Name,
                 Description = housing.Description,
-                PricePerDay = housing.PricePerDay,
+                Price = housing.PricePerDay,
                 Name = housing.Name,
                 Address=housing.Address,
                 Scenery=housing.Scenery
@@ -151,7 +151,7 @@ namespace FindHousingProject.Web.Controllers
                     Id = housingViewModel.Id,
                     Place = placeDto,
                     Description = housingViewModel.Description,
-                    PricePerDay =housingViewModel.PricePerDay,
+                    PricePerDay =housingViewModel.Price,
                     Address=housingViewModel.Address,
                     Name=housingViewModel.Name,
                     Scenery=housingViewModel.Scenery
@@ -194,7 +194,7 @@ namespace FindHousingProject.Web.Controllers
                     Name = housing.Name,
                     Place = housing.Place?.Name,
                     Address = housing.Address,
-                    PricePerDay = housing.PricePerDay,
+                    Price = housing.PricePerDay,
                     Description = housing.Description,
                     Scenery = housing.Scenery
                 };
@@ -221,7 +221,7 @@ namespace FindHousingProject.Web.Controllers
                     Id = housingViewModel.Id,
                     Place = placeDto,
                     Description = housingViewModel.Description,
-                    PricePerDay = housingViewModel.PricePerDay,
+                    PricePerDay = housingViewModel.Price,
                     Address = housingViewModel.Address,
                     Name = housingViewModel.Name,
                 };

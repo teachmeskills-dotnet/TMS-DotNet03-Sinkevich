@@ -5,7 +5,7 @@
     ViewData["Title"] = "Reservation";
 }
 
-<h1 style="color:blue">Your reservations:</h1>
+<h1>Your reservations:</h1>
 <table class="table">
     <thead>
         <tr>
@@ -43,10 +43,14 @@
                     @Html.DisplayFor(modelItem => item.CheckOut)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.State)
+                    @Html.DisplayFor(modelItem => item.State.ToString())
                     &#9989;
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<p>
+    <!-- Оберните в ссылку этот текст -->
+    <a href="https://localhost:5001/Reservation/Reservation" download>Скачать</a>
+</p>

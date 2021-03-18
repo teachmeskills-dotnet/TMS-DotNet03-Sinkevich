@@ -14,7 +14,7 @@ namespace FindHousingProject.Web.ViewModels
         //public Country Place { get; set; } //https://www.jqueryscript.net/form/country-picker-flags.html
         public DateTime BookedFrom { get; set; }
         public DateTime BookedTo { get; set; }
-        public decimal PricePerDay { get; set; }
+        public decimal Price { get; set; }
         /// <summary>
         /// Scenery.
         /// </summary>

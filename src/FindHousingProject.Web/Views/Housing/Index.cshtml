@@ -3,7 +3,7 @@
     ViewData["Title"] = "Housings";
 }
 <body>
-    <h1 style="color:#0094ff">Owner's Housing</h1>
+    <h1>Owner's Housing</h1>
     <p>
         <a asp-action="Create">
             <div class="form-group">
@@ -38,11 +38,11 @@
                     <td>
                         @if (item.Scenery != null)
                         {
-                            <img style='max-width:80px;max-height:80px' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Scenery))">
+                            <img class="scale" style='max-width:80px;max-height:80px' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Scenery))" alt="Housing">
                         }
                         else
                         {
-                            <img style='max-width:80px;max-height:80px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png">
+                            <img style='max-width:80px;max-height:80px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png" alt="Housing">
                         }
                     </td>
                     <td>

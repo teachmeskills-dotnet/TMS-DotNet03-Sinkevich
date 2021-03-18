@@ -25,10 +25,11 @@
     </script>
 </head>
 <body>
-    <h1>Details</h1>
-    <div style="color:blue">
-        <div class="table" style="width: 50%">
-            <h3>@Model.Name</h3>
+    <div class="col-md-7">
+        <h1>Details</h1>
+        <hr />
+        <div class="table">
+            <h2 style="color:blue; text-align:center">@Model.Name</h2>
             <input type="hidden" asp-for="Id" />
             <hr />
             <dl class="row">
@@ -45,10 +46,10 @@
                     @Html.DisplayFor(model => model.Place)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.PricePerDay)
+                    @Html.DisplayNameFor(model => model.Price)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.PricePerDay)
+                    @Html.DisplayFor(model => model.Price)$
                 </dd>
                 <dt class="col-sm-2">
                     @Html.DisplayNameFor(model => model.Address)
@@ -60,25 +61,28 @@
             <div class="info">
                 <p class="name"><a>Description: </a>@Model.Description</p>
             </div>
-            <div class="Scenery">
+            <div class="Scenery" style="text-align:center">
                 @if (Model.Scenery != null)
                 {
-                    <img style='max-width:160px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Scenery))">
+                    <img class="scale" style='max-width:250px;border-radius:40px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Scenery))" alt="Housing">
                 }
                 else
                 {
-                    <img style='max-width:160px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png">
+                    <img style='max-width:160px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png" alt="Housing">
                 }
+            </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
             </div>
         </div>
     </div>
     @if (Model.User?.Role != RolesConstants.OwnerRole)
     {
         <div class="search-boxDetails">
-            <div class="search-box-title">@Html.DisplayFor(model => model.PricePerDay)</div>
+            <div class="search-box-title">@Html.DisplayFor(model => model.Price)</div>
             <form class="search-form" asp-controller="Reservation" asp-action="Reservation">
                 <input type="hidden" asp-for="Id" name="Id" />
-                <input type="hidden" asp-for="PricePerDay" name="PricePerDay" />
+                <input type="hidden" asp-for="Price" name="PricePerDay" />
                 <div>
                     <div class="search-box-dates">
                         <label class="search-box-label" for="search-bar">DATES</label>
@@ -123,9 +127,6 @@
                 </div>
             </form>
         </div>}
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
 </body>
 @section Scripts {
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
