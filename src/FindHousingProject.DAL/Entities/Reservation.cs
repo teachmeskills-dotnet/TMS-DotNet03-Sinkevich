@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace FindHousingProject.DAL.Entities
 {
@@ -39,11 +40,15 @@ namespace FindHousingProject.DAL.Entities
         /// <summary>
         /// Arrival Date.
         /// </summary>
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+
         public DateTime CheckIn { get; set; }
 
         /// <summary>
         /// Date of departure.
         /// </summary>
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+
         public DateTime CheckOut { get; set; }
 
         /// <summary>

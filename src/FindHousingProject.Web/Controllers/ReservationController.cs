@@ -55,5 +55,16 @@ namespace FindHousingProject.Web.Controllers
             }
             return RedirectToAction("Details", "Housing", new { housingId = housing.Id, message = ErrorResource.EnterData/*message = "Exception happened"*/ });
         }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteReservation(string reservationId)
+        {
+            var userId = await _userManager.GetUserIdByEmailAsync(User.Identity.Name);
+
+            await _reservationManager.DeleteReservationAsync(reservationId, userId);
+
+            return RedirectToAction("Reservation");
+        }
     }
 }

@@ -75,7 +75,7 @@ namespace FindHousingProject.BLL.Managers
         public async Task<HousingDto> GetHousingAsync(string id)
         {
             var housing = await _repositoryHousing
-            .GetAll().Include(x => x.Place).FirstOrDefaultAsync(order => order.Id == id);
+            .GetAll().Include(x => x.Place).FirstOrDefaultAsync(h => h.Id == id);
 
             if (housing is null)
             {

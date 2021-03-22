@@ -38,19 +38,34 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CheckIn)
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CheckOut)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.State.ToString())
+                    <!--Html.DisplayFor(modelItem => item.State)-->
                     &#9989;
                 </td>
+
+                <td>
+                    <div id="zatemnenie">
+                        <div id="okno">
+                            Are you sure you want to delete this?<br>
+                            @using (Html.BeginForm("Delete", "Reservation",new { reservationId = item.Id }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                            }
+                            <b href="#" class="close">Cancel</b>
+                        </div>
+                    </div>
+                </td>
+                <td><a href="#zatemnenie">Delete</a></td>
             </tr>
         }
     </tbody>
 </table>
 <p>
-    <!-- Оберните в ссылку этот текст -->
-    <a href="https://localhost:5001/Reservation/Reservation" download>Скачать</a>
+    <a href="https://localhost:5001/Reservation/Reservation" download>Download</a>
 </p>

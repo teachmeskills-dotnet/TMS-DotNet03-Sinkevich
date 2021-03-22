@@ -27,7 +27,12 @@
             </div>
             <br />
             <div class="field">
-                <label asp-for="Address"></label>
+                <b><label asp-for="Address"></label></b>
+                <input asp-for="Address" autocomplete="off">
+            </div>
+            <br />
+            <div class="field">
+                <label asp-for="Scenery"></label>
                 <div style="text-align: center">
                     @if (Model?.Scenery != null)
                     {

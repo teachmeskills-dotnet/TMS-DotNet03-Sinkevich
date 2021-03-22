@@ -97,6 +97,15 @@ namespace FindHousingProject.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reservation is not found..
+        /// </summary>
+        public static string ReservationNotFound {
+            get {
+                return ResourceManager.GetString("ReservationNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User is not found..
         /// </summary>
         public static string UserNotFound {

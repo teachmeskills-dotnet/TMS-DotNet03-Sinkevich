@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FindHousingProject.Common.Resources;
 
 namespace FindHousingProject.BLL.Managers
 {
@@ -43,7 +44,7 @@ namespace FindHousingProject.BLL.Managers
             var reservations = await _repositoryReservation
                 .GetAll().AsNoTracking().ToListAsync();
             reservations = reservations.Where(x => Period.Create(x.CheckIn, x.CheckOut).IsIntersectOrInclude(reservstionPeriod)).ToList();
-
+            reservations.RemoveAll(x => x.HousingId != housingId);
             if(reservations.Any())
             {
                 return StatusConstants.BookedError;
@@ -64,6 +65,36 @@ namespace FindHousingProject.BLL.Managers
             await _repositoryReservation.CreateAsync(reservation);
             await _repositoryReservation.SaveChangesAsync();
             return StatusConstants.Booked;
+        }
+        public async Task DeleteReservationAsync(string id, string userId)
+        {
+            var reservation = await _repositoryReservation.GetEntityAsync(reservation => reservation.Id == id && reservation.UserId == userId);
+
+            if (reservation is null)
+            {
+                throw new KeyNotFoundException(ErrorResource.ReservationNotFound);
+            }
+
+            _repositoryReservation.Delete(reservation);
+            await _repositoryReservation.SaveChangesAsync();
+        }
+        public async Task<ReservationDto> GetReservationAsync(string id)
+        {
+            var reservation = await _repositoryReservation
+            .GetAll().FirstOrDefaultAsync(r => r.Id == id);
+
+            if (reservation is null)
+            {
+                throw new KeyNotFoundException(ErrorResource.ReservationNotFound);
+            }
+
+            var reservationDto = new ReservationDto
+            {
+              
+               CheckIn= reservation.CheckIn,
+               CheckOut = reservation.CheckOut
+            };
+            return reservationDto;
         }
     }
 }

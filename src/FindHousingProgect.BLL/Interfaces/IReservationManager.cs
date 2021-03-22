@@ -11,5 +11,6 @@ namespace FindHousingProject.BLL.Interfaces
     {
         IEnumerable<Reservation> GetAllUserReservations(String userId);
         Task<String> ReservationAsync(String housingId, String userId, decimal amount, DateTime checkIn, DateTime checkOut);
+        Task DeleteReservationAsync(string id, string userId);
     }
 }

@@ -129,6 +129,9 @@
   <data name="ProfileNotFound" xml:space="preserve">
     <value>Profile is not found.</value>
   </data>
+  <data name="ReservationNotFound" xml:space="preserve">
+    <value>Reservation is not found.</value>
+  </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>User is not found.</value>
   </data>
