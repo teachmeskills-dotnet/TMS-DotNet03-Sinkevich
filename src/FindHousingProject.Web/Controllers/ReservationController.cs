@@ -5,6 +5,9 @@ using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using FindHousingProject.Common.Constants;
 using System.Threading.Tasks;
+using IronPdf;
+using System;
+
 
 namespace FindHousingProject.Web.Controllers
 {
@@ -65,6 +68,13 @@ namespace FindHousingProject.Web.Controllers
             await _reservationManager.DeleteReservationAsync(reservationId, userId);
 
             return RedirectToAction("Reservation");
+        }
+        [ActionName("Download")]
+        public ActionResult DownloadPDF()
+        {
+            var PDF = HtmlToPdf.StaticRenderUrlAsPdf(new Uri("https://localhost:5001/Reservation/Reservation"));
+            return File(PDF.BinaryData, "application/pdf", "Reservation.Pdf");
+
         }
     }
 }

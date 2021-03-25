@@ -519,18 +519,3 @@ input::-webkit-input-placeholder {
     display: block;
 }
 
-.close {
-    display: inline-block;
-    border: 1px solid #0000cc;
-    color: #0000cc;
-    padding: 0 12px;
-    margin: 10px;
-    text-decoration: none;
-    background: #f2f2f2;
-    font-size: 14pt;
-    cursor: pointer;
-}
-
-    .close:hover {
-        background: #e6e6ff;
-    }
