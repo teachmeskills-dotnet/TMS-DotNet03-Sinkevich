@@ -79,7 +79,7 @@
     @if (Model.User?.Role != RolesConstants.OwnerRole)
     {
         <div class="search-boxDetails">
-            <div class="search-box-title">@Html.DisplayFor(model => model.Price)</div>
+            <div class="search-box-title">@Html.DisplayFor(model => model.Price)$</div>
             <form class="search-form" asp-controller="Reservation" asp-action="Reservation">
                 <input type="hidden" asp-for="Id" name="Id" />
                 <input type="hidden" asp-for="Price" name="PricePerDay" />

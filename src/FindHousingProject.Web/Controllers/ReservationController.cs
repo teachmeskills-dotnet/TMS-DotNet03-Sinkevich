@@ -39,12 +39,22 @@ namespace FindHousingProject.Web.Controllers
             if (ModelState.IsValid)
             {
                 var userId = await _userManager.GetUserIdByEmailAsync(User.Identity.Name);
+                var days=0;
                 var reservationDto = new ReservationDto()
                 {
                     CheckIn = reservationsViewModel.CheckIn,
                     CheckOut = reservationsViewModel.CheckOut,
                 };
-                var days = (reservationDto.CheckOut - reservationDto.CheckIn).Days;
+                if (reservationDto.CheckIn == reservationDto.CheckOut)
+                {
+                    days = 1;
+                }
+                else //if (reservationDto.CheckIn != reservationDto.CheckOut)
+                {
+                    days = (reservationDto.CheckOut - reservationDto.CheckIn).Days;
+                }
+               // var days = (reservationDto.CheckOut - reservationDto.CheckIn).Days;
+
                 var totalAmount = days * housing.PricePerDay;
                 var status = await _reservationManager.ReservationAsync(housing.Id, userId, totalAmount, reservationDto.CheckIn, reservationDto.CheckOut);
                 switch (status)
@@ -74,7 +84,6 @@ namespace FindHousingProject.Web.Controllers
         {
             var PDF = HtmlToPdf.StaticRenderUrlAsPdf(new Uri("https://localhost:5001/Reservation/Reservation"));
             return File(PDF.BinaryData, "application/pdf", "Reservation.Pdf");
-
         }
     }
 }
