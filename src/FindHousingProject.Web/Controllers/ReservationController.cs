@@ -5,8 +5,6 @@ using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using FindHousingProject.Common.Constants;
 using System.Threading.Tasks;
-using IronPdf;
-using System;
 
 
 namespace FindHousingProject.Web.Controllers
@@ -39,7 +37,7 @@ namespace FindHousingProject.Web.Controllers
             if (ModelState.IsValid)
             {
                 var userId = await _userManager.GetUserIdByEmailAsync(User.Identity.Name);
-                var days=0;
+                var days = 0;
                 var reservationDto = new ReservationDto()
                 {
                     CheckIn = reservationsViewModel.CheckIn,
@@ -53,7 +51,7 @@ namespace FindHousingProject.Web.Controllers
                 {
                     days = (reservationDto.CheckOut - reservationDto.CheckIn).Days;
                 }
-               // var days = (reservationDto.CheckOut - reservationDto.CheckIn).Days;
+                // var days = (reservationDto.CheckOut - reservationDto.CheckIn).Days;
 
                 var totalAmount = days * housing.PricePerDay;
                 var status = await _reservationManager.ReservationAsync(housing.Id, userId, totalAmount, reservationDto.CheckIn, reservationDto.CheckOut);
@@ -66,7 +64,7 @@ namespace FindHousingProject.Web.Controllers
                         // break;
                 }
             }
-            return RedirectToAction("Details", "Housing", new { housingId = housing.Id, message = ErrorResource.EnterData/*message = "Exception happened"*/ });
+            return RedirectToAction("Details", "Housing", new { housingId = housing.Id, message = ErrorResource.EnterData });
         }
 
         [HttpPost, ActionName("Delete")]
@@ -78,12 +76,6 @@ namespace FindHousingProject.Web.Controllers
             await _reservationManager.DeleteReservationAsync(reservationId, userId);
 
             return RedirectToAction("Reservation");
-        }
-        [ActionName("Download")]
-        public ActionResult DownloadPDF()
-        {
-            var PDF = HtmlToPdf.StaticRenderUrlAsPdf(new Uri("https://localhost:5001/Reservation/Reservation"));
-            return File(PDF.BinaryData, "application/pdf", "Reservation.Pdf");
         }
     }
 }

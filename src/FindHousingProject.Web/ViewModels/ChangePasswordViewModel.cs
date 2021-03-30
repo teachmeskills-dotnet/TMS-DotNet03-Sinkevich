@@ -19,7 +19,6 @@ namespace FindHousingProject.Web.ViewModels
         /// New password.
         /// </summary>
         [Required(ErrorMessage = "Enter your new password")]
-        // [MinLength(8, ErrorMessage = "Пароль слишком короткий (минимум 8 символов)")]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }

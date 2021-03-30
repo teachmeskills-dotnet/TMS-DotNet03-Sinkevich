@@ -3,13 +3,15 @@ using FindHousingProject.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FindHousingProject.DAL.Configurations
 {
-    public class PlaceConfiguration: IEntityTypeConfiguration<Place>
+    /// <summary>
+    /// EF Configuration for Place entity.
+    /// </summary>
+    public class PlaceConfiguration : IEntityTypeConfiguration<Place>
     {
+        /// <inheritdoc/>
         public void Configure(EntityTypeBuilder<Place> builder)
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));

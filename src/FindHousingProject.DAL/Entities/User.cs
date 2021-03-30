@@ -25,14 +25,14 @@ namespace FindHousingProject.DAL.Entities
         public byte[] Avatar { get; set; }
 
         /// <summary>
-        /// User date of Birth.
+        /// User date of birth.
         /// </summary>
         public DateTime BirthDate { get; set; }
 
         /// <summary>
         /// User identity document.
         /// </summary>
-        public string Documents{ get; set; }
+        public string Documents { get; set; }
 
         /// <summary>
         /// User gender
@@ -40,12 +40,12 @@ namespace FindHousingProject.DAL.Entities
         public string Gender { get; set; }
 
         /// <summary>
-        ///
+        /// Reservations
         /// </summary>
         public ICollection<Reservation> Reservations { get; set; }
 
         /// <summary>
-        ///
+        /// Housings
         /// </summary>
         public ICollection<Housing> Housings { get; set; }
     }

@@ -17,13 +17,13 @@ namespace FindHousingProject.BLL.Interfaces
         Task CreateAsync(HousingDto housingDto);
 
         /// <summary>
-        /// Get information by housing using owner's email.
+        /// Get information about housing using owner's email.
         /// </summary>
         /// <param name="email">User email.</param>
         Task<IEnumerable<Housing>> GetCurrentHousingsAsync(string email);
 
         /// <summary>
-        /// Deletion by the owner (owner id) of the house (identification by id).
+        /// Delete by the owner (owner id) of the house (identification by id).
         /// </summary>
         Task DeleteAsync(string id, string userId);
 
@@ -34,7 +34,7 @@ namespace FindHousingProject.BLL.Interfaces
         Task<HousingDto> GetHousingAsync(string id);
 
         /// <summary>
-        /// Updating the owner(owner id) information on the house.
+        /// Update the owner(owner id) information of the house.
         /// </summary>
         Task UpdateHousingAsync(HousingDto housingDto, string userId);
 

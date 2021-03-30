@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace FindHousingProject.BLL.Repositories
 {
+    /// <inheritdoc cref="IRepository<T>"/>
+
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly DbSet<T> _dbSet;

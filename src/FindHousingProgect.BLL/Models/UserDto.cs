@@ -4,6 +4,9 @@ using System.Text;
 
 namespace FindHousingProject.BLL.Models
 {
+    /// <summary>
+    /// User data transfer object.
+    /// </summary>
     public class UserDto
     {
         /// <summary>
@@ -15,10 +18,12 @@ namespace FindHousingProject.BLL.Models
         /// Full Name.
         /// </summary>
         public string FullName { get; set; }
+
         /// <summary>
-        /// Role .
+        /// Role owner or guest.
         /// </summary>
         public string Role { get; set; }
+
         /// <summary>
         /// Email.
         /// </summary>
@@ -30,7 +35,7 @@ namespace FindHousingProject.BLL.Models
         public byte[] Avatar { get; set; }
 
         /// <summary>
-        /// Is vendor.
+        /// Is owner.
         /// </summary>
         public bool IsOwner { get; set; }
     }

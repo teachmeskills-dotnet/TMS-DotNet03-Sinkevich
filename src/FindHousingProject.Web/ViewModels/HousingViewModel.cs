@@ -1,32 +1,63 @@
 ﻿using FindHousingProject.BLL.Models;
-using FindHousingProject.DAL.Entities;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace FindHousingProject.Web.ViewModels
 {
+    /// <summary>
+    /// Housing view model.
+    /// </summary>
     public class HousingViewModel
     {
+        /// <summary>
+        /// Housing Id.
+        /// </summary>
         public string Id { get; set; }
-        public string  Name { get; set; }
+
+        /// <summary>
+        /// Housing name.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Housing place.
+        /// </summary>
         public string Place { get; set; }
+
+        /// <summary>
+        /// Place. Create later.
+        /// </summary>
         //public Country Place { get; set; } //https://www.jqueryscript.net/form/country-picker-flags.html
-        public DateTime BookedFrom { get; set; }
-        public DateTime BookedTo { get; set; }
+
+        /// <summary>
+        /// Price.
+        /// </summary>
         public decimal Price { get; set; }
+
         /// <summary>
         /// Scenery.
         /// </summary>
         public byte[] Scenery { get; set; }
+
         /// <summary>
         /// New scenery.
         /// </summary>
         [Display(Name = "Change scenery")]
         public IFormFile NewScenery { get; set; }
-        //public List<SelectListItem> Roles { get; set; }
+
+        /// <summary>
+        /// Housing description.
+        /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Housing address.
+        /// </summary>
         public string Address { get; set; }
+
+        /// <summary>
+        /// User.
+        /// </summary>
         public UserDto User { get; set; }
     }
 }

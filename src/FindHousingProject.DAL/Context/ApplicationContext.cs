@@ -3,20 +3,26 @@ using FindHousingProject.DAL.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FindHousingProject.DAL
 {
-    public class ApplicationContext : IdentityDbContext<User>//IdentityDbContext
+    /// <summary>
+    /// Database context.
+    /// </summary>
+    public class ApplicationContext : IdentityDbContext<User>
     {
+        /// <summary>
+        /// Housing.
+        /// </summary>
         public DbSet<Housing> Housing { get; set; }
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="options">DbContextOptions</param>
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
-            : base(options)
-        {
-            //Database.EnsureCreated();
-        }
+            : base(options){}
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));
@@ -27,10 +33,7 @@ namespace FindHousingProject.DAL
             builder.ApplyConfiguration(new ReservationConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
 
-
             base.OnModelCreating(builder);
         }
-
-
     }
 }

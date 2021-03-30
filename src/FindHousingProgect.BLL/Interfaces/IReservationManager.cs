@@ -11,7 +11,7 @@ namespace FindHousingProject.BLL.Interfaces
     public interface IReservationManager
     {
         /// <summary>
-        /// Retrieving all lists of a user's (guest's) reservation.
+        /// Retrieving all lists of user's (guest's) reservation.
         /// <summary>
         /// <param name="userId">User email.</param>
         IEnumerable<Reservation> GetAllUserReservations(String userId);
@@ -22,7 +22,7 @@ namespace FindHousingProject.BLL.Interfaces
         Task<String> ReservationAsync(String housingId, String userId, decimal amount, DateTime checkIn, DateTime checkOut);
 
         /// <summary>
-        /// Deleting a reservation by a user.
+        /// Deleting a reservation by user.
         /// <summary>
         Task DeleteReservationAsync(string id, string userId);
     }

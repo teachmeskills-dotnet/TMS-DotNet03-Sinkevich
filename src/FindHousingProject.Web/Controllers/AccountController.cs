@@ -5,8 +5,6 @@ using FindHousingProject.DAL.Entities;
 using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -14,10 +12,10 @@ namespace FindHousingProject.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<User> _userManager;//private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;//private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IUserManager _iuserManager;
-        public AccountController(IUserManager iuserManager, UserManager<User> userManager, SignInManager<User> signInManager)//public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(IUserManager iuserManager, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -35,16 +33,12 @@ namespace FindHousingProject.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email, Role = RolesConstants.GuestRole };//User user = new User { Email = model.Email, UserName = model.Email, Year = model.Year };
-                // добавляем пользователя
+                User user = new User { Email = model.Email, UserName = model.Email, Role = RolesConstants.GuestRole };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    // установка куки
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "User");
-
-                    //return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -161,7 +155,6 @@ namespace FindHousingProject.Web.Controllers
                     }
                     userDto.Avatar = imageData;
                 }
-             
 
                 await _iuserManager.UpdateProfileAsync(userDto);
                 return RedirectToAction("Index", "User");

@@ -5,7 +5,7 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
-/* Provide sufficient contrast against white background */
+
 a {
   color: #0366d6;
 }
@@ -21,8 +21,7 @@ a {
     background-color: #c2e8b0;
     border-color: #1861ac;
 }
-/* Sticky footer styles
--------------------------------------------------- */
+
 html {
   font-size: 14px;
 }
@@ -49,8 +48,7 @@ button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
 }
-/* Sticky footer styles
--------------------------------------------------- */
+
 html {
   position: relative;
   min-height: 100%;
@@ -61,10 +59,8 @@ html {
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px; /
 }
-
-
 
 body {
     height: 100%;
@@ -72,7 +68,6 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    /* Margin bottom by footer height */
     margin-bottom: 60px;
 }
 
@@ -124,9 +119,9 @@ h1 {
     color: black
 }
 .round {
-    border-radius: 150px; /* Радиус скругления */
-    border: 3px ;/*solid black;  Параметры рамки */
-    box-shadow: 0 0 7px #666; /* Параметры тени */
+    border-radius: 150px;
+    border: 3px ;
+    box-shadow: 0 0 7px #666;
 }
 
 .table {
@@ -224,9 +219,7 @@ label {
         display: block;
         padding-left: 15px;
         font-family: 'Roboto', sans-serif;
-        /*color: rgba(255, 255, 255, .6);*/
         color: #fff;
-        /*-webkit-text-stroke: 1px white;*/
         text-transform: uppercase;
         font-size: 14px;
     }
@@ -290,19 +283,14 @@ input::-webkit-input-placeholder {
     color: darkgreen;
 }
 
-
-
 .scale {
-    transition: 3s; /* Время эффекта */
+    transition: 3s;
 }
 
     .scale:hover {
-        transform: scale(5); /* Увеличиваем масштаб */
+        transform: scale(5);
         border-radius:30px;
     }
-
-
-
 
 .search-box {
     background: #ffffff;
@@ -479,15 +467,6 @@ input::-webkit-input-placeholder {
     line-height: 24px;
 }
 
-
-
-
-
-
-
-
-
-
 #zatemnenie {
     background: rgba(102, 102, 102, 0.5);
     width: 100%;
@@ -518,4 +497,3 @@ input::-webkit-input-placeholder {
 #zatemnenie:target {
     display: block;
 }
-

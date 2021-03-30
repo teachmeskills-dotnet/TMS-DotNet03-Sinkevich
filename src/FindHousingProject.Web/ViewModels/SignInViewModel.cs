@@ -12,7 +12,7 @@ namespace FindHousingProject.Web.ViewModels
         /// </summary>
         [Required(ErrorMessage = "Enter user's email")]
         [Display(Name = "User's email")]
-        public string Email{ get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Password.

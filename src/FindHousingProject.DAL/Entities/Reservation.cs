@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace FindHousingProject.DAL.Entities
 {
     /// <summary>
-    /// Accommondation booking information.
+    /// Accommodation booking information.
     /// </summary>
     public class Reservation
     {
@@ -23,7 +21,7 @@ namespace FindHousingProject.DAL.Entities
         public string HousingId { get; set; }
 
         /// <summary>
-        /// 
+        /// Housing.
         /// </summary>
         public Housing Housing { get; set; }
 
@@ -33,7 +31,7 @@ namespace FindHousingProject.DAL.Entities
         public string UserId { get; set; }
 
         /// <summary>
-        ///
+        /// User.
         /// </summary>
         public User User { get; set; }
 
@@ -41,23 +39,21 @@ namespace FindHousingProject.DAL.Entities
         /// Arrival Date.
         /// </summary>
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-
         public DateTime CheckIn { get; set; }
 
         /// <summary>
         /// Date of departure.
         /// </summary>
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-
         public DateTime CheckOut { get; set; }
 
         /// <summary>
-        /// Cost all days.
+        /// The cost of all days.
         /// </summary>
         public decimal Amount { get; set; }
 
         /// <summary>
-        /// .
+        /// State.
         /// </summary>
         public byte State { get; set; }
     }

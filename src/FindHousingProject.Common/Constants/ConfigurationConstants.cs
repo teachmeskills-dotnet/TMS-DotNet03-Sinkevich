@@ -26,7 +26,7 @@
         public const int ShortLenghtForStringField = 63;
 
         /// <summary>
-        /// Standart length a for string field.
+        /// Standart length for a string field.
         /// </summary>
         public const int StandartLenghtForStringField = 127;
 

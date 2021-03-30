@@ -31,7 +31,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Housing.Name)
+                        @Html.ActionLink(item.Housing.Name,"Details", "Housing", new { housingId = item.Housing.Id })
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Amount)$

@@ -1,27 +1,25 @@
-﻿using FindHousingProject.BLL.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace FindHousingProject.Web.ViewModels
 {
+    /// <summary>
+    /// Reservations view model.
+    /// </summary>
     public class ReservationsViewModel
     {
+        /// <summary>
+        /// Reservation id.
+        /// </summary>
         public string Id { get; set; }
-        public string Name { get; set; }
-        public string Place { get; set; }
-        public string Housing { get; set; }
-        public string HousingId { get; set; }
-        public DateTime CheckIn{ get; set; }
-        public DateTime CheckOut { get; set; }
-        public decimal PricePerDay { get; set; }
-        public string Address { get; set; }
 
-        public UserDto User { get; set; }
-        public string Status { get; set; }
-        public decimal Amount { get; set; }
+        /// <summary>
+        /// Reservation check-in.
+        /// </summary>
+        public DateTime CheckIn { get; set; }
+
+        /// <summary>
+        /// Reservation check-out.
+        /// </summary>
+        public DateTime CheckOut { get; set; }
     }
 }

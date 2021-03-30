@@ -6,7 +6,7 @@ using System.Text;
 namespace FindHousingProject.DAL.Entities
 {
     /// <summary>
-    /// User about the place (resort, town, village, island and so on).
+    /// User(owner) describes the place.
     /// </summary>
     public class Place
     {
@@ -17,19 +17,19 @@ namespace FindHousingProject.DAL.Entities
         public string Id { get; set; }
 
         /// <summary>
-        /// User Country Id.
+        /// User's country Id.
         /// </summary>
         public string CountryId { get; set; }
 
         /// <summary>
-        /// User Country.
+        /// User's country.
         /// </summary>
         public Country Country { get; set; }
 
         /// <summary>
-        ///
+        /// Housing.
         /// </summary>
-        public  ICollection<Housing> Housings { get; set; }
+        public ICollection<Housing> Housings { get; set; }
 
         /// <summary>
         /// Type of housing (hotel, house, apartment, hostel, etc.).
@@ -42,7 +42,7 @@ namespace FindHousingProject.DAL.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// Location information.
+        /// Housing information.
         /// </summary>
         public string Description { get; set; }
     }

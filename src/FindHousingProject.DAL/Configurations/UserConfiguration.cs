@@ -3,13 +3,15 @@ using FindHousingProject.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FindHousingProject.DAL.Configurations
 {
+    /// <summary>
+    /// EF Configuration for User entity.
+    /// </summary>
     class UserConfiguration : IEntityTypeConfiguration<User>
     {
+        /// <inheritdoc/>
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));
@@ -30,10 +32,10 @@ namespace FindHousingProject.DAL.Configurations
                 .HasColumnType(ConfigurationConstants.AvatarFormat);
 
             //builder.Property(p => p.PhoneNumber)
-              //  .IsRequired();
+            //  .IsRequired();
 
             builder.Property(p => p.BirthDate)
-               // .IsRequired()
+                // .IsRequired()
                 .HasColumnType(ConfigurationConstants.DateFormat);
 
             builder.Property(t => t.Documents)
@@ -41,9 +43,8 @@ namespace FindHousingProject.DAL.Configurations
                 .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
 
             builder.Property(t => t.Gender)
-               // .IsRequired()
+                // .IsRequired()
                 .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
-
         }
     }
 }

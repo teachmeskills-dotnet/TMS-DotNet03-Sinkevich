@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 namespace FindHousingProject.BLL.Managers
 {
     ///<inheritdoc cref="IUserManager"/>
-    public class UsManager: IUserManager
+    public class UsManager : IUserManager
     {
         private readonly UserManager<User> _userManager;
         private readonly IRepository<User> _repositoryUser;
 
-       public UsManager(UserManager<User> userManager, IRepository<User> repositoryUser)
+        public UsManager(UserManager<User> userManager, IRepository<User> repositoryUser)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _repositoryUser = repositoryUser ?? throw new ArgumentNullException(nameof(repositoryUser));
@@ -74,7 +74,7 @@ namespace FindHousingProject.BLL.Managers
 
         public async Task DeleteAsync(string id, string email)
         {
-            var profile = await _repositoryUser.GetEntityAsync(profile => profile.Id== id && profile.Email == email);
+            var profile = await _repositoryUser.GetEntityAsync(profile => profile.Id == id && profile.Email == email);
             if (profile is null)
             {
                 throw new KeyNotFoundException(ErrorResource.UserNotFound);
@@ -94,7 +94,7 @@ namespace FindHousingProject.BLL.Managers
             {
                 throw new KeyNotFoundException(ErrorResource.UserNotFound);
             }
-            if(userDto.Avatar != null)
+            if (userDto.Avatar != null)
             {
                 userDAL.Avatar = userDto.Avatar;
             }

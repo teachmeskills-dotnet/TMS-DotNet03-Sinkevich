@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace FindHousingProject.BLL.Managers
 {
-    public class HousingManager: IHousingManager
+    /// <inheritdoc cref="IHousingManager"/>
+    public class HousingManager : IHousingManager
     {
         private readonly IRepository<Housing> _repositoryHousing;
         private readonly IUserManager _userManager;
@@ -48,20 +49,20 @@ namespace FindHousingProject.BLL.Managers
             await _repositoryHousing.SaveChangesAsync();
         }
 
-       public async Task<IEnumerable<Housing>> GetCurrentHousingsAsync(string email)
-       {
+        public async Task<IEnumerable<Housing>> GetCurrentHousingsAsync(string email)
+        {
             var userId = await _userManager.GetUserIdByEmailAsync(email);
-            return await _repositoryHousing.GetListAsync(x=>x.UserId==userId);
-       }
+            return await _repositoryHousing.GetListAsync(x => x.UserId == userId);
+        }
 
         public IEnumerable<Housing> GetAllHousings()
         {
-            return  _repositoryHousing.GetAll();
+            return _repositoryHousing.GetAll();
         }
 
         public async Task DeleteAsync(string id, string userId)
         {
-             var housing = await _repositoryHousing.GetEntityAsync(housing=>housing.Id==id && housing.UserId==userId);
+            var housing = await _repositoryHousing.GetEntityAsync(housing => housing.Id == id && housing.UserId == userId);
 
             if (housing is null)
             {
@@ -91,18 +92,19 @@ namespace FindHousingProject.BLL.Managers
                 Address = housing.Address,
                 Name = housing.Name,
                 Description = housing.Description,
-                Scenery=housing.Scenery,
+                Scenery = housing.Scenery,
                 PricePerDay = housing.PricePerDay
             };
             return housingsDto;
         }
+
         public async Task UpdateHousingAsync(HousingDto housingDto, string userId)
         {
             housingDto = housingDto ?? throw new ArgumentNullException(nameof(housingDto));
 
             var housing = await _repositoryHousing
             .GetAll().Include(x => x.Place).FirstOrDefaultAsync(housings => housings.Id == housingDto.Id
-               && housings.UserId == userId );
+               && housings.UserId == userId);
 
             if (housing is null)
             {
@@ -137,7 +139,7 @@ namespace FindHousingProject.BLL.Managers
                 housing.Address = housingDto.Address;
                 updated = true;
             }
-            if (housing.Scenery != housingDto.Scenery && housingDto.Scenery!=null)
+            if (housing.Scenery != housingDto.Scenery && housingDto.Scenery != null)
             {
                 housing.Scenery = housingDto.Scenery;
                 updated = true;
@@ -162,15 +164,15 @@ namespace FindHousingProject.BLL.Managers
             var housingDtos = new List<Housing>();
 
             var housings = await _repositoryHousing
-                .GetAll().Include(x=>x.Place).Include(x=>x.Reservations)
+                .GetAll().Include(x => x.Place).Include(x => x.Reservations)
                 .AsNoTracking().ToListAsync();
             if (!string.IsNullOrWhiteSpace(userInput))
             {
-                housings = housings.Where(x => x.Name.Contains(userInput, StringComparison.OrdinalIgnoreCase) ||(x.Place!=null && x.Place.Name.Contains(userInput, StringComparison.OrdinalIgnoreCase))).ToList();
+                housings = housings.Where(x => x.Name.Contains(userInput, StringComparison.OrdinalIgnoreCase) || (x.Place != null && x.Place.Name.Contains(userInput, StringComparison.OrdinalIgnoreCase))).ToList();
             }
-            if (checkIn!=null && checkOut!=null)
+            if (checkIn != null && checkOut != null)
             {
-                housings = housings.Where(x=> !x.Reservations.Any(r=>r.CheckIn >= checkIn.Value && r.CheckOut<= checkOut.Value)).ToList();
+                housings = housings.Where(x => !x.Reservations.Any(r => r.CheckIn >= checkIn.Value && r.CheckOut <= checkOut.Value)).ToList();
             }
             if (housings.Any())
             {
@@ -178,7 +180,7 @@ namespace FindHousingProject.BLL.Managers
                 {
                     housingDtos.Add(new Housing
                     {
-                        Id=housing.Id,
+                        Id = housing.Id,
                         Name = housing.Name,
                         Address = housing.Address,
                         Place = housing.Place,

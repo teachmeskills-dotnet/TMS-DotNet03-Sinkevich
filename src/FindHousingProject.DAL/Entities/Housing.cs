@@ -32,12 +32,12 @@ namespace FindHousingProject.DAL.Entities
         public string UserId { get; set; }
 
         /// <summary>
-        /// User which booking housing
+        /// User who booking housing.
         /// </summary>
         public User User { get; set; }
 
         /// <summary>
-        ///
+        /// Reservation.
         /// </summary>
         public ICollection<Reservation> Reservations { get; set; }
 
@@ -47,7 +47,7 @@ namespace FindHousingProject.DAL.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// Cost per day.
+        /// The cost per day.
         /// </summary>
         public decimal PricePerDay { get; set; }
 
@@ -67,7 +67,7 @@ namespace FindHousingProject.DAL.Entities
         public DateTime? BookedTo { get; set; }
 
         /// <summary>
-        /// Discription about housing.
+        /// Description about housing.
         /// </summary>
         public string Description { get; set; }
 
@@ -77,7 +77,7 @@ namespace FindHousingProject.DAL.Entities
         public string Address { get; set; }
 
         /// <summary>
-        /// .
+        /// Photo of housing.
         /// </summary>
         public byte[] Scenery { get; set; }
     }

@@ -22,16 +22,10 @@ namespace FindHousingProject.Web.ViewModels
         public string Email { get; set; }
 
         /// <summary>
-        /// Is Owner.
+        /// By default role is guest.
         /// </summary>
         [Display(Name = "Choose a role:")]
         public string Role { get; set; }
-
-        /// <summary>
-        /// Is Owner.
-        /// </summary>
-        [Display(Name = "Owner?")]
-        public bool IsOwner { get; set; }
 
         /// <summary>
         /// Name.
@@ -51,7 +45,7 @@ namespace FindHousingProject.Web.ViewModels
         /// </summary>
         [Display(Name = "Change avatar")]
         public IFormFile NewAvatar { get; set; }
-        //public List<SelectListItem> Roles { get; set; }
+
         public List<SelectListItem> Roles
         {
             get => new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {

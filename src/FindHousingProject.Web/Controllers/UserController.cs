@@ -1,15 +1,7 @@
 ﻿using FindHousingProject.BLL.Interfaces;
-using FindHousingProject.BLL.Models;
-using FindHousingProject.Common.Constants;
-using FindHousingProject.DAL.Entities;
 using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FindHousingProject.Web.Controllers
@@ -33,7 +25,7 @@ namespace FindHousingProject.Web.Controllers
             {
                 Id = profile.Id,
                 Email = profile.Email,
-                FullName= profile.FullName,
+                FullName = profile.FullName,
                 Avatar = profile.Avatar,
                 Role = profile.Role,
                 IsOwner = profile.IsOwner

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FindHousingProject.Web.ViewModels
 {
+    /// <summary>
+    /// Simple view model.
+    /// </summary>
     public class SimpleViewModel
     {
         public int Value { get; set; }

@@ -1,12 +1,8 @@
-﻿using Abp.Web.Mvc.Models;
-using FindHousingProject.Web.ViewModels;
+﻿using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FindHousingProject.Web.Controllers
 {

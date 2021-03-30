@@ -3,13 +3,15 @@ using FindHousingProject.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FindHousingProject.DAL.Configurations
 {
-   public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
+    /// <summary>
+    /// EF Configuration for Reservation entity.
+    /// </summary>
+    public class ReservationConfiguration : IEntityTypeConfiguration<Reservation>
     {
+        /// <inheritdoc/>
         public void Configure(EntityTypeBuilder<Reservation> builder)
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));
@@ -40,7 +42,6 @@ namespace FindHousingProject.DAL.Configurations
 
             builder.Property(t => t.State)
                 .IsRequired();
-
         }
     }
 }

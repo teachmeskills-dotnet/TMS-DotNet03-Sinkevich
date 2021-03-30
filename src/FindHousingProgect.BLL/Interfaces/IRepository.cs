@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace FindHousingProject.BLL.Interfaces
 {
     /// <summary>
-    /// Generic repository provide all base needed methods (CRUD).
+    /// Generic repository provides all base needed methods (CRUD).
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface IRepository<T> where T : class
@@ -36,6 +36,12 @@ namespace FindHousingProject.BLL.Interfaces
         /// <param name="predicate">LINQ predicate.</param>
         /// <returns>T entity.</returns>
         Task<T> GetEntityAsync(Expression<Func<T, bool>> predicate);
+
+        /// <summary>
+        /// Get list entity async by predicate.
+        /// </summary>
+        /// <param name="predicate">LINQ predicate.</param>
+        /// <returns>T entity.</returns>
         Task<List<T>> GetListAsync(Expression<Func<T, bool>> predicate);
 
         /// <summary>
@@ -58,7 +64,7 @@ namespace FindHousingProject.BLL.Interfaces
         void Delete(T entity);
 
         /// <summary>
-        /// Remove entities from database
+        /// Remove entity from database.
         /// </summary>
         /// <param name="entity">Entity object</param>
         void DeleteRange(IEnumerable<T> entity);
