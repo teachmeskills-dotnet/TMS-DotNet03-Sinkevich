@@ -5,16 +5,12 @@ using FindHousingProject.DAL;
 using FindHousingProject.DAL.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FindHousingProject.Web
 {
@@ -25,8 +21,6 @@ namespace FindHousingProject.Web
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
         public IConfiguration Configuration { get; }
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             // Repositories
@@ -44,7 +38,7 @@ namespace FindHousingProject.Web
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // ASP.NET Core Identity
-            services.AddIdentity<User, IdentityRole>() //services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>() 
                 .AddEntityFrameworkStores<ApplicationContext>();
 
             services.ConfigureApplicationCookie(config =>
@@ -53,7 +47,6 @@ namespace FindHousingProject.Web
                 config.LoginPath = "/Account/SignIn";
             });
         }
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -63,7 +56,6 @@ namespace FindHousingProject.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -74,16 +66,9 @@ namespace FindHousingProject.Web
 
             app.UseRouting();
 
-            app.UseAuthentication();    // подключение аутентификации
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            /* app.UseEndpoints(endpoints =>
-             {
-                 endpoints.MapGet("/", async context =>
-                 {
-                     await context.Response.WriteAsync("Hello World!");
-                 });
-             });*/
 
             app.UseEndpoints(endpoints =>
             {
@@ -92,20 +77,5 @@ namespace FindHousingProject.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-       /* private static void CreateRoles(IServiceProvider serviceProvider)
-        {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-            Task<IdentityResult> roleResult;
-
-            Task<bool> hasVendorRole = roleManager.RoleExistsAsync("Owner");
-            hasVendorRole.Wait();
-
-            if (!hasVendorRole.Result)
-            {
-                roleResult = roleManager.CreateAsync(new IdentityRole("Owner"));
-                roleResult.Wait();
-            }
-        }*/
     }
 }
