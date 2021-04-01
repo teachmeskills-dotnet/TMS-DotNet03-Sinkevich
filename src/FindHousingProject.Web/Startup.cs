@@ -36,9 +36,9 @@ namespace FindHousingProject.Web
             services.AddControllersWithViews();
             // Database context
             services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             // ASP.NET Core Identity
-            services.AddIdentity<User, IdentityRole>() 
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();
 
             services.ConfigureApplicationCookie(config =>
