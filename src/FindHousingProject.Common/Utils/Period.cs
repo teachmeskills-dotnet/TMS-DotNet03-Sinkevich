@@ -16,7 +16,7 @@ namespace FindHousingProject.Common.Utils
         /// </summary>
         public DateTime End { get; set; }
 
-        public bool IsIntersectOrInclude(Period other) => (Start < other.End & End > other.End) || (End < other.Start & Start > other.End) || (Start >= other.Start & End >= other.End);
+        public bool IsIntersectOrInclude(Period other) => (Start < other.End & End > other.End) || (Start < other.Start & End > other.Start) || (Start >= other.Start & End <= other.End);
 
         public Period(DateTime start, DateTime end)
         {

@@ -16,17 +16,13 @@ namespace FindHousingProject.BLL.Managers
     public class ReservationManager : IReservationManager
     {
         private readonly IRepository<Housing> _repositoryHousing;
-        private readonly IUserManager _userManager;
         private readonly IRepository<User> _repositoryUser;
-        private readonly IRepository<Place> _repositoryPlace;
         private readonly IRepository<Reservation> _repositoryReservation;
 
-        public ReservationManager(IRepository<Housing> repositoryHousing, IUserManager userManager, IRepository<User> repositoryUser, IRepository<Place> repositoryPlace, IRepository<Reservation> repositoryReservation)
+        public ReservationManager(IRepository<Housing> repositoryHousing, IRepository<User> repositoryUser, IRepository<Reservation> repositoryReservation)
         {
             _repositoryHousing = repositoryHousing ?? throw new ArgumentNullException(nameof(repositoryHousing));
-            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _repositoryUser = repositoryUser ?? throw new ArgumentNullException(nameof(repositoryUser));
-            _repositoryPlace = repositoryPlace ?? throw new ArgumentNullException(nameof(repositoryPlace));
             _repositoryReservation = repositoryReservation ?? throw new ArgumentNullException(nameof(repositoryReservation));
         }
 

@@ -38,7 +38,7 @@ namespace FindHousingProject.DAL.Configurations
             builder.Property(t => t.NumberOfSeats)
                 .IsRequired();
 
-            builder.Property(t=>t.BookedFrom)
+            builder.Property(t => t.BookedFrom)
                 .HasColumnType(ConfigurationConstants.DateFormat);
 
             builder.Property(t => t.BookedTo)
@@ -53,6 +53,8 @@ namespace FindHousingProject.DAL.Configurations
 
             builder.Property(p => p.Scenery)
                 .HasColumnType(ConfigurationConstants.AvatarFormat);
+
+           
         }
     }
 }
