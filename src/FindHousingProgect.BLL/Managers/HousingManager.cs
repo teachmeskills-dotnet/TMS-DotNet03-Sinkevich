@@ -58,7 +58,7 @@ namespace FindHousingProject.BLL.Managers
 
         public IEnumerable<Housing> GetAllHousings()
         {
-            return _repositoryHousing.GetAll();
+            return _repositoryHousing.GetAll().ToList();
         }
 
         public async Task DeleteAsync(string id, string userId)

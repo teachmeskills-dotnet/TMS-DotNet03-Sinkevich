@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FindHousingProject.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210401173325_findhousing")]
+    [Migration("20210403200516_findhousing")]
     partial class findhousing
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,7 +73,7 @@ namespace FindHousingProject.DAL.Migrations
                         .HasColumnType("decimal");
 
                     b.Property<byte[]>("Scenery")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("bytea");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");
@@ -160,7 +160,7 @@ namespace FindHousingProject.DAL.Migrations
                         .HasColumnType("integer");
 
                     b.Property<byte[]>("Avatar")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("bytea");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("date");

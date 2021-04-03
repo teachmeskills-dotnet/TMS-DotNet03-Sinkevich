@@ -51,10 +51,9 @@ namespace FindHousingProject.DAL.Configurations
                 .IsRequired()
                 .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
 
-            builder.Property(p => p.Scenery)
-                .HasColumnType(ConfigurationConstants.AvatarFormat);
+            builder.Property(p => p.Scenery);
 
-           
+
         }
     }
 }

@@ -15,10 +15,7 @@
         /// </summary>
         public const string DecimalFormat = "decimal";
 
-        /// <summary>
-        /// Custom avatar format.
-        /// </summary>
-        public const string AvatarFormat = "varbinary(max)";
+  
 
         /// <summary>
         /// Short length for a string field.

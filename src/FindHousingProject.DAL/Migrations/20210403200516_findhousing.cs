@@ -29,7 +29,7 @@ namespace FindHousingProject.DAL.Migrations
                     Id = table.Column<string>(type: "text", nullable: false),
                     FullName = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     Role = table.Column<string>(type: "character varying(63)", maxLength: 63, nullable: false),
-                    Avatar = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Avatar = table.Column<byte[]>(type: "bytea", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "date", nullable: false),
                     Documents = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false, defaultValue: "паспорт"),
                     Gender = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
@@ -206,7 +206,7 @@ namespace FindHousingProject.DAL.Migrations
                     BookedTo = table.Column<DateTime>(type: "date", nullable: true),
                     Description = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     Address = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    Scenery = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    Scenery = table.Column<byte[]>(type: "bytea", nullable: true)
                 },
                 constraints: table =>
                 {

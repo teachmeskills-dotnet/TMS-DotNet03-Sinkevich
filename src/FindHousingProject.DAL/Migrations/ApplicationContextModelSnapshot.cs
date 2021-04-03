@@ -71,7 +71,7 @@ namespace FindHousingProject.DAL.Migrations
                         .HasColumnType("decimal");
 
                     b.Property<byte[]>("Scenery")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("bytea");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");
@@ -158,7 +158,7 @@ namespace FindHousingProject.DAL.Migrations
                         .HasColumnType("integer");
 
                     b.Property<byte[]>("Avatar")
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("bytea");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("date");

@@ -28,8 +28,7 @@ namespace FindHousingProject.DAL.Configurations
             // builder.Property(p => p.Email)
             //.IsRequired();
 
-            builder.Property(p => p.Avatar)
-                .HasColumnType(ConfigurationConstants.AvatarFormat);
+            builder.Property(p => p.Avatar);
 
             //builder.Property(p => p.PhoneNumber)
             //  .IsRequired();

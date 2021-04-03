@@ -22,8 +22,8 @@ namespace FindHousingProject.DAL
         /// <param name="options">DbContextOptions</param>
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options){
-            //Database.EnsureCreated();
-            //Database.Migrate();
+            Database.EnsureCreated();
+           // Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
