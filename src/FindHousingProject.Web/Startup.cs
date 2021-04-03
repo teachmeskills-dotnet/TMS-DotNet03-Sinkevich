@@ -38,7 +38,7 @@ namespace FindHousingProject.Web
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // ASP.NET Core Identity
-            services.AddIdentity<User, IdentityRole>() 
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();
 
             services.ConfigureApplicationCookie(config =>

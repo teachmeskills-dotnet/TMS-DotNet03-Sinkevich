@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FindHousingProject.DAL.Migrations
 {
-    public partial class findhousingproject : Migration
+    public partial class find : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,6 +27,7 @@ namespace FindHousingProject.DAL.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(63)", maxLength: 63, nullable: false),
                     Avatar = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "date", nullable: false),
                     Documents = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false, defaultValue: "паспорт"),
@@ -202,7 +203,7 @@ namespace FindHousingProject.DAL.Migrations
                     NumberOfSeats = table.Column<int>(type: "int", nullable: false),
                     BookedFrom = table.Column<DateTime>(type: "date", nullable: true),
                     BookedTo = table.Column<DateTime>(type: "date", nullable: true),
-                    Discription = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Scenery = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },

@@ -120,6 +120,9 @@
   <data name="DataNotBooked" xml:space="preserve">
     <value>Date is booked. Choose another date.</value>
   </data>
+  <data name="DeletionIsNotAvailable" xml:space="preserve">
+    <value>Deletion is not available. Please contact:</value>
+  </data>
   <data name="EnterData" xml:space="preserve">
     <value>Please select your booking dates!</value>
   </data>

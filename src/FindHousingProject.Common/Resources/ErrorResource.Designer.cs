@@ -70,6 +70,15 @@ namespace FindHousingProject.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deletion is not available. Please contact:.
+        /// </summary>
+        public static string DeletionIsNotAvailable {
+            get {
+                return ResourceManager.GetString("DeletionIsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select your booking dates!.
         /// </summary>
         public static string EnterData {

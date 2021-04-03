@@ -15,14 +15,15 @@ namespace FindHousingProject.BLL.Managers
     {
         private readonly IRepository<Housing> _repositoryHousing;
         private readonly IUserManager _userManager;
-        private readonly IRepository<User> _repositoryUser;
         private readonly IRepository<Place> _repositoryPlace;
-        public HousingManager(IRepository<Housing> repositoryHousing, IUserManager userManager, IRepository<User> repositoryUser, IRepository<Place> repositoryPlace)
+        private readonly IRepository<Reservation> _repositoryReservation;
+        public HousingManager(IRepository<Housing> repositoryHousing, IUserManager userManager, IRepository<Place> repositoryPlace, IRepository<Reservation> repositoryReservation)
         {
             _repositoryHousing = repositoryHousing ?? throw new ArgumentNullException(nameof(repositoryHousing));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
-            _repositoryUser = repositoryUser ?? throw new ArgumentNullException(nameof(repositoryUser));
             _repositoryPlace = repositoryPlace ?? throw new ArgumentNullException(nameof(repositoryPlace));
+            _repositoryReservation = repositoryReservation ?? throw new ArgumentNullException(nameof(repositoryReservation));
+
         }
 
         public async Task CreateAsync(HousingDto housingDto)
@@ -68,7 +69,8 @@ namespace FindHousingProject.BLL.Managers
             {
                 throw new KeyNotFoundException(ErrorResource.HousingNotFound);
             }
-
+            _repositoryReservation.GetAll().Where(x => x.HousingId == housing.Id).ToList().ForEach(x=>_repositoryReservation.Delete(x));
+            await _repositoryReservation.SaveChangesAsync();
             _repositoryHousing.Delete(housing);
             await _repositoryHousing.SaveChangesAsync();
         }

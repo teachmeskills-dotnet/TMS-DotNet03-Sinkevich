@@ -1,21 +1,36 @@
 ﻿@model FindHousingProject.Web.ViewModels.HousingViewModel
+@using FindHousingProject.Common.Resources
 
 @{
     ViewData["Title"] = "Delete";
 }
-
-<h1>Delete</h1>
-<div class="box">
-    <h1>
-        Are you sure you want to delete this?
-        @using (Html.BeginForm())
+<head>
+    <script type="text/javascript">
+        @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
         {
-            @Html.AntiForgeryToken()
-
-            <input type="submit" value="Delete" class="btn btn-danger" />
-            <a asp-action="Index" class="btn btn-info">
-                Сancel
-            </a>
+            <text>
+            $(document).ready(function() {
+                alert('@ViewData.ModelState["Error"].Errors.First().ErrorMessage');
+            });
+            </text>
         }
-    </h1>
-</div>
+    </script>
+</head>
+<body>
+    <h1>Delete</h1>
+    <div class="box">
+        <h1>
+            Are you sure you want to delete this?
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <input type="submit" value="Delete" class="btn btn-danger" style="font-size: 1em" />
+                <a asp-action="Index" class="btn btn-info" style="font-size: 1em">
+                    Сancel
+                </a>
+            }
+        </h1>
+    </div>
+</body>
+
