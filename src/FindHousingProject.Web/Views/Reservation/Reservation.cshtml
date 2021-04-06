@@ -31,20 +31,18 @@
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(item.Housing.Name,"Details", "Housing", new { housingId = item.Housing.Id })
+                        @Html.ActionLink(item.Housing.Name, "Details", "Housing", new { housingId = item.Housing.Id })
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Amount)$
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CheckIn)
-
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CheckOut)
                     </td>
                     <td>
-                        <!--Html.DisplayFor(modelItem => item.State)-->
                         &#9989;
                     </td>
                     <td>

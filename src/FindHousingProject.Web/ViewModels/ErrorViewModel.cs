@@ -1,5 +1,3 @@
-using System;
-
 namespace FindHousingProject.Web.ViewModels
 {
     /// <summary>

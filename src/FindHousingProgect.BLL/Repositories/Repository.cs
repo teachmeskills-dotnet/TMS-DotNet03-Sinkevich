@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FindHousingProject.BLL.Repositories
@@ -37,6 +36,7 @@ namespace FindHousingProject.BLL.Repositories
         {
             return _dbSet.AsNoTracking();
         }
+
         public async Task<List<T>> GetListAsync(Expression<Func<T, bool>> predicate)
         {
             return await _dbSet.Where(predicate).ToListAsync();

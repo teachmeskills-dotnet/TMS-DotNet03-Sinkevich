@@ -28,7 +28,7 @@
                     }
                 </div>
                 <div>
-                    @if (Model.Role == RolesConstants.GuestRole)
+                    @if (Model.Role == RoleConstant.Guest)
                     {
                         <a asp-controller="Reservation" asp-action="Reservation">Reservation</a>
                     }
@@ -40,6 +40,3 @@
         </div>
     </div>
 </body>
-
-
-

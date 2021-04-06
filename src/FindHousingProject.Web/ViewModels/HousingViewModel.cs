@@ -25,11 +25,6 @@ namespace FindHousingProject.Web.ViewModels
         public string Place { get; set; }
 
         /// <summary>
-        /// Place. Create later.
-        /// </summary>
-        //public Country Place { get; set; } //https://www.jqueryscript.net/form/country-picker-flags.html
-
-        /// <summary>
         /// Price.
         /// </summary>
         public decimal Price { get; set; }

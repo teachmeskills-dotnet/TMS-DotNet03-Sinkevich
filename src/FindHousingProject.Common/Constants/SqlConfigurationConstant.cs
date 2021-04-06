@@ -3,7 +3,7 @@
     /// <summary>
     /// Configuration constants.
     /// </summary>
-    public static class ConfigurationConstants
+    public static class SqlConfigurationConstant
     {
         /// <summary>
         /// Custom date format.

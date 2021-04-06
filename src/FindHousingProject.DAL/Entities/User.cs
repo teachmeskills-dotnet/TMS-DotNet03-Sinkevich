@@ -12,7 +12,7 @@ namespace FindHousingProject.DAL.Entities
         /// <summary>
         /// User full name.
         /// </summary>
-        public string? FullName { get; set; }
+        public string FullName { get; set; }
 
         /// <summary>
         /// User role name.

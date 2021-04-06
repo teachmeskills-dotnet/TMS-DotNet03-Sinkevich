@@ -1,14 +1,14 @@
 ﻿using FindHousingProject.BLL.Interfaces;
 using FindHousingProject.BLL.Models;
-using FindHousingProject.DAL.Entities;
 using FindHousingProject.Common.Constants;
+using FindHousingProject.Common.Resources;
 using FindHousingProject.Common.Utils;
+using FindHousingProject.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FindHousingProject.Common.Resources;
 
 namespace FindHousingProject.BLL.Managers
 {
@@ -28,28 +28,34 @@ namespace FindHousingProject.BLL.Managers
 
         public IEnumerable<Reservation> GetAllUserReservations(String userId)
         {
-            return _repositoryReservation.GetAll().Where(x => x.UserId == userId).Include(x => x.Housing);
+            return _repositoryReservation
+                .GetAll()
+                .Where(x => x.UserId == userId)
+                .Include(x => x.Housing);
         }
 
         public async Task<String> ReservationAsync(String housingId, String userId, decimal amount, DateTime checkIn, DateTime checkOut)
         {
             if (checkIn == null || checkOut == null)
             {
-                return StatusConstants.BookedError;
+                return StatusConstant.BookedError;
             }
+
             var housing = await _repositoryHousing.GetEntityAsync(x => x.Id == housingId);
             var reservationDtos = new List<Reservation>();
             var reservstionPeriod = Period.Create(checkIn, checkOut);
-            var reservations = await _repositoryReservation
-                .GetAll().AsNoTracking().ToListAsync();
+            var reservations = await _repositoryReservation.GetAll().AsNoTracking().ToListAsync();
+
             reservations = reservations.Where(x => Period.Create(x.CheckIn, x.CheckOut).IsIntersectOrInclude(reservstionPeriod)).ToList();
             reservations.RemoveAll(x => x.HousingId != housingId);
+
             if (reservations.Any())
             {
-                return StatusConstants.BookedError;
+                return StatusConstant.BookedError;
             }
 
             var user = await _repositoryUser.GetEntityAsync(x => x.Id == userId);
+
             var reservation = new Reservation
             {
                 HousingId = housing.Id,
@@ -59,11 +65,13 @@ namespace FindHousingProject.BLL.Managers
                 CheckIn = checkIn,
                 CheckOut = checkOut,
                 Amount = amount,
-                State = StateConstants.requested
+                State = StateConstant.requested
             };
+
             await _repositoryReservation.CreateAsync(reservation);
             await _repositoryReservation.SaveChangesAsync();
-            return StatusConstants.Booked;
+
+            return StatusConstant.Booked;
         }
 
         public async Task DeleteReservationAsync(string id, string userId)
@@ -81,8 +89,7 @@ namespace FindHousingProject.BLL.Managers
 
         public async Task<ReservationDto> GetReservationAsync(string id)
         {
-            var reservation = await _repositoryReservation
-            .GetAll().FirstOrDefaultAsync(r => r.Id == id);
+            var reservation = await _repositoryReservation.GetAll().FirstOrDefaultAsync(r => r.Id == id);
 
             if (reservation is null)
             {
@@ -94,6 +101,7 @@ namespace FindHousingProject.BLL.Managers
                 CheckIn = reservation.CheckIn,
                 CheckOut = reservation.CheckOut
             };
+
             return reservationDto;
         }
     }

@@ -9,52 +9,51 @@ namespace FindHousingProject.DAL.Configurations
     /// <summary>
     /// EF Configuration for Housing entity.
     /// </summary>
-    class HousingConfiguration : IEntityTypeConfiguration<Housing>
+    internal class HousingConfiguration : IEntityTypeConfiguration<Housing>
     {
         /// <inheritdoc/>
         public void Configure(EntityTypeBuilder<Housing> builder)
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
-            builder.ToTable(TableConstants.HousingTable)
-                .HasKey(o => o.Id);
-            builder.Property(t => t.Name)
+            builder.ToTable(TableConstant.HousingTable)
+                .HasKey(housing => housing.Id);
+
+            builder.Property(housing => housing.Name)
                 .IsRequired()
-                .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
+                .HasMaxLength(SqlConfigurationConstant.LongLenghtForStringField);
 
-            builder.HasOne(o => o.Place)
-                .WithMany(t => t.Housings)
-                .HasForeignKey(u => u.PlaceId);
+            builder.HasOne(housing => housing.Place)
+                .WithMany(place => place.Housings)
+                .HasForeignKey(housing => housing.PlaceId);
 
-            builder.HasOne(o => o.User)
-               .WithMany(t => t.Housings)
-                .HasForeignKey(u => u.UserId);
+            builder.HasOne(housing => housing.User)
+               .WithMany(user => user.Housings)
+                .HasForeignKey(housing => housing.UserId);
 
-            builder.Property(t => t.PricePerDay)
+            builder.Property(housing => housing.PricePerDay)
                 .IsRequired()
-                .HasColumnType(ConfigurationConstants.DecimalFormat)
+                .HasColumnType(SqlConfigurationConstant.DecimalFormat)
                 .HasPrecision(11, 2);
 
-            builder.Property(t => t.NumberOfSeats)
+            builder.Property(housing => housing.NumberOfSeats)
                 .IsRequired();
 
-            builder.Property(t => t.BookedFrom)
-                .HasColumnType(ConfigurationConstants.DateFormat);
+            builder.Property(housing => housing.BookedFrom)
+                .HasColumnType(SqlConfigurationConstant.DateFormat);
 
-            builder.Property(t => t.BookedTo)
-                .HasColumnType(ConfigurationConstants.DateFormat);
+            builder.Property(housing => housing.BookedTo)
+                .HasColumnType(SqlConfigurationConstant.DateFormat);
 
-            builder.Property(t => t.Description)
-                .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
+            builder.Property(housing => housing.Description)
+                .HasMaxLength(SqlConfigurationConstant.LongLenghtForStringField);
 
-            builder.Property(t => t.Address)
+            builder.Property(housing => housing.Address)
                 .IsRequired()
-                .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
+                .HasMaxLength(SqlConfigurationConstant.LongLenghtForStringField);
 
-            builder.Property(p => p.Scenery)
-                .HasColumnType(ConfigurationConstants.AvatarFormat);
-
-           
+            builder.Property(housing => housing.Scenery)
+                .HasColumnType(SqlConfigurationConstant.AvatarFormat);
         }
     }
 }

@@ -76,7 +76,7 @@
             </div>
         </div>
     </div>
-    @if (Model.User?.Role != RolesConstants.OwnerRole)
+    @if (Model.User?.Role != RoleConstant.Owner)
     {
         <div class="search-boxDetails">
             <div class="search-box-title">@Html.DisplayFor(model => model.Price)$</div>

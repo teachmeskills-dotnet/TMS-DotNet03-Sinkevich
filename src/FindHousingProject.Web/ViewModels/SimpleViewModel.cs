@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FindHousingProject.Web.ViewModels
+﻿namespace FindHousingProject.Web.ViewModels
 {
     /// <summary>
     /// Simple view model.

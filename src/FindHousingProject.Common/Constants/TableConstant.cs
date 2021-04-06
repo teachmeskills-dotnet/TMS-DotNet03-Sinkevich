@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FindHousingProject.Common.Constants
+﻿namespace FindHousingProject.Common.Constants
 {
     /// <summary>
     /// Table constants.
     /// </summary>
-    public static class TableConstants
+    public static class TableConstant
     {
         /// <summary>
         /// Country.

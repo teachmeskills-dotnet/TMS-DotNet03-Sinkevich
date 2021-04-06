@@ -3,16 +3,16 @@
     /// <summary>
     /// Constants.
     /// </summary>
-    public static class RolesConstants
+    public static class RoleConstant
     {
         /// <summary>
         /// Owner can create housing.
         /// </summary>
-        public const string OwnerRole = "Owner";
+        public const string Owner = "Owner";
 
         /// <summary>
         /// Guest can booke housing.
         /// </summary>
-        public const string GuestRole = "Guest";
+        public const string Guest = "Guest";
     }
 }

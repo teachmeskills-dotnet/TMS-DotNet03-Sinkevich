@@ -1,11 +1,11 @@
 ﻿using FindHousingProject.BLL.Interfaces;
 using FindHousingProject.BLL.Models;
+using FindHousingProject.Common.Constants;
 using FindHousingProject.Common.Resources;
 using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using FindHousingProject.Common.Constants;
+using System;
 using System.Threading.Tasks;
-
 
 namespace FindHousingProject.Web.Controllers
 {
@@ -15,11 +15,14 @@ namespace FindHousingProject.Web.Controllers
         private readonly IUserManager _userManager;
         private readonly IReservationManager _reservationManager;
 
-        public ReservationController(IHousingManager housingManager, IUserManager userManager, IReservationManager reservationManager)
+        public ReservationController(
+            IHousingManager housingManager,
+            IUserManager userManager, 
+            IReservationManager reservationManager)
         {
-            _housingManager = housingManager;
-            _userManager = userManager;
-            _reservationManager = reservationManager;
+            _housingManager = housingManager ?? throw new ArgumentNullException(nameof(housingManager));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _reservationManager = reservationManager ?? throw new ArgumentNullException(nameof(reservationManager));
         }
 
         [HttpGet]
@@ -37,32 +40,37 @@ namespace FindHousingProject.Web.Controllers
             if (ModelState.IsValid)
             {
                 var userId = await _userManager.GetUserIdByEmailAsync(User.Identity.Name);
-                var days = 0;
+                int days;
+
                 var reservationDto = new ReservationDto()
                 {
                     CheckIn = reservationsViewModel.CheckIn,
                     CheckOut = reservationsViewModel.CheckOut,
                 };
+
                 if (reservationDto.CheckIn == reservationDto.CheckOut)
                 {
                     days = 1;
                 }
-                else //if (reservationDto.CheckIn != reservationDto.CheckOut)
+                else
                 {
                     days = (reservationDto.CheckOut - reservationDto.CheckIn).Days;
                 }
-                // var days = (reservationDto.CheckOut - reservationDto.CheckIn).Days;
 
                 var totalAmount = days * housing.PricePerDay;
-                var status = await _reservationManager.ReservationAsync(housing.Id, userId, totalAmount, reservationDto.CheckIn, reservationDto.CheckOut);
-                switch (status)
+
+                var status = await _reservationManager.ReservationAsync(
+                    housing.Id,
+                    userId,
+                    totalAmount,
+                    reservationDto.CheckIn,
+                    reservationDto.CheckOut);
+
+                return status switch
                 {
-                    case StatusConstants.Booked:
-                        return RedirectToAction("Reservation");
-                    default:
-                        return RedirectToAction("Details", "Housing", new { housingId = housing.Id, message = ErrorResource.DataNotBooked });
-                        // break;
-                }
+                    StatusConstant.Booked => RedirectToAction("Reservation"),
+                    _ => RedirectToAction("Details", "Housing", new { housingId = housing.Id, message = ErrorResource.DataNotBooked }),
+                };
             }
             return RedirectToAction("Details", "Housing", new { housingId = housing.Id, message = ErrorResource.EnterData });
         }

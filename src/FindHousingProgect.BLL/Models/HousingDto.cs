@@ -1,6 +1,5 @@
 ﻿using FindHousingProject.DAL.Entities;
 using System;
-using System.Collections.Generic;
 
 namespace FindHousingProject.BLL.Models
 {
@@ -9,8 +8,6 @@ namespace FindHousingProject.BLL.Models
     /// </summary>
     public class HousingDto
     {
-        public HousingDto() { }
-
         /// <summary>
         /// Housing Id.
         /// </summary>
@@ -35,11 +32,6 @@ namespace FindHousingProject.BLL.Models
         /// User who is booking housing
         /// </summary>
         public User User { get; set; }
-
-        /// <summary>
-        /// Guest's reservations
-        /// </summary>
-        //public ICollection<Reservation> Reservations { get; set; }
 
         /// <summary>
         /// Housing name.

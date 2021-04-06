@@ -1,7 +1,6 @@
 ﻿using FindHousingProject.Common.Constants;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -24,8 +23,19 @@ namespace FindHousingProject.Web.ViewModels
 
         public List<SelectListItem> Roles
         {
-            get => new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
-                    Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} };
+            get => new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Value = RoleConstant.Owner,
+                    Text= "Owner"
+                },
+                new SelectListItem
+                {
+                    Value = RoleConstant.Guest,
+                    Text= "Guest"
+                }
+            };
         }
 
         /// <summary>
@@ -36,7 +46,7 @@ namespace FindHousingProject.Web.ViewModels
         /// <summary>
         /// Pretty full name.
         /// </summary>
-        public string PrettyFullName { get => FullName ?? "Enter F*cking Name"; }
+        public string PrettyFullName { get => FullName ?? "Enter full name"; }
 
         /// <summary>
         /// Email.

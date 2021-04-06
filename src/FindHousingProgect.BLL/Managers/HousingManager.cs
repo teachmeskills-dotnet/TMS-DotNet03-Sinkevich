@@ -17,13 +17,13 @@ namespace FindHousingProject.BLL.Managers
         private readonly IUserManager _userManager;
         private readonly IRepository<Place> _repositoryPlace;
         private readonly IRepository<Reservation> _repositoryReservation;
+
         public HousingManager(IRepository<Housing> repositoryHousing, IUserManager userManager, IRepository<Place> repositoryPlace, IRepository<Reservation> repositoryReservation)
         {
             _repositoryHousing = repositoryHousing ?? throw new ArgumentNullException(nameof(repositoryHousing));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _repositoryPlace = repositoryPlace ?? throw new ArgumentNullException(nameof(repositoryPlace));
             _repositoryReservation = repositoryReservation ?? throw new ArgumentNullException(nameof(repositoryReservation));
-
         }
 
         public async Task CreateAsync(HousingDto housingDto)
@@ -46,6 +46,7 @@ namespace FindHousingProject.BLL.Managers
                 Description = housingDto.Description,
                 Address = housingDto.Address
             };
+
             await _repositoryHousing.CreateAsync(housing);
             await _repositoryHousing.SaveChangesAsync();
         }
@@ -69,8 +70,10 @@ namespace FindHousingProject.BLL.Managers
             {
                 throw new KeyNotFoundException(ErrorResource.HousingNotFound);
             }
-            _repositoryReservation.GetAll().Where(x => x.HousingId == housing.Id).ToList().ForEach(x=>_repositoryReservation.Delete(x));
+
+            _repositoryReservation.GetAll().Where(x => x.HousingId == housing.Id).ToList().ForEach(x => _repositoryReservation.Delete(x));
             await _repositoryReservation.SaveChangesAsync();
+
             _repositoryHousing.Delete(housing);
             await _repositoryHousing.SaveChangesAsync();
         }
@@ -97,6 +100,7 @@ namespace FindHousingProject.BLL.Managers
                 Scenery = housing.Scenery,
                 PricePerDay = housing.PricePerDay
             };
+
             return housingsDto;
         }
 
@@ -104,9 +108,11 @@ namespace FindHousingProject.BLL.Managers
         {
             housingDto = housingDto ?? throw new ArgumentNullException(nameof(housingDto));
 
-            var housing = await _repositoryHousing
-            .GetAll().Include(x => x.Place).FirstOrDefaultAsync(housings => housings.Id == housingDto.Id
-               && housings.UserId == userId);
+            var housing =
+                await _repositoryHousing
+                    .GetAll()
+                    .Include(x => x.Place)
+                    .FirstOrDefaultAsync(housings => housings.Id == housingDto.Id && housings.UserId == userId);
 
             if (housing is null)
             {
@@ -122,7 +128,7 @@ namespace FindHousingProject.BLL.Managers
             }
         }
 
-        static bool ValidateToUpdate(Housing housing, HousingDto housingDto)
+        private static bool ValidateToUpdate(Housing housing, HousingDto housingDto)
         {
             bool updated = false;
 
@@ -165,17 +171,24 @@ namespace FindHousingProject.BLL.Managers
         {
             var housingDtos = new List<Housing>();
 
-            var housings = await _repositoryHousing
-                .GetAll().Include(x => x.Place).Include(x => x.Reservations)
-                .AsNoTracking().ToListAsync();
+            var housings =
+                await _repositoryHousing
+                    .GetAll()
+                    .Include(x => x.Place)
+                    .Include(x => x.Reservations)
+                    .AsNoTracking()
+                    .ToListAsync();
+
             if (!string.IsNullOrWhiteSpace(userInput))
             {
                 housings = housings.Where(x => x.Name.Contains(userInput, StringComparison.OrdinalIgnoreCase) || (x.Place != null && x.Place.Name.Contains(userInput, StringComparison.OrdinalIgnoreCase))).ToList();
             }
+
             if (checkIn != null && checkOut != null)
             {
                 housings = housings.Where(x => !x.Reservations.Any(r => r.CheckIn >= checkIn.Value && r.CheckOut <= checkOut.Value)).ToList();
             }
+
             if (housings.Any())
             {
                 foreach (var housing in housings)
@@ -191,6 +204,7 @@ namespace FindHousingProject.BLL.Managers
                     });
                 }
             }
+
             return housingDtos;
         }
     }

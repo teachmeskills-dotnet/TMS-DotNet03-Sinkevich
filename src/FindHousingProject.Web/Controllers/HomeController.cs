@@ -11,6 +11,7 @@ namespace FindHousingProject.Web.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private readonly SimpleViewModel _vm;
+
         public HomeController(ILogger<HomeController> logger)
         {
             var rnd = new Random();
@@ -19,13 +20,12 @@ namespace FindHousingProject.Web.Controllers
             {
                 Value = rnd.Next(minValue: 0, maxValue: 100)
             };
-            _logger = logger;
 
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public IActionResult Index()
         {
-
             return View(_vm);
         }
 

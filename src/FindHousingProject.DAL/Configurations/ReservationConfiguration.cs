@@ -16,31 +16,31 @@ namespace FindHousingProject.DAL.Configurations
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
-            builder.ToTable(TableConstants.ReservationTable)
-                .HasKey(o => o.Id);
+            builder.ToTable(TableConstant.ReservationTable)
+                .HasKey(reservation => reservation.Id);
 
-            builder.HasOne(o => o.Housing)
-                .WithMany(t => t.Reservations)
-                .HasForeignKey(u => u.HousingId);
+            builder.HasOne(reservation => reservation.Housing)
+                .WithMany(housing => housing.Reservations)
+                .HasForeignKey(reservation => reservation.HousingId);
 
-            builder.HasOne(o => o.User)
-                .WithMany(t => t.Reservations)
-                .HasForeignKey(u => u.UserId);
+            builder.HasOne(reservation => reservation.User)
+                .WithMany(user => user.Reservations)
+                .HasForeignKey(reservation => reservation.UserId);
 
-            builder.Property(t => t.CheckIn)
+            builder.Property(reservation => reservation.CheckIn)
                 .IsRequired()
-                .HasColumnType(ConfigurationConstants.DateFormat);
+                .HasColumnType(SqlConfigurationConstant.DateFormat);
 
-            builder.Property(t => t.CheckOut)
+            builder.Property(reservation => reservation.CheckOut)
                 .IsRequired()
-                .HasColumnType(ConfigurationConstants.DateFormat);
+                .HasColumnType(SqlConfigurationConstant.DateFormat);
 
-            builder.Property(t => t.Amount)
+            builder.Property(reservation => reservation.Amount)
                 .IsRequired()
-                .HasColumnType(ConfigurationConstants.DecimalFormat)
+                .HasColumnType(SqlConfigurationConstant.DecimalFormat)
                 .HasPrecision(11, 2);
 
-            builder.Property(t => t.State)
+            builder.Property(reservation => reservation.State)
                 .IsRequired();
         }
     }

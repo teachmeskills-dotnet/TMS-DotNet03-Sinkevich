@@ -20,7 +20,9 @@ namespace FindHousingProject.Web
         {
             Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
+
         public IConfiguration Configuration { get; }
+
         public void ConfigureServices(IServiceCollection services)
         {
             // Repositories
@@ -28,25 +30,30 @@ namespace FindHousingProject.Web
             services.AddScoped<IRepository<Housing>, Repository<Housing>>();
             services.AddScoped<IRepository<Place>, Repository<Place>>();
             services.AddScoped<IRepository<Reservation>, Repository<Reservation>>();
+
             // Managers
-            services.AddScoped<IUserManager, UsManager>();
+            services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IHousingManager, HousingManager>();
             services.AddScoped<IReservationManager, ReservationManager>();
+
             // Microsoft services
             services.AddControllersWithViews();
+
             // Database context
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             // ASP.NET Core Identity
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();
 
             services.ConfigureApplicationCookie(config =>
             {
-                config.Cookie.Name = "TeachMeSkills.Cookie";
+                config.Cookie.Name = "FindHousingProject.Cookie";
                 config.LoginPath = "/Account/SignIn";
             });
         }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -68,7 +75,6 @@ namespace FindHousingProject.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.UseEndpoints(endpoints =>
             {

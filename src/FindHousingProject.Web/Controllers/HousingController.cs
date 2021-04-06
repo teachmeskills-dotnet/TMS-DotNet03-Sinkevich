@@ -1,30 +1,27 @@
-﻿using FindHousingProject.DAL;
+﻿using FindHousingProject.BLL.Interfaces;
+using FindHousingProject.BLL.Models;
+using FindHousingProject.Common.Constants;
+using FindHousingProject.DAL.Entities;
+using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FindHousingProject.BLL.Models;
-using FindHousingProject.DAL.Entities;
-using FindHousingProject.BLL.Managers;
-using FindHousingProject.Web.ViewModels;
-using FindHousingProject.Common.Constants;
-using FindHousingProject.BLL.Interfaces;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace FindHousingProject.Web.Controllers
 {
     public class HousingController : Controller
     {
-        private readonly IHousingManager _ihousingManager;
+        private readonly IHousingManager _housingManager;
         private readonly IUserManager _usManager;
 
-        public HousingController(IHousingManager housingManager, IUserManager usManager)
+        public HousingController(
+            IHousingManager housingManager,
+            IUserManager usManager)
         {
-            _ihousingManager = housingManager;
-            _usManager = usManager;
+            _housingManager = housingManager ?? throw new ArgumentNullException(nameof(housingManager));
+            _usManager = usManager ?? throw new ArgumentNullException(nameof(usManager));
         }
 
         public async Task<IActionResult> Index()
@@ -36,13 +33,13 @@ namespace FindHousingProject.Web.Controllers
             else
             {
                 var user = await _usManager.GetAsync(User.Identity.Name);
-                if (user?.Role != RolesConstants.OwnerRole)
+                if (user?.Role != RoleConstant.Owner)
                 {
                     return RedirectToAction("Another", "Home");
                 }
                 else
                 {
-                    return View(await _ihousingManager.GetCurrentHousingsAsync(User.Identity.Name));
+                    return View(await _housingManager.GetCurrentHousingsAsync(User.Identity.Name));
                 }
             }
         }
@@ -63,8 +60,8 @@ namespace FindHousingProject.Web.Controllers
                 var placeDto = new Place()
                 {
                     Name = housingViewModel.Place,
-
                 };
+
                 var housingDto = new HousingDto()
                 {
                     UserId = userId,
@@ -75,6 +72,7 @@ namespace FindHousingProject.Web.Controllers
                     Address = housingViewModel.Address,
                     Scenery = housingViewModel.Scenery
                 };
+
                 if (housingViewModel.NewScenery != null)
                 {
                     byte[] imageData = null;
@@ -84,15 +82,17 @@ namespace FindHousingProject.Web.Controllers
                     }
                     housingDto.Scenery = imageData;
                 }
-                await _ihousingManager.CreateAsync(housingDto);
+
+                await _housingManager.CreateAsync(housingDto);
                 return RedirectToAction("Index", "Housing");
             }
+
             return View(housingViewModel);
         }
 
         public async Task<IActionResult> Delete(string housingId)
         {
-            var housing = await _ihousingManager.GetHousingAsync(housingId);
+            var housing = await _housingManager.GetHousingAsync(housingId);
 
             var housingEditViewModel = new HousingViewModel()
             {
@@ -102,6 +102,7 @@ namespace FindHousingProject.Web.Controllers
                 Price = housing.PricePerDay,
                 Name = housing.Name
             };
+
             return View(housingEditViewModel);
         }
 
@@ -111,14 +112,14 @@ namespace FindHousingProject.Web.Controllers
         {
             var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
 
-            await _ihousingManager.DeleteAsync(housingId, userId);
+            await _housingManager.DeleteAsync(housingId, userId);
 
             return RedirectToAction("Index", "Housing");
         }
 
         public async Task<IActionResult> Edit(string housingId)
         {
-            var housing = await _ihousingManager.GetHousingAsync(housingId);
+            var housing = await _housingManager.GetHousingAsync(housingId);
 
             var housingEditViewModel = new HousingViewModel()
             {
@@ -130,6 +131,7 @@ namespace FindHousingProject.Web.Controllers
                 Address = housing.Address,
                 Scenery = housing.Scenery
             };
+
             return View(housingEditViewModel);
         }
 
@@ -143,8 +145,8 @@ namespace FindHousingProject.Web.Controllers
                 var placeDto = new Place()
                 {
                     Name = housingViewModel.Place,
-
                 };
+
                 var housingDto = new HousingDto()
                 {
                     Id = housingViewModel.Id,
@@ -155,6 +157,7 @@ namespace FindHousingProject.Web.Controllers
                     Name = housingViewModel.Name,
                     Scenery = housingViewModel.Scenery
                 };
+
                 if (housingViewModel.NewScenery != null)
                 {
                     byte[] imageData = null;
@@ -164,9 +167,11 @@ namespace FindHousingProject.Web.Controllers
                     }
                     housingDto.Scenery = imageData;
                 }
-                await _ihousingManager.UpdateHousingAsync(housingDto, userId);
+
+                await _housingManager.UpdateHousingAsync(housingDto, userId);
                 return RedirectToAction("Index", "Housing");
             }
+
             return View(housingViewModel);
         }
 
@@ -178,7 +183,7 @@ namespace FindHousingProject.Web.Controllers
             }
             else
             {
-                var housing = await _ihousingManager.GetHousingAsync(housingId);
+                var housing = await _housingManager.GetHousingAsync(housingId);
                 var user = await _usManager.GetAsync(User.Identity.Name);
 
                 if (message != null)
@@ -224,19 +229,21 @@ namespace FindHousingProject.Web.Controllers
                     Address = housingViewModel.Address,
                     Name = housingViewModel.Name,
                 };
+
                 return RedirectToAction("Index", "Housing");
             }
+
             return View(housingViewModel);
         }
 
         public IActionResult ShowSearchFrom()
         {
-            return View(_ihousingManager.GetAllHousings());
+            return View(_housingManager.GetAllHousings());
         }
 
         public async Task<IActionResult> ShowSearchResults(String SearchPhrase, DateTime? from = null, DateTime? to = null)
         {
-            return View("ShowSearchFrom", await _ihousingManager.SearchHousingAsync(SearchPhrase, from, to));
+            return View("ShowSearchFrom", await _housingManager.SearchHousingAsync(SearchPhrase, from, to));
         }
     }
 }

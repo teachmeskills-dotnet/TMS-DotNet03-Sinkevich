@@ -5,6 +5,7 @@ using FindHousingProject.DAL.Entities;
 using FindHousingProject.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -15,11 +16,15 @@ namespace FindHousingProject.Web.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IUserManager _iuserManager;
-        public AccountController(IUserManager iuserManager, UserManager<User> userManager, SignInManager<User> signInManager)
+
+        public AccountController(
+            IUserManager iuserManager,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            _iuserManager = iuserManager;
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+            _signInManager = signInManager ?? throw new ArgumentNullException(nameof(signInManager));
+            _iuserManager = iuserManager ?? throw new ArgumentNullException(nameof(iuserManager));
         }
 
         [HttpGet]
@@ -33,7 +38,13 @@ namespace FindHousingProject.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email, Role = RolesConstants.GuestRole };
+                var user = new User
+                {
+                    Email = model.Email,
+                    UserName = model.Email,
+                    Role = RoleConstant.Guest
+                };
+
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -48,6 +59,7 @@ namespace FindHousingProject.Web.Controllers
                     }
                 }
             }
+
             return View(model);
         }
 
@@ -58,6 +70,7 @@ namespace FindHousingProject.Web.Controllers
             {
                 ReturnUrl = returnUrl
             };
+
             return View(signInViewModel);
         }
 
@@ -75,11 +88,13 @@ namespace FindHousingProject.Web.Controllers
                     {
                         return Redirect(model.ReturnUrl);
                     }
+
                     return RedirectToAction("Index", "User");
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid email and(or) password.");
             }
+
             return View(model);
         }
 
@@ -109,11 +124,13 @@ namespace FindHousingProject.Web.Controllers
                 {
                     return RedirectToAction("Settings", "Account");
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
+
             return View(model);
         }
 
@@ -129,6 +146,7 @@ namespace FindHousingProject.Web.Controllers
                 Role = user.Role,
                 Avatar = user.Avatar
             };
+
             return View(model);
         }
 
@@ -159,6 +177,7 @@ namespace FindHousingProject.Web.Controllers
                 await _iuserManager.UpdateProfileAsync(userDto);
                 return RedirectToAction("Index", "User");
             }
+
             return View(settingsViewModel);
         }
     }

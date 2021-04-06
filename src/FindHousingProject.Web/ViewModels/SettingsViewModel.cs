@@ -32,7 +32,7 @@ namespace FindHousingProject.Web.ViewModels
         /// </summary>
         [Display(Name = "Full Name")]
         [Required(ErrorMessage = "Enter full name")]
-        [MaxLength(ConfigurationConstants.StandartLenghtForStringField)] //https://docs.fluentvalidation.net/en/latest/aspnet.html
+        [MaxLength(SqlConfigurationConstant.StandartLenghtForStringField)]
         public string FullName { get; set; }
 
         /// <summary>
@@ -48,8 +48,19 @@ namespace FindHousingProject.Web.ViewModels
 
         public List<SelectListItem> Roles
         {
-            get => new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> {new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem {
-                    Value = RolesConstants.OwnerRole, Text= "Owner"},new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem{ Value = RolesConstants.GuestRole, Text= "Guest"} };
+            get => new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Value = RoleConstant.Owner,
+                    Text= "Owner"
+                },
+                new SelectListItem
+                {
+                    Value = RoleConstant.Guest,
+                    Text= "Guest"
+                }
+            };
         }
     }
 }

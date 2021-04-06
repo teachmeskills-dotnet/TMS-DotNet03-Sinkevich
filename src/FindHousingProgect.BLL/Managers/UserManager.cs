@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 namespace FindHousingProject.BLL.Managers
 {
     ///<inheritdoc cref="IUserManager"/>
-    public class UsManager : IUserManager
+    public class UserManager : IUserManager
     {
         private readonly UserManager<User> _userManager;
         private readonly IRepository<User> _repositoryUser;
 
-        public UsManager(UserManager<User> userManager, IRepository<User> repositoryUser)
+        public UserManager(UserManager<User> userManager, IRepository<User> repositoryUser)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _repositoryUser = repositoryUser ?? throw new ArgumentNullException(nameof(repositoryUser));
@@ -38,7 +38,7 @@ namespace FindHousingProject.BLL.Managers
             {
                 if (isOwner)
                 {
-                    await _userManager.AddToRoleAsync(userEmail, RolesConstants.OwnerRole);
+                    await _userManager.AddToRoleAsync(userEmail, RoleConstant.Owner);
                 }
                 await CreateAsync(new UserDto
                 {
@@ -46,6 +46,7 @@ namespace FindHousingProject.BLL.Managers
                     Email = userEmail.Email
                 });
             }
+
             return (result, userEmail);
         }
 
@@ -56,6 +57,7 @@ namespace FindHousingProject.BLL.Managers
             {
                 throw new KeyNotFoundException(ErrorResource.UserNotFound);
             }
+
             return user.Id;
         }
 
@@ -94,12 +96,15 @@ namespace FindHousingProject.BLL.Managers
             {
                 throw new KeyNotFoundException(ErrorResource.UserNotFound);
             }
+
             if (userDto.Avatar != null)
             {
                 userDAL.Avatar = userDto.Avatar;
             }
+
             userDAL.FullName = userDto.FullName;
             userDAL.Role = userDto.Role;
+
             _repositoryUser.Update(userDAL);
             await _repositoryUser.SaveChangesAsync();
         }
@@ -134,6 +139,7 @@ namespace FindHousingProject.BLL.Managers
                 Role = profile.Role,
                 Avatar = profile.Avatar
             };
+
             return userDto;
         }
     }

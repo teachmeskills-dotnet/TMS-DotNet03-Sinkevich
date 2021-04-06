@@ -9,42 +9,36 @@ namespace FindHousingProject.DAL.Configurations
     /// <summary>
     /// EF Configuration for User entity.
     /// </summary>
-    class UserConfiguration : IEntityTypeConfiguration<User>
+    internal class UserConfiguration : IEntityTypeConfiguration<User>
     {
         /// <inheritdoc/>
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
-            builder.ToTable(TableConstants.UserTable)
-                .HasKey(o => o.Id);
-            builder.Property(t => t.FullName)
-                //.IsRequired()
-                .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
+            builder.ToTable(TableConstant.UserTable)
+                .HasKey(user => user.Id);
 
-            builder.Property(t => t.Role)
+            builder.Property(user => user.FullName)
+                .HasMaxLength(SqlConfigurationConstant.LongLenghtForStringField);
+
+            builder.Property(user => user.Role)
                 .IsRequired()
-                .HasMaxLength(ConfigurationConstants.ShortLenghtForStringField);
-            // builder.Property(p => p.Email)
-            //.IsRequired();
+                .HasMaxLength(SqlConfigurationConstant.ShortLenghtForStringField);
 
-            builder.Property(p => p.Avatar)
-                .HasColumnType(ConfigurationConstants.AvatarFormat);
+            builder.Property(user => user.Avatar)
+                .HasColumnType(SqlConfigurationConstant.AvatarFormat);
 
-            //builder.Property(p => p.PhoneNumber)
-            //  .IsRequired();
+            builder.Property(user => user.BirthDate)
+                .HasColumnType(SqlConfigurationConstant.DateFormat);
 
-            builder.Property(p => p.BirthDate)
-                // .IsRequired()
-                .HasColumnType(ConfigurationConstants.DateFormat);
+            builder.Property(user => user.Documents)
+                .IsRequired()
+                .HasDefaultValue<string>("паспорт")
+                .HasMaxLength(SqlConfigurationConstant.LongLenghtForStringField);
 
-            builder.Property(t => t.Documents)
-                .IsRequired().HasDefaultValue<string>("паспорт")
-                .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
-
-            builder.Property(t => t.Gender)
-                // .IsRequired()
-                .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
+            builder.Property(user => user.Gender)
+                .HasMaxLength(SqlConfigurationConstant.LongLenghtForStringField);
         }
     }
 }

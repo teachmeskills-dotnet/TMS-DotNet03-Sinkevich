@@ -16,11 +16,12 @@ namespace FindHousingProject.DAL.Configurations
         {
             builder = builder ?? throw new ArgumentNullException(nameof(builder));
 
-            builder.ToTable(TableConstants.CountryTable)
-                .HasKey(o => o.Id);
-            builder.Property(t => t.Name)
+            builder.ToTable(TableConstant.CountryTable)
+                .HasKey(country => country.Id);
+
+            builder.Property(country => country.Name)
                 .IsRequired()
-                .HasMaxLength(ConfigurationConstants.LongLenghtForStringField);
+                .HasMaxLength(SqlConfigurationConstant.LongLenghtForStringField);
         }
     }
 }
