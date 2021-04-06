@@ -1,0 +1,42 @@
+﻿@using FindHousingProject.Common.Resources
+@model FindHousingProject.Web.ViewModels.SettingsViewModel
+@{ ViewData["Title"] = string.Format(PageResource.StringFormat, PageResource.SiteName, PageResource.Settings); }
+
+<body>
+    <div class="col-md-5" style="margin: auto;">
+        <form method="post" asp-action="Settings" asp-controller="Account" enctype="multipart/form-data" class="table" style="text-align:center">
+            <div asp-validation-summary="All"></div>
+            <div>
+                <b>Change your name:</b>
+                <input asp-for="FullName" autocomplete="off">
+                <hr />
+                <b>Change your role:</b>
+                <input type="hidden" asp-for="Email" autocomplete="off">
+                <select asp-for="Role" asp-items="Model.Roles"></select>
+            </div>
+            <hr />
+            <div>
+                @if (Model?.Avatar != null)
+                {
+                    <img class="round" style='max-width:140px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Avatar))" alt=" Avatar">
+                }
+                else
+                {
+                    <img style='max-width:140px;' src="https://politsib.ru/source/images/avatar.png" alt=" Avatar">
+                }
+                <input name="NewAvatar" type="file" class="template-button" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</body>
+
+<form method="get" asp-controller="Account" asp-action="ChangePassword" style="text-align:center">
+    <button type="submit" class="btn btn-primary">Change Password</button>
+</form>
+
+@section Scripts {
+    <script src="~/js/app.js" asp-append-version="true"></script>
+}

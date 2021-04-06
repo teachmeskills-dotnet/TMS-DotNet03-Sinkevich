@@ -1,0 +1,65 @@
+﻿@model FindHousingProject.Web.ViewModels.HousingViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<body>
+    <h1>Edit housing</h1>
+    <hr />
+    <div class="col-md-4" style="margin: auto;">
+        <form method="post" asp-action="Edit" asp-controller="Housing" enctype="multipart/form-data" class="table">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="field ">
+                <b><label asp-for="Name"></label></b>
+                <input asp-for="Name" autocomplete="off">
+            </div>
+            <br />
+            <div class="field ">
+                <b><label asp-for="Place"></label></b>
+                <input asp-for="Place" autocomplete="off">
+            </div>
+            <br />
+            <div class="field ">
+                <b><label asp-for="Price"></label></b>
+                <input asp-for="Price" autocomplete="off">
+            </div>
+            <br />
+            <div class="field ">
+                <b><label asp-for="Description"></label></b>
+                <input asp-for="Description" autocomplete="off">
+            </div>
+            <br />
+            <div class="field ">
+                <b><label asp-for="Address"></label></b>
+                <input asp-for="Address" autocomplete="off">
+            </div>
+            <br />
+            <div class="field ">
+                <label>Scenery</label>
+                <div style="text-align: center">
+                    @if (Model?.Scenery != null)
+                    {
+                        <img style='max-width:170px;border-radius:40px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.Scenery))" alt="Scenery">
+                    }
+                    else
+                    {
+                        <img style='max-width:70px;max-height:70px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png">
+                    }
+                    <br />
+                    <input name="NewScenery" type="file" class="template-button" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+@section Scripts {
+    <script src="~/js/app.js" asp-append-version="true"></script>
+}

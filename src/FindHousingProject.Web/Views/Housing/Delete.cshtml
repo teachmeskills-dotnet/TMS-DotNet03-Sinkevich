@@ -1,0 +1,23 @@
+﻿@model FindHousingProject.Web.ViewModels.HousingViewModel
+@using FindHousingProject.Common.Resources
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<body>
+    <h1>Delete</h1>
+    <div class="box">
+        <h1>
+            Are you sure you want to delete this?
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <input type="submit" value="Delete" class="btn btn-danger" style="font-size: 1em" />
+                <a asp-action="Index" class="btn btn-info" style="font-size: 1em">
+                    Сancel
+                </a>
+            }
+        </h1>
+    </div>
+</body>

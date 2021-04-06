@@ -1,0 +1,76 @@
+﻿@model IEnumerable<FindHousingProject.DAL.Entities.Reservation>
+@using FindHousingProject.Common.Resources
+
+@{
+    ViewData["Title"] = "Reservation";
+}
+<div id="content" style="min-height: 21.0cm; min-width:14.8cm; text-align:center">
+    <h1>Your reservations:</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Housing.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CheckIn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CheckOut)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Housing.Name, "Details", "Housing", new { housingId = item.Housing.Id })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)$
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CheckIn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CheckOut)
+                    </td>
+                    <td>
+                        &#9989;
+                    </td>
+                    <td>
+                        <div id="zatemnenie">
+                            <div id="okno">
+                                Are you sure you want to delete this?<br>
+                                <p>
+                                    @using (Html.BeginForm("Delete", "Reservation", new { reservationId = item.Id }, FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                        <a href="#" class="btn btn-light" role="button" aria-pressed="true">Cancel</a>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                    <td><a href="#zatemnenie">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<button class="btn btn-outline-primary" id="downloadPDF">Download</button>
+
+@section Scripts {
+    <script src="~/js/SavePDF.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+}

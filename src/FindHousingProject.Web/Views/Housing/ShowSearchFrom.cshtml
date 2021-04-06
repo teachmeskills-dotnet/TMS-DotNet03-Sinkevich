@@ -1,0 +1,62 @@
+﻿@model IEnumerable<FindHousingProject.DAL.Entities.Housing>
+@{
+    ViewData["Title"] = "Search";
+}
+<body>
+    <h1>Search for a Housing</h1>
+    <hr />
+    <div class="col-md-4">
+        <form asp-action="ShowSearchResults">
+            <div class="inp">
+                <input name="SearchPhrase" class="form-control" />
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PricePerDay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Scenery)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PricePerDay)$
+                    </td>
+                    <td>
+                        @if (item.Scenery != null)
+                        {
+                            <img class="scale" style='max-width:90px;max-height:90px' src="data:image/jpeg;base64,@(Convert.ToBase64String(item.Scenery))" alt="Housing">
+                        }
+                        else
+                        {
+                            <img style='max-width:70px;max-height:70px' src="https://i.pinimg.com/originals/76/68/3c/76683c4fb69b9e720660359ad6ee4047.png" alt="Housing">
+                        }
+                        <br /> @Html.ActionLink("Details", "Details", new { housingId = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
