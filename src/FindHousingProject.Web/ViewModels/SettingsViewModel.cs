@@ -31,7 +31,7 @@ namespace FindHousingProject.Web.ViewModels
         /// Name.
         /// </summary>
         [Display(Name = "Full Name")]
-        [Required(ErrorMessage = "Enter full name")]
+        [Required(ErrorMessage = "Enter your name")]
         [MaxLength(ConfigurationConstants.StandartLenghtForStringField)] //https://docs.fluentvalidation.net/en/latest/aspnet.html
         public string FullName { get; set; }
 

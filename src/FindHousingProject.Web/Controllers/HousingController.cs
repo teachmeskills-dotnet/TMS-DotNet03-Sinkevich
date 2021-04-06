@@ -201,34 +201,6 @@ namespace FindHousingProject.Web.Controllers
                 return View(housingDetailsViewModel);
             }
         }
-
-        [HttpPost, ActionName("Details")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DetailsHousing(HousingViewModel housingViewModel)
-        {
-            var placeDto = new Place()
-            {
-                Name = housingViewModel.Place,
-            };
-
-            if (ModelState.IsValid)
-            {
-                var userId = await _usManager.GetUserIdByEmailAsync(User.Identity.Name);
-
-                var housingDto = new HousingDto()
-                {
-                    Id = housingViewModel.Id,
-                    Place = placeDto,
-                    Description = housingViewModel.Description,
-                    PricePerDay = housingViewModel.Price,
-                    Address = housingViewModel.Address,
-                    Name = housingViewModel.Name,
-                };
-                return RedirectToAction("Index", "Housing");
-            }
-            return View(housingViewModel);
-        }
-
         public IActionResult ShowSearchFrom()
         {
             return View(_ihousingManager.GetAllHousings());
